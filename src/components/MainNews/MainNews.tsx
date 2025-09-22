@@ -18,7 +18,7 @@ export default function MainNews() {
       .get(url)
       .then((res) => {
         const articles = res.data?.articles || [];
-        setTopNews(articles);
+        setTopNews(articles); 
       })
       .catch((err) => {
         console.log("Error fetching news:", err);

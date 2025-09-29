@@ -54,12 +54,12 @@ export default function LoginPage({ navigation }) {
       );
 
       console.log("Login success:", response.data);
-      setMessage("تم تسجيل الدخول بنجاح ");
+      setMessage("Login successful");
 
       navigation.navigate("Home");
     } catch (error: any) {
       console.log("Login error:", error.response?.data || error.message);
-      setMessage("خطأ في تسجيل الدخول");
+      setMessage("Check Username or Password");
     } finally {
       setLoading(false);
     }

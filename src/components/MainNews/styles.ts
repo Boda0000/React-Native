@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     width: 300,
     height: 250,
   },
+
   whiteCont: {
     backgroundColor: "rgba(255, 255, 255, 0.7)",
     padding: 10,

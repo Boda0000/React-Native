@@ -14,13 +14,10 @@ export default function MainNews() {
     const url =
       "https://newsapi.org/v2/top-headlines?country=us&apiKey=dd1d9d70f9df43b0ae2a705ce653671a";
 
-    axios
-      .get(url)
-      .then((res) => {
-        const articles = res.data?.articles || [];
-        setTopNews(articles);
-      })
-     
+    axios.get(url).then((res) => {
+      const articles = res.data?.articles || [];
+      setTopNews(articles);
+    });
   }
 
   function renderNews(item) {

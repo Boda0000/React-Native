@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import Header from "../../components/Header/Header";
 import MainNews from "../../components/MainNews/MainNews";
 import styles from "./styles";
@@ -8,23 +8,13 @@ const HomeScreen = () => {
   const [textcont, setTextcont] = useState("News");
   const [counter, setCounter] = useState(0);
 
-  useEffect(() => {
-    Alert.alert("counter or text changed");
-  }, [textcont, counter]);
-
   function changeText() {
     setTextcont("Next News");
-    setCounter((prevValue) => {
-      if (prevValue / 2 === 0) {
-        return prevValue + 1;
-      } else {
-        return prevValue + 1;
-      }
-    });
+    setCounter((prevValue) => prevValue + 1);
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <View >
       <Header />
       <MainNews />
       <View style={styles.content}>

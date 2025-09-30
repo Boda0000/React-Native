@@ -14,8 +14,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: "black",
     borderRadius: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
+    paddingVertical: 15,
     fontSize: 14,
   },
   inputError: {
@@ -26,6 +25,15 @@ export default StyleSheet.create({
     color: "red",
     fontSize: 12,
     margin: 5,
-    
+  },
+  inputContainer: {
+    position: "relative",
+  },
+  iconInside: {
+    position: "absolute",
+    right: 10,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

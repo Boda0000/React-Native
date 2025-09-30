@@ -20,7 +20,7 @@ const LoginSchema = Yup.object().shape({
     .matches(/^\+20[1][0-9]{9}$/, "Please enter a valid mobile number"),
   password: Yup.string()
     .trim()
-    .min(8, "Password must be at least 8 characters")
+    .min(8, "Password must be at least 8 characters"),
 });
 
 export default function LoginPage({ navigation }) {
@@ -96,7 +96,7 @@ export default function LoginPage({ navigation }) {
             />
 
             <CustomInput
-            label="Enter Your Password"
+              label="Enter Your Password"
               placeholder="Password"
               onChangeText={handleChange("password")}
               onBlur={handleBlur("password")}
@@ -115,8 +115,8 @@ export default function LoginPage({ navigation }) {
                 {loading ? "Logging in..." : "Login"}
               </Text>
             </TouchableOpacity>
+            {message !== "" && <Text style={styles.message}>{message}</Text>}
           </>
-          
         )}
       </Formik>
     </View>

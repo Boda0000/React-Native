@@ -13,6 +13,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import FormInput from "../../components/CustomInput/CustomInput";
+import CustomButton from "../../components/btn/CustomButton";
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string()
@@ -106,15 +107,11 @@ export default function LoginPage({ navigation }) {
               isPassword
             />
 
-            <TouchableOpacity
-              style={styles.button}
+            <CustomButton
+              title="Login"
               onPress={() => handleSubmit()}
-              disabled={loading}
-            >
-              <Text style={styles.buttonText}>
-                {loading ? "Logging in..." : "Login"}
-              </Text>
-            </TouchableOpacity>
+              loading={loading}
+            />
             {message !== "" && <Text style={styles.message}>{message}</Text>}
           </>
         )}

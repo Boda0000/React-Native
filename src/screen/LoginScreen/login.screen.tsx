@@ -11,16 +11,16 @@ import axios from "axios";
 import styles from "./style";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import CustomInput from "../../components/CustomInput/CustomInput";
+import FormInput from "../../components/CustomInput/CustomInput";
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string()
     .trim()
-    .matches(/^\+20[1][0-9]{9}$/, "Please enter a valid mobile number")
-    .required("Please enter your mobile number"),
+    .matches(/^\+20[1][0-9]{9}$/, "Please enter a valid mobile number"),
   password: Yup.string()
     .trim()
     .min(8, "Password must be at least 8 characters")
-    .required("Please enter your password"),
 });
 
 export default function LoginPage({ navigation }) {
@@ -85,29 +85,26 @@ export default function LoginPage({ navigation }) {
           touched,
         }) => (
           <>
-            <TextInput
-              style={styles.input}
-              placeholder="Mobile Number"
-              keyboardType="phone-pad"
+            <CustomInput
+              label="Enter Username Or Mobile"
+              placeholder="Mobile"
               onChangeText={handleChange("username")}
               onBlur={handleBlur("username")}
               value={values.username}
+              error={errors.username}
+              touched={touched.username}
             />
-            {errors.username && touched.username && (
-              <Text style={styles.errorText}>{errors.username}</Text>
-            )}
 
-            <TextInput
-              style={styles.input}
+            <CustomInput
+            label="Enter Your Password"
               placeholder="Password"
-              secureTextEntry
               onChangeText={handleChange("password")}
               onBlur={handleBlur("password")}
               value={values.password}
+              touched={touched.password}
+              error={errors.password}
+              isPassword
             />
-            {errors.password && touched.password && (
-              <Text style={styles.errorText}>{errors.password}</Text>
-            )}
 
             <TouchableOpacity
               style={styles.button}
@@ -118,9 +115,8 @@ export default function LoginPage({ navigation }) {
                 {loading ? "Logging in..." : "Login"}
               </Text>
             </TouchableOpacity>
-
-            {message !== "" && <Text style={styles.message}>{message}</Text>}
           </>
+          
         )}
       </Formik>
     </View>

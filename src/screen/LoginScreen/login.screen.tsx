@@ -14,6 +14,7 @@ import * as Yup from "yup";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import FormInput from "../../components/CustomInput/CustomInput";
 import CustomButton from "../../components/btn/CustomButton";
+import Toast from "react-native-toast-message";
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string()
@@ -27,6 +28,14 @@ const LoginSchema = Yup.object().shape({
 export default function LoginPage({ navigation }) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+
+  const showMessage = (message: string, success: boolean = true) => {
+    Toast.show({
+      type: success ? "success" : "error",
+      text1: message,
+      position: "top",
+    });
+  };
 
   const handleLogin = async (values) => {
     setLoading(true);
@@ -55,12 +64,16 @@ export default function LoginPage({ navigation }) {
       );
 
       console.log("Login success:", response.data);
-      setMessage("Login successful");
+      const successMsg = response.data?.message || "Login successful";
+      showMessage(successMsg, true);
 
       navigation.navigate("Home");
     } catch (error: any) {
       console.log("Login error:", error.response?.data || error.message);
-      setMessage("Check Username or Password");
+
+      const errorMsg =
+        error.response?.data?.message || "Check Username or Password";
+      showMessage(errorMsg, false);
     } finally {
       setLoading(false);
     }
@@ -112,7 +125,7 @@ export default function LoginPage({ navigation }) {
               onPress={() => handleSubmit()}
               loading={loading}
             />
-            {message !== "" && <Text style={styles.message}>{message}</Text>}
+            {/* {message !== "" && <Text style={styles.message}>{message}</Text>} */}
           </>
         )}
       </Formik>

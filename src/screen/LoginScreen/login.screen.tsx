@@ -15,7 +15,7 @@ import CustomInput from "../../components/CustomInput/CustomInput";
 import FormInput from "../../components/CustomInput/CustomInput";
 import CustomButton from "../../components/btn/CustomButton";
 import Toast from "react-native-toast-message";
-import { mapUserResponse, UserModel } from "../../models/UserModel";
+import { mapUser, UserModel } from "../../models/UserModel";
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string()
@@ -54,7 +54,7 @@ export default function LoginPage({ navigation }) {
               device_type: Platform.OS,
             },
             id: null,
-          }, 
+          },
         },
         {
           headers: {
@@ -64,22 +64,22 @@ export default function LoginPage({ navigation }) {
         }
       );
 
-      const user: UserModel = mapUserResponse(response.data);
+      const user: UserModel = mapUser(response.data);
       console.log("User object:", user);
       console.log("Token:", user.token);
 
       if (user.message) {
-  showMessage(user.message, true);
-}
+        showMessage(user.message, true);
+      }
 
       navigation.navigate("Home");
     } catch (error: any) {
       console.log("Login error:", error.response.data.errors[0].detail);
       showMessage(error.response.data.errors[0].detail, false);
-  } finally {
-    setLoading(false);
-  }
-};
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <View style={styles.container}>

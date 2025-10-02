@@ -20,4 +20,5 @@ export default StyleSheet.create({
 
   },
   btnText: {},
+  
 });

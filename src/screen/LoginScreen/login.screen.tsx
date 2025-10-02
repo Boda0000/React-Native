@@ -16,6 +16,7 @@ import FormInput from "../../components/CustomInput/CustomInput";
 import CustomButton from "../../components/btn/CustomButton";
 import Toast from "react-native-toast-message";
 import { mapUser, UserModel } from "../../models/UserModel";
+import { saveUser } from "../../storage/storageService";
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string()
@@ -28,7 +29,6 @@ const LoginSchema = Yup.object().shape({
 
 export default function LoginPage({ navigation }) {
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
 
   const showMessage = (message: string, success: boolean = true) => {
     Toast.show({
@@ -40,7 +40,6 @@ export default function LoginPage({ navigation }) {
 
   const handleLogin = async (values) => {
     setLoading(true);
-    setMessage("");
 
     try {
       const response = await axios.post(
@@ -65,17 +64,19 @@ export default function LoginPage({ navigation }) {
       );
 
       const user: UserModel = mapUser(response.data);
-      console.log("User object:", user);
-      console.log("Token:", user.token);
+      await saveUser(user);
 
-      if (user.message) {
-        showMessage(user.message, true);
-      }
+      if (user.message) {showMessage(user.message, true);}
 
       navigation.navigate("Home");
-    } catch (error: any) {
-      console.log("Login error:", error.response.data.errors[0].detail);
-      showMessage(error.response.data.errors[0].detail, false);
+
+    } 
+    catch (error: any) {
+      console.log("Login error full:", JSON.stringify(error, null, 2));
+      showMessage(
+        error.response?.data?.errors?.[0]?.detail || "Login failed",
+        false
+      );
     } finally {
       setLoading(false);
     }
@@ -127,7 +128,6 @@ export default function LoginPage({ navigation }) {
               onPress={() => handleSubmit()}
               loading={loading}
             />
-            {/* {message !== "" && <Text style={styles.message}>{message}</Text>} */}
           </>
         )}
       </Formik>

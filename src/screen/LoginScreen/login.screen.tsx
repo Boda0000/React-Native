@@ -75,6 +75,7 @@ export default function LoginPage({ navigation }) {
         index: 0,
         routes: [{ name: "Home" }],
       });
+      
     } catch (error: any) {
       console.log("Login error full:", JSON.stringify(error, null, 2));
       showMessage(

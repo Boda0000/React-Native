@@ -22,4 +22,6 @@ export default function CustomButton({title,onPress,loading,disabled,}: ButtonPr
       )}
     </TouchableOpacity>
   );
+
+  
 }

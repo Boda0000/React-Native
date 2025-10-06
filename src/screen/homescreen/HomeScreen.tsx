@@ -5,6 +5,7 @@ import MainNews from "../../components/MainNews/MainNews";
 import styles from "./styles";
 import { getUser, removeUser } from "../../storage/storageService";
 
+
 const HomeScreen = ({ navigation }) => {
   const [textcont, setTextcont] = useState("News");
   const [counter, setCounter] = useState(0);
@@ -27,7 +28,6 @@ const HomeScreen = ({ navigation }) => {
 
   const handleLogout = async () => {
     await removeUser();
-    //   navigation.replace("Login");
     navigation.reset({
       index: 0,
       routes: [{ name: "Login" }],

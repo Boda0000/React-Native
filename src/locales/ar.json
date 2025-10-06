@@ -1,4 +1,8 @@
 {
-  "welcome": "مرحبًا بك في تطبيقنا",
+  "welcome": "مرحبا",
+  "username_label": "أدخل اسم المستخدم أو رقم الهاتف",
+  "username_placeholder": "رقم الهاتف",
+  "password_label": "أدخل كلمة المرور",
+  "password_placeholder": "كلمة المرور",
   "login": "تسجيل الدخول"
 }

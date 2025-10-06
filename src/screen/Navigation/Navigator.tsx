@@ -6,31 +6,31 @@ import LoginPage from "../LoginScreen/login.screen";
 import HomeScreen from "../homescreen/HomeScreen";
 import { getUser } from "../../storage/storageService";
 import Toast from "react-native-toast-message";
+import { initLanguage } from "../../locales/i18n";
 
 const Stack = createStackNavigator();
 
 export default function Navigator() {
   const [initialRoute, setInitialRoute] = useState<string | null>(null);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const checkUser = async () => {
+    const initializeApp = async () => {
       try {
-        const user = await getUser();
-        if (user) {
-          setInitialRoute("Home");
-        } else {
-          setInitialRoute("Login");
-        }
+        const [user] = await Promise.all([getUser(), initLanguage()]);
+        setInitialRoute(user ? "Home" : "Login");
       } catch (error) {
-        console.log("Error checking user:", error);
+        console.log("Error initializing app:", error);
         setInitialRoute("Login");
+      } finally {
+        setIsReady(true);
       }
     };
 
-    checkUser();
+    initializeApp();
   }, []);
 
-  if (!initialRoute) {
+  if (!isReady || !initialRoute) {
     return (
       <View
         style={{

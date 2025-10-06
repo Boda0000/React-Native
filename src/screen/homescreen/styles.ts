@@ -20,5 +20,12 @@ export default StyleSheet.create({
 
   },
   btnText: {},
+
+  LogoutBtn:{
+    backgroundColor:"red",
+     padding: 10,
+    borderRadius: 10,
+    marginVertical: 5,
+  },
   
 });

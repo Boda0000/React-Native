@@ -66,12 +66,12 @@ export default function LoginPage({ navigation }) {
       const user: UserModel = mapUser(response.data);
       await saveUser(user);
 
-      if (user.message) {showMessage(user.message, true);}
+      if (user.message) {
+        showMessage(user.message, true);
+      }
 
       navigation.navigate("Home");
-
-    } 
-    catch (error: any) {
+    } catch (error: any) {
       console.log("Login error full:", JSON.stringify(error, null, 2));
       showMessage(
         error.response?.data?.errors?.[0]?.detail || "Login failed",

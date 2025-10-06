@@ -3,7 +3,6 @@ import { UserModel } from "../models/UserModel";
 
 export const saveUser = async (user: UserModel) => {
   try {
-
     await AsyncStorage.setItem("userData", JSON.stringify(user));
     console.log("userr", user);
   } catch (error) {
@@ -21,5 +20,14 @@ export const getUser = async (): Promise<UserModel | null> => {
   } catch (error) {
     console.log("Error getting user:", error);
     return null;
+  }
+};
+
+export const removeUser = async () => {
+  try {
+    await AsyncStorage.removeItem("userData");
+    console.log("User removed");
+  } catch (error) {
+    console.log("Error removing user:", error);
   }
 };

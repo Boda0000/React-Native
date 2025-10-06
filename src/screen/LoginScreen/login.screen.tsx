@@ -70,7 +70,11 @@ export default function LoginPage({ navigation }) {
         showMessage(user.message, true);
       }
 
-      navigation.navigate("Home");
+      // navigation.navigate("Home");
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Home" }],
+      });
     } catch (error: any) {
       console.log("Login error full:", JSON.stringify(error, null, 2));
       showMessage(

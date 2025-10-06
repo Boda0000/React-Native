@@ -25,10 +25,18 @@ const HomeScreen = ({ navigation }) => {
     setCounter((prevValue) => prevValue + 1);
   };
 
+  // const handleLogout = async () => {
+  //   await removeUser();
+  //   navigation.replace("Login");
+  // };
   const handleLogout = async () => {
-    await removeUser();
-    navigation.replace("Login");
-  };
+  await removeUser();
+  navigation.reset({
+    index: 0,
+    routes: [{ name: "Login" }],
+  });
+};
+
 
   return (
     <View>

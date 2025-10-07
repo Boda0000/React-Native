@@ -1,5 +1,21 @@
 {
   "plugins": [
     "expo-localization"
-  ]
+  ],
+  "extra": {
+    "eas": {
+      "projectId": "cb818bcf-8c62-4d65-a93b-1ac5f67347e9"
+    }
+  },
+  "owner": "abdelrahmankamel",
+  "expo": {
+    "android": {
+      "package": "com.abdelrahmankamel.reactnativeapp"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "cb818bcf-8c62-4d65-a93b-1ac5f67347e9"
+      }
+    }
+  }
 }

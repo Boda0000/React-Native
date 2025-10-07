@@ -17,6 +17,7 @@
     "@react-navigation/stack": "^7.4.8",
     "axios": "^1.12.2",
     "expo": "^54.0.8",
+    "expo-localization": "~17.0.7",
     "formik": "^2.4.6",
     "i18n-js": "^4.5.1",
     "react": "19.1.0",
@@ -31,6 +32,7 @@
     "react-native-snackbar": "^2.9.0",
     "react-native-toast-message": "^2.3.3",
     "react-native-web": "^0.21.0",
+    "reactotron-react-native": "^5.1.17",
     "yup": "^1.7.1"
   },
   "devDependencies": {

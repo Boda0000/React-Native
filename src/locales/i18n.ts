@@ -1,8 +1,7 @@
 import { I18n } from "i18n-js";
-import * as RNLocalize from "react-native-localize";
+import * as Localization from 'expo-localization';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { I18nManager } from "react-native";
-
 import en from "./en.json";
 import ar from "./ar.json";
 
@@ -13,7 +12,7 @@ export const initLanguage = async (): Promise<string> => {
   try {
     const savedLang = await AsyncStorage.getItem("appLang");
     const locale =
-      savedLang || RNLocalize.getLocales()[0]?.languageCode || "en";
+      savedLang || Localization.getLocales()[0]?.languageCode || "en";
 
     i18n.locale = locale;
 

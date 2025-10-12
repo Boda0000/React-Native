@@ -5,7 +5,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LoginPage from "../LoginScreen/login.screen";
 import HomeScreen from "../homescreen/HomeScreen";
 import { getUser } from "../../storage/storageService";
-import Toast from "react-native-toast-message";
 import { initLanguage } from "../../locales/i18n";
 
 const Stack = createStackNavigator();
@@ -54,7 +53,6 @@ export default function Navigator() {
         <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
 
-      <Toast />
     </NavigationContainer>
   );
 }

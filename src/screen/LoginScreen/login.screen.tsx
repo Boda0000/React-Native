@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Platform,
-  I18nManager,
-} from "react-native";
-import axios from "axios";
+import { View, Text, I18nManager, Platform } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import styles from "./style";
@@ -19,6 +10,7 @@ import { mapUser, UserModel } from "../../models/UserModel";
 import { saveUser } from "../../storage/storageService";
 import { changeLanguage, getCurrentLanguage } from "../../locales/i18n";
 import i18n from "../../locales/i18n";
+import { useLogin } from "../../Hooks/useLogin";
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string()
@@ -29,8 +21,7 @@ const LoginSchema = Yup.object().shape({
     .min(8, "Password must be at least 8 characters"),
 });
 
-export default function LoginPage({ navigation }) {
-  const [loading, setLoading] = useState(false);
+export default function LoginPage({ navigation }: any) {
   const [lang, setLang] = useState(i18n.locale);
 
   useEffect(() => {
@@ -59,30 +50,8 @@ export default function LoginPage({ navigation }) {
     setLang(newLang);
   };
 
-  const handleLogin = async (values: { mobile: string; password: string }) => {
-    setLoading(true);
-    try {
-      const response = await axios.post(
-        `https://manarbe.oetest.tech/api/v1/${lang}/auth/login`,
-        {
-          data: {
-            type: "user",
-            attributes: {
-              mobile: values.mobile,
-              password: values.password,
-              device_type: Platform.OS,
-            },
-            id: null,
-          },
-        },
-        {
-          headers: {
-            accept: "application/json",
-            "content-type": "application/json",
-          },
-        }
-      );
-
+  const { mutate, isPending } = useLogin(
+    async (response) => {
       const user: UserModel = mapUser(response.data);
       await saveUser(user);
 
@@ -94,16 +63,12 @@ export default function LoginPage({ navigation }) {
         index: 0,
         routes: [{ name: "Home" }],
       });
-    } catch (error: any) {
-      console.log("Login error full:", JSON.stringify(error, null, 2));
-      showMessage(
-        error.response?.data?.errors?.[0]?.detail || "Login failed",
-        false
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+   (error: any) => {
+  showMessage(error.message || "Login failed", false);
+}
+
+  );
 
   return (
     <View style={styles.container} key={lang}>
@@ -114,7 +79,10 @@ export default function LoginPage({ navigation }) {
         initialValues={{ username: "", password: "" }}
         validationSchema={LoginSchema}
         onSubmit={(values) => {
-          handleLogin({ mobile: values.username, password: values.password });
+          mutate({
+            mobile: values.username,
+            password: values.password,
+          });
         }}
       >
         {({
@@ -135,6 +103,7 @@ export default function LoginPage({ navigation }) {
               error={errors.username}
               touched={touched.username}
               key={`username-${lang}`}
+              
             />
 
             <CustomInput
@@ -152,7 +121,7 @@ export default function LoginPage({ navigation }) {
             <CustomButton
               title={i18n.t("login")}
               onPress={() => handleSubmit()}
-              loading={loading}
+              loading={isPending}
               key={`login-${lang}`}
             />
 

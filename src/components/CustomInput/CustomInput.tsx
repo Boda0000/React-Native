@@ -14,6 +14,7 @@ interface FormInputProps extends TextInputProps {
   error?: string;
   touched?: boolean;
   isPassword?: boolean;
+
 }
 
 export default function FormInput({
@@ -21,7 +22,7 @@ export default function FormInput({
   error,
   touched,
   isPassword,
-  ...props
+
 }: FormInputProps) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -33,7 +34,6 @@ export default function FormInput({
         <TextInput
           style={[styles.input, touched && error ? styles.inputError : null]}
           secureTextEntry={isPassword && !showPassword}
-          {...props}
         />
 
         {isPassword && (

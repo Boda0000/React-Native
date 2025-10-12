@@ -5,6 +5,7 @@ import { I18nManager } from "react-native";
 import en from "./en.json";
 import ar from "./ar.json";
 
+
 const i18n = new I18n({ en, ar });
 i18n.defaultLocale = "en";
 

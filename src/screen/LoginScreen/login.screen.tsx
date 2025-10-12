@@ -53,6 +53,7 @@ export default function LoginPage({ navigation }: any) {
   const { mutate, isPending } = useLogin(
     async (response) => {
       const user: UserModel = mapUser(response.data);
+      console.log("UserModel", response.data);
       await saveUser(user);
 
       if (user.message) {
@@ -64,10 +65,9 @@ export default function LoginPage({ navigation }: any) {
         routes: [{ name: "Home" }],
       });
     },
-   (error: any) => {
-  showMessage(error.message || "Login failed", false);
-}
-
+    (error: any) => {
+      showMessage(error.message || "Login failed", false);
+    }
   );
 
   return (
@@ -83,6 +83,7 @@ export default function LoginPage({ navigation }: any) {
             mobile: values.username,
             password: values.password,
           });
+          console.log(" values.username", values.username);
         }}
       >
         {({
@@ -103,7 +104,6 @@ export default function LoginPage({ navigation }: any) {
               error={errors.username}
               touched={touched.username}
               key={`username-${lang}`}
-              
             />
 
             <CustomInput

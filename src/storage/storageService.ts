@@ -4,7 +4,7 @@ import { UserModel } from "../models/UserModel";
 export const saveUser = async (user: UserModel) => {
   try {
     await AsyncStorage.setItem("userData", JSON.stringify(user));
-    console.log("userr", user);
+    console.log("user", user);
   } catch (error) {
     console.log("Error saving user:", error);
   }

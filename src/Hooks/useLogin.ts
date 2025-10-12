@@ -9,33 +9,35 @@ async function loginFn(login: Logindata) {
   const lang = await getCurrentLanguage();
 
   const response = await fetch(
-    `https://manarbe.oetest.tech/api/v1/ar/auth/login`,
+    `https://manarbe.oetest.tech/api/v1/${lang}/auth/login`,
     {
       method: "POST",
       headers: {
         accept: "application/json",
         "content-type": "application/json",
-        
       },
       body: JSON.stringify({
-        "data": {
-        "type": "user",
-        "attributes": {
-            "mobile": "+201117777777",
-            "password": "12345678",
-            "device_type": "ios"
+        data: {
+          type: "user",
+          attributes: {
+            mobile: login.mobile,
+            password: login.password,
+            device_type: "ios",
+          },
+          id: "null",
         },
-        "id": "null"
-    }
       }),
     }
   );
+
   const data = await response.json();
   if (!response.ok) {
-    
-    console.log("data",data?.errors?.[0]?.detail)
-    throw new Error(data?.errors?.[0]?.detail || "Invalid mobile number or password");
+    console.log("data", data?.errors?.[0]?.detail);
+    throw new Error(
+      data?.errors?.[0]?.detail || "Invalid mobile number or password"
+    );
   }
+  console.log("hhh", data);
   return data;
 }
 export function useLogin(

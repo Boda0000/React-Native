@@ -34,6 +34,8 @@ export interface UserModel {
 
 export const mapUser = (data: any): UserModel => {
   const attributes = data?.data?.attributes || {};
+  console.log("attributes?.mobile", attributes?.mobile)
+
     return {
     id: data?.data?.id || "",
     name: attributes?.name || "",

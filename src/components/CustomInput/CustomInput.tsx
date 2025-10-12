@@ -14,7 +14,6 @@ interface FormInputProps extends TextInputProps {
   error?: string;
   touched?: boolean;
   isPassword?: boolean;
-
 }
 
 export default function FormInput({
@@ -22,7 +21,9 @@ export default function FormInput({
   error,
   touched,
   isPassword,
-
+  value,
+  onChangeText,
+  onBlur,
 }: FormInputProps) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -33,6 +34,9 @@ export default function FormInput({
       <View style={styles.inputContainer}>
         <TextInput
           style={[styles.input, touched && error ? styles.inputError : null]}
+          value={value}
+          onChangeText={onChangeText}
+          onBlur={onBlur}
           secureTextEntry={isPassword && !showPassword}
         />
 
@@ -41,10 +45,7 @@ export default function FormInput({
             style={styles.iconInside}
             onPress={() => setShowPassword(!showPassword)}
           >
-            <Ionicons
-              name={showPassword ? "eye-off" : "eye"}
-              size={20}
-            />
+            <Ionicons name={showPassword ? "eye-off" : "eye"} size={20} />
           </TouchableOpacity>
         )}
       </View>

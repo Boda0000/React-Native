@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, I18nManager, Platform } from "react-native";
+import React from "react";
+import { View, Text } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import styles from "./style";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import CustomButton from "../../components/btn/CustomButton";
-import Toast from "react-native-toast-message";
-import { mapUser, UserModel } from "../../models/UserModel";
-import { saveUser } from "../../storage/storageService";
-import { changeLanguage, getCurrentLanguage } from "../../locales/i18n";
 import i18n from "../../locales/i18n";
 import { useLogin } from "../../Hooks/useLogin";
+import { useLanguage } from "../../Hooks/useLanguage";
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string()
@@ -21,54 +18,9 @@ const LoginSchema = Yup.object().shape({
     .min(8, "Password must be at least 8 characters"),
 });
 
-export default function LoginPage({ navigation }: any) {
-  const [lang, setLang] = useState(i18n.locale);
-
-  useEffect(() => {
-    const initLang = async () => {
-      const current = await getCurrentLanguage();
-      setLang(current);
-      i18n.locale = current;
-      I18nManager.forceRTL(current === "ar");
-    };
-    initLang();
-  }, []);
-
-  const showMessage = (message: string, success: boolean = true) => {
-    Toast.show({
-      type: success ? "success" : "error",
-      text1: message,
-      position: "top",
-    });
-  };
-
-  const toggleLanguage = async () => {
-    const newLang = lang === "en" ? "ar" : "en";
-    await changeLanguage(newLang);
-    i18n.locale = newLang;
-    I18nManager.forceRTL(newLang === "ar");
-    setLang(newLang);
-  };
-
-  const { mutate, isPending } = useLogin(
-    async (response) => {
-      const user: UserModel = mapUser(response.data);
-      console.log("UserModel", response.data);
-      await saveUser(user);
-
-      if (user.message) {
-        showMessage(user.message, true);
-      }
-
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "Home" }],
-      });
-    },
-    (error: any) => {
-      showMessage(error.message || "Login failed", false);
-    }
-  );
+export default function LoginPage() {
+  const { lang, toggleLanguage } = useLanguage(); 
+  const { mutate, isPending } = useLogin();
 
   return (
     <View style={styles.container} key={lang}>
@@ -83,7 +35,6 @@ export default function LoginPage({ navigation }: any) {
             mobile: values.username,
             password: values.password,
           });
-          console.log(" values.username", values.username);
         }}
       >
         {({

@@ -19,8 +19,10 @@ const LoginSchema = Yup.object().shape({
 });
 
 export default function LoginPage() {
-  const { lang, toggleLanguage } = useLanguage(); 
-  const { mutate, isPending } = useLogin();
+  const { lang, toggleLanguage } = useLanguage();
+  const { mutate, isPending, isLoading } = useLogin();
+
+  const loading = isPending || isLoading;
 
   return (
     <View style={styles.container} key={lang}>
@@ -72,7 +74,7 @@ export default function LoginPage() {
             <CustomButton
               title={i18n.t("login")}
               onPress={() => handleSubmit()}
-              loading={isPending}
+              loading={isLoading}
               key={`login-${lang}`}
             />
 

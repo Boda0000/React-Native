@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { Mutation, useMutation } from "@tanstack/react-query";
 import { getCurrentLanguage } from "../locales/i18n";
 import { mapUser, UserModel } from "../models/UserModel";
 import { saveUser } from "../storage/storageService";
@@ -59,7 +59,7 @@ async function loginFn(login: Logindata) {
 export function useLogin() {
   const navigation = useNavigation<any>();
 
-  return useMutation({
+  const mutation = useMutation({
     mutationFn: loginFn,
     onSuccess: async (user: UserModel) => {
       await saveUser(user);
@@ -78,4 +78,7 @@ export function useLogin() {
       console.log("Login error:", error);
     },
   });
+
+  return mutation; 
 }
+

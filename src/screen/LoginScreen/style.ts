@@ -41,6 +41,12 @@ export default StyleSheet.create({
     color: "red",
     marginBottom: 10,
   },  
+logo: {
+  width: 200,
+  height: 150,
+  marginVertical: 20,
+  
+}
 
 
 

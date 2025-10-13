@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import styles from "./style";
@@ -26,6 +26,9 @@ export default function LoginPage() {
 
   return (
     <View style={styles.container} key={lang}>
+      <Image source={require("../../assets/images/App Logo.png")}
+      style={styles.logo}
+      />
       <Text style={styles.title}>{i18n.t("welcome")}</Text>
 
       <Formik

@@ -37,17 +37,13 @@ export default StyleSheet.create({
     fontSize: 16,
     color: "black",
   },
- errorText: {
+  errorText: {
     color: "red",
     marginBottom: 10,
-  },  
-logo: {
-  width: 200,
-  height: 150,
-  marginVertical: 20,
-  
-}
-
-
-
+  },
+  logo: {
+    width: 200,
+    height: 150,
+    marginVertical: 20,
+  },
 });

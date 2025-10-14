@@ -1,13 +1,45 @@
 {
   "expo": {
-    "name": "reactnativeapp",
-    "icon": "./src/assets/images/App Icon.png",
-    "slug": "reactnativeapp",
+    "name": "Our Edu App Test",
+
+    "icon": "./src/assets/images/AppIcon.png",
+
+    "slug": "Test",
+
     "owner": "abdelrahmankamel",
-    "plugins": ["expo-localization"],
-    "android": {
-      "package": "com.abdelrahmankamel.reactnativeapp"
+
+    "plugins": [
+      "expo-localization",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 28
+          }
+        }
+      ]
+    ],
+
+    "version": "1.0.0",
+
+    "orientation": "portrait",
+
+    "splash": {
+      "image": "./src/assets/images/AppIcon.png",
+
+      "backgroundColor": "#000000",
+
+      "resizeMode": "contain"
     },
+
+    "android": {
+      "package": "com.abdelrahmankamel.reactnativeapp",
+
+      // "minSdkVersion": 26,
+
+      "versionCode": 1
+    },
+
     "extra": {
       "eas": {
         "projectId": "cb818bcf-8c62-4d65-a93b-1ac5f67347e9"

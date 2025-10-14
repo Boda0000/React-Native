@@ -27,7 +27,7 @@ export default function LoginPage() {
   return (
     <View style={styles.container} key={lang}>
       <Image
-        source={require("../../assets/images/App Logo.png")}
+        source={require("../../assets/images/AppIcon.png")}
         style={styles.logo}
       />
       <Text style={styles.title}>{i18n.t("welcome")}</Text>

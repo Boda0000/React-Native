@@ -47,7 +47,19 @@
       },
       "permissions": ["CAMERA", "location"],
       "blockedPermissions": ["ACCESS_BACKGROUND_LOCATION"],
-      "intentFilters": [],
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": 
+            {
+             "scheme": "https",
+              "host": "ouredu.onrender.com",
+              "pathPrefix": "/"
+            },
+           
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ],
       "userInterfaceStyle": "dark",
       "softwareKeyboardLayoutMode": "pan"
     },

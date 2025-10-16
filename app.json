@@ -4,7 +4,7 @@
 
     "icon": "./src/assets/images/AppIcon.png",
 
-    "slug": "Test",
+    "slug": "react-native-app",
 
     "owner": "abdelrahmankamel",
 
@@ -14,13 +14,19 @@
         "expo-build-properties",
         {
           "android": {
-            "minSdkVersion": 28
+            "minSdkVersion": 28,
+            "targetSdkVersion": 34,
+            "compileSdkVersion": 34
+          },
+          "ios": {
+            "deploymentTarget": "15.1",
+            "useFrameworks": "static"
           }
         }
       ]
     ],
 
-    "version": "1.0.0",
+    "version": "2.0.0",
 
     "orientation": "portrait",
 
@@ -34,10 +40,27 @@
 
     "android": {
       "package": "com.abdelrahmankamel.reactnativeapp",
-
-      // "minSdkVersion": 26,
-
-      "versionCode": 1
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/images/AppIcon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [],
+      "blockedPermissions": [],
+      "intentFilters": [],
+      "userInterfaceStyle": "dark",
+      "softwareKeyboardLayoutMode": "pan"
+    },
+    "ios": {
+      "bundleIdentifier": "com.abdelrahmankamel.reactnativeapp",
+      "buildNumber": "1.0.0",
+      "supportsTablet": false,
+      "userInterfaceStyle": "automatic",
+      "infoPlist": {
+        "NSCameraUsageDescription": "We need camera access to upload your profile photo.",
+        "NSPhotoLibraryUsageDescription": "We need photo library access to select images.",
+        "NSLocationWhenInUseUsageDescription": "We use your location to improve your experience."
+      }
     },
 
     "extra": {

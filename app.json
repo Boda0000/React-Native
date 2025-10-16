@@ -45,8 +45,8 @@
         "foregroundImage": "./src/assets/images/AppIcon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": [],
-      "blockedPermissions": [],
+      "permissions": ["CAMERA", "location"],
+      "blockedPermissions": ["ACCESS_BACKGROUND_LOCATION"],
       "intentFilters": [],
       "userInterfaceStyle": "dark",
       "softwareKeyboardLayoutMode": "pan"

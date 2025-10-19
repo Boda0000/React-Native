@@ -1,12 +1,18 @@
 {
   "expo": {
     "name": "Our Edu App Test",
+    "slug": "react-native-app",
+    "owner": "abdelrahmankamel",
 
+    "version": "2.0.0",
+    "orientation": "portrait",
     "icon": "./src/assets/images/AppIcon.png",
 
-    "slug": "react-native-app",
-
-    "owner": "abdelrahmankamel",
+    "splash": {
+      "image": "./src/assets/images/AppIcon.png",
+      "backgroundColor": "#000000",
+      "resizeMode": "contain"
+    },
 
     "plugins": [
       "expo-localization",
@@ -15,28 +21,15 @@
         {
           "android": {
             "minSdkVersion": 28,
-            "targetSdkVersion": 34,
-            "compileSdkVersion": 34
+            "targetSdkVersion": 35,
+            "compileSdkVersion": 35
           },
           "ios": {
-            "deploymentTarget": "15.1",
-            "useFrameworks": "static"
+            "deploymentTarget": "15.1"
           }
         }
       ]
     ],
-
-    "version": "2.0.0",
-
-    "orientation": "portrait",
-
-    "splash": {
-      "image": "./src/assets/images/AppIcon.png",
-
-      "backgroundColor": "#000000",
-
-      "resizeMode": "contain"
-    },
 
     "android": {
       "package": "com.abdelrahmankamel.reactnativeapp",
@@ -45,24 +38,25 @@
         "foregroundImage": "./src/assets/images/AppIcon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": ["CAMERA", "location"],
+      "permissions": ["CAMERA", "ACCESS_FINE_LOCATION"],
       "blockedPermissions": ["ACCESS_BACKGROUND_LOCATION"],
       "intentFilters": [
         {
           "action": "VIEW",
-          "data": 
+          "data": [
             {
-             "scheme": "https",
+              "scheme": "https",
               "host": "ouredu.onrender.com",
               "pathPrefix": "/"
-            },
-           
+            }
+          ],
           "category": ["BROWSABLE", "DEFAULT"]
         }
       ],
       "userInterfaceStyle": "dark",
       "softwareKeyboardLayoutMode": "pan"
     },
+
     "ios": {
       "bundleIdentifier": "com.abdelrahmankamel.reactnativeapp",
       "buildNumber": "1.0.0",

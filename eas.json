@@ -6,22 +6,26 @@
   "build": {
     "preview-apk": {
       "distribution": "internal",
+      "channel": "preview",
       "android": {
         "buildType": "apk"
       }
     },
     "preview-aab": {
       "distribution": "internal",
+      "channel": "preview",
       "android": {
         "buildType": "app-bundle"
       }
     },
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "channel": "development"
     },
     "production": {
-      "autoIncrement": true
+      "autoIncrement": true,
+      "channel": "production"
     }
   },
   "submit": {

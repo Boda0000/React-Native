@@ -62,7 +62,6 @@ export default StyleSheet.create({
     borderColor: "#E8ECF4",
     borderWidth: 1,
     width: "100%",
-    
   },
   pckName: {
     fontSize: 16,
@@ -71,19 +70,26 @@ export default StyleSheet.create({
     textAlign: "right",
     marginBottom: 10,
   },
-  pckdes: {
-    color: "#666",
-    marginTop: 6,
-  },
+ 
   packagePrice: {
     marginTop: 8,
     fontWeight: "bold",
-    color: "#333",
+    color: "#414E75",
+    alignItems: "center",
+    
   },
   Sessions: {
-     flexDirection: "row", alignItems: "center", gap: 5 
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    color: "#414E75",
+    
   },
-    Duration: {
-     flexDirection: "row", alignItems: "center", gap: 5 
+  Duration: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    color: "#414E75",
+    
   },
 });

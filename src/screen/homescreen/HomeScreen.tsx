@@ -11,19 +11,20 @@ import Duration from "../../assets/icons/Duration.svg";
 const PackageCard = ({ pkg }: { pkg: CoursePackage }) => (
   <View style={styles.pckcont}>
     <Text style={styles.pckName}>{pkg.title}</Text>
-    <Text style={styles.pckdes}>{pkg.package_price} EGP</Text>
     <View style={styles.Duration}>
       <Duration width={16} height={16} />
-      <Text>Duration: {pkg.duration_months} months</Text>
+      <Text style={styles.Duration}>Duration: {pkg.duration_months} months</Text>
     </View>
 
     <View style={styles.Sessions}>
       <Sessions width={16} height={16} />
-      <Text>
+      <Text style={styles.Sessions}>
         Sessions: {pkg.sessions_count} ({pkg.sessions_type})
       </Text>
     </View>
-
+    <View style={styles.packagePrice}>
+      <Text style={styles.packagePrice}> السعر:{pkg.package_price}</Text>
+    </View>
     <CustomButton title="احجز باقة شهرية" onPress={() => {}} />
   </View>
 );

@@ -1,58 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import Header from "../../components/Header/Header";
-import MainNews from "../../components/MainNews/MainNews";
+import React from "react";
+import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import { useHome } from "../../Hooks/useHome";
 import styles from "./styles";
-import { getUser, removeUser } from "../../storage/storageService";
+import Header from "../../components/Header/Header";
+import { CoursePackage } from "../../models/HomeModel";
+import CustomButton from "src/components/btn/CustomButton";
 
 
-const HomeScreen = ({ navigation }) => {
-  const [textcont, setTextcont] = useState("News");
-  const [counter, setCounter] = useState(0);
-  const [userName, setUserName] = useState("");
+const PackageCard = ({ pkg }: { pkg: CoursePackage }) => (
+  <View style={styles.pckcont}>
+    <Text style={styles.pckName}>{pkg.title}</Text>
+    <Text style={styles.pckdes}>{pkg.package_price} EGP</Text>
+    <Text>Duration: {pkg.duration_months} months</Text>
+    <Text>
+      Sessions: {pkg.sessions_count} ({pkg.sessions_type})
+    </Text>
 
-  useEffect(() => {
-    const loadUser = async () => {
-      const user = await getUser();
-      if (user) {
-        setUserName(user.name);
-      }
-    };
-    loadUser();
-  }, []);
+    <CustomButton title="احجز باقة شهرية" onPress={() => {}} />
+  </View>
+);
 
-  const changeText = () => {
-    setTextcont("Next News");
-    setCounter((prevValue) => prevValue + 1);
-  };
-
-  const handleLogout = async () => {
-    await removeUser();
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Login" }],
-    });
-  };
+const HomeScreen = () => {
+  const { data } = useHome();
+  const packages = data || [];
 
   return (
-    <View>
+    <View style={styles.container}>
       <Header />
-      <MainNews />
-      <View style={styles.content}>
-        {userName !== "" && (
-          <Text style={styles.text}>Welcome, {userName}</Text>
-        )}
-        <Text style={styles.text}>{textcont}</Text>
-        <Text style={styles.text}>{counter}</Text>
-
-        <TouchableOpacity style={styles.btn} onPress={changeText}>
-          <Text style={styles.btnText}>Click me</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.LogoutBtn} onPress={handleLogout}>
-          <Text style={styles.btnText}>Logout</Text>
+      <View style={styles.card}>
+        <Text style={styles.textcard}>احجز حصص فردية أونلاين و حضورية</Text>
+        <TouchableOpacity style={styles.buttoncard}>
+          <Text style={styles.buttonTextcard}>سجل الآن</Text>
         </TouchableOpacity>
       </View>
+
+      <View style={styles.middlesec}>
+        <Text style={styles.text1}>الباقات</Text>
+        <Text style={styles.text2}>كل الباقات</Text>
+      </View>
+
+      <FlatList
+        data={packages}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => <PackageCard pkg={item} />}
+      />
     </View>
   );
 };

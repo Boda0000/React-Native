@@ -2,21 +2,24 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    margin: 10,
-    padding: 30,
-    backgroundColor: "peige",
+    flexDirection: "row-reverse", 
+    alignItems: "center", 
+    marginVertical: 50,
+    gap: 90, 
   },
+
   img: {
-    width: 40,
-    height: 40,
+    width: 41,
+    height: 41,
+    borderWidth: 1,
+    borderColor: "#ECEFFF",
+    borderRadius: 10,
   },
   title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "black",
+    fontSize: 26,
+    fontWeight: "600",
+    color: "#414E75", 
   },
 });
+
 export default styles;

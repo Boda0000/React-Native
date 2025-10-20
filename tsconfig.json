@@ -8,29 +8,17 @@
     "allowJs": true,
     "noEmit": true,
     "isolatedModules": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": [
-      "react",
-      "react-dom",
-      "react-native",
-      "node"
-    ],
-    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "baseUrl": "."
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"]
+    },
+    "types": ["react", "react-dom", "react-native", "node"]
   },
-  "include": [
-    "src",
-    "App.tsx",
-    "App.js",
-    "index.ts",
-    "index.js"
-  ],
-  "exclude": [
-    "node_modules",
-    "babel.config.js",
-    "metro.config.js"
-  ]
+"include": ["src", "App.tsx", "App.js", "index.ts", "index.js", "*.d.ts"],
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js"]
 }

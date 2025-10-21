@@ -3,23 +3,28 @@ import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { useHome } from "../../Hooks/useHome";
 import styles from "./styles";
 import Header from "../../components/Header/Header";
-import { CoursePackage } from "../../models/HomeModel";
+import { AllPackage } from "../../models/HomeModel";
 import CustomButton from "src/components/btn/CustomButton";
 import Sessions from "../../assets/icons/Sessions.svg";
-import Duration from "../../assets/icons/Duration.svg";
+import Calendar from "../../assets/icons/calendar.svg";
 
-const PackageCard = ({ pkg }: { pkg: CoursePackage }) => (
+const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
   <View style={styles.pckcont}>
     <Text style={styles.pckName}>{pkg.title}</Text>
-    <View style={styles.Duration}>
-      <Duration width={16} height={16} />
-      <Text style={styles.Duration}>Duration: {pkg.duration_months} months</Text>
+
+    <View style={styles.Calendar}>
+      <Calendar width={16} height={16} />
+
+      <Text style={styles.Calendar}>
+        Duration: {pkg.duration_months} months
+      </Text>
     </View>
 
     <View style={styles.Sessions}>
       <Sessions width={16} height={16} />
+
       <Text style={styles.Sessions}>
-        Sessions: {pkg.sessions_count} ({pkg.sessions_type})
+        Sessions: {pkg.sessions_count} ({pkg.sessions_type}){" "}
       </Text>
     </View>
     <View style={styles.packagePrice}>

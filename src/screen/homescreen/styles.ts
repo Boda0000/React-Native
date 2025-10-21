@@ -70,26 +70,27 @@ export default StyleSheet.create({
     textAlign: "right",
     marginBottom: 10,
   },
- 
+
   packagePrice: {
     marginTop: 8,
     fontWeight: "bold",
     color: "#414E75",
     alignItems: "center",
-    
+    backgroundColor: "#F8F9FF",
+    padding: 5,
+    borderRadius: 8,
+    textAlign: "right",
   },
   Sessions: {
     flexDirection: "row",
     alignItems: "center",
     gap: 5,
     color: "#414E75",
-    
   },
-  Duration: {
+  Calendar: {
     flexDirection: "row",
     alignItems: "center",
     gap: 5,
     color: "#414E75",
-    
   },
 });

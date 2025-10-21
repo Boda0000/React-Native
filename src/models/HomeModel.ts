@@ -1,4 +1,23 @@
-export interface CoursePackage {
+export interface MainData {
+  data: any;
+  included: RawItem[];
+}
+
+export interface RawItem {
+  type: "package";
+  id: string;
+  attributes: {
+    title: string;
+    price: string;
+    duration_months: number;
+    sessions_count: number;
+    sessions_type: string;
+    session_time_in_minutes: string;
+    package_price: string;
+  };
+}
+
+export interface AllPackage {
   type: string;
   id: string;
   title: string;
@@ -10,31 +29,9 @@ export interface CoursePackage {
   package_price: string;
 }
 
-interface RawPackageAttributes {
-  title: string;
-  price: string;
-  duration_months: number;
-  sessions_count: number;
-  sessions_type: string;
-  session_time_in_minutes: string;
-  package_price: string;
-}
-
-interface RawPackageItem {
-  type: "package";
-  id: string;
-  attributes: RawPackageAttributes;
-}
-
-export interface LandingPageData {
-  data: any;
-  included?: RawPackageItem[];
-}
-
-export class CoursePackageMapper {
-  static parseAllPackages(rawResponse: LandingPageData): CoursePackage[] {
-    const rawPackages = rawResponse?.included;
-    console.log("rawPackages", rawPackages);
+export class Map {
+  static parseData(rawResponse: MainData): AllPackage[] {
+    const rawPackages = rawResponse.included;
 
     if (!rawPackages?.length) {
       return [];

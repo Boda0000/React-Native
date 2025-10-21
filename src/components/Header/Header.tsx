@@ -5,7 +5,10 @@ import styles from "./styles";
 export default function Header() {
   return (
     <View style={styles.container}>
-      <Image style={styles.img} source={require("../../assets/images/noti 1x.png")} />
+      <Image
+        style={styles.img}
+        source={require("../../assets/images/noti 1x.png")}
+      />
       <Text style={styles.title}>الرئيسية</Text>
     </View>
   );

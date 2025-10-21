@@ -13,6 +13,7 @@
     },
     "plugins": [
       "expo-localization",
+      "expo-font",
       [
         "expo-build-properties",
         {
@@ -54,25 +55,9 @@
               "pathPrefix": "/"
             }
           ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
-        },
-        {
-          "action": "VIEW",
-          "data": [
-            {
-              "scheme": "https",
-              "host": "ouredu.onrender.com",
-              "pathPrefix": "/"
-            }
-          ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
+          "category": ["BROWSABLE", "DEFAULT"]
         }
+       
       ],
       "userInterfaceStyle": "dark",
       "softwareKeyboardLayoutMode": "pan",

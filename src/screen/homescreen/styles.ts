@@ -1,4 +1,5 @@
 import { StyleSheet, I18nManager } from "react-native";
+import {responsiveFontSize,responsiveHeight, responsiveWidth,} from "react-native-responsive-dimensions";
 
 const isRTL = I18nManager.isRTL;
 
@@ -100,6 +101,7 @@ export default StyleSheet.create({
     alignItems: "center",
     gap: 5,
     color: "#414E75",
+
   },
 
   SessionTime: {

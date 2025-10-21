@@ -4,7 +4,6 @@ import reactotron from "reactotron-react-native";
 import "./ReactotronConfig";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Toast from "react-native-toast-message";
-import * as Font from "expo-font";
 
 
 // @ts-ignore

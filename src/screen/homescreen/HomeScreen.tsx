@@ -6,14 +6,14 @@ import Header from "../../components/Header/Header";
 import { AllPackage } from "../../models/HomeModel";
 import CustomButton from "src/components/btn/CustomButton";
 import Sessions from "../../assets/icons/Sessions.svg";
-import Calendar from "../../assets/icons/calendar.svg";
+import Duration from "../../assets/icons/Duration.svg";
 
 const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
   <View style={styles.pckcont}>
     <Text style={styles.pckName}>{pkg.title}</Text>
 
     <View style={styles.Calendar}>
-      <Calendar width={16} height={16} />
+      <Duration width={16} height={16} />
 
       <Text style={styles.Calendar}>
         Duration: {pkg.duration_months} months

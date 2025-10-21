@@ -4,6 +4,16 @@
   "username_placeholder": "Mobile",
   "password_label": "Enter Your Password",
   "password_placeholder": "Password",
-  "login": "Login"
-  
+  "login": "Login",
+  "Duration": "Duration",
+  "months": "Months",
+  "sessions": "Sessions",
+  "sessionTime": "Session Time",
+  "minutes": "Minutes",
+  "packagePrice": "Package Price",
+  "price": "Price",
+  "currency": "EGP",
+  "online": "Online",
+  "onsite": "Onsite",
+  "Months" : "Months"
 }

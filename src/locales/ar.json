@@ -4,5 +4,17 @@
   "username_placeholder": "رقم الهاتف",
   "password_label": "أدخل كلمة المرور",
   "password_placeholder": "كلمة المرور",
-  "login": "تسجيل الدخول"
+  "login": "تسجيل الدخول",
+  "title": "الرئيسية",
+  "book_session": "احجز حصص فردية أونلاين و حضورية",
+  "register_now": "سجل الآن",
+  "all_packages": "كل الباقات",
+  "price": "السعر",
+  "book_monthly_package": "احجز باقة شهرية",
+  "Duration": "مدة الباقة",
+  "sessionTime": "مدة الحصة",
+  "session_count": "عدد الحصص",
+  "tax_included": "السعر يشمل الضريبة",
+  "Months" : "شهور",
+  "sessions" : "حصص"
 }

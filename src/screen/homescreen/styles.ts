@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, I18nManager } from "react-native";
+
+const isRTL = I18nManager.isRTL;
 
 export default StyleSheet.create({
   container: {
@@ -71,6 +73,13 @@ export default StyleSheet.create({
     marginBottom: 10,
   },
 
+  pckDetails: {
+    flexDirection: isRTL ? "row-reverse" : "row",
+    paddingVertical: 8,
+    textAlign: "right",
+    justifyContent: "space-between",
+  },
+
   packagePrice: {
     marginTop: 8,
     fontWeight: "bold",
@@ -84,13 +93,18 @@ export default StyleSheet.create({
   Sessions: {
     flexDirection: "row",
     alignItems: "center",
+    color: "#414E75",
+  },
+  Duration: {
+    flexDirection: "row-reverse",
+    alignItems: "center",
     gap: 5,
     color: "#414E75",
   },
-  Calendar: {
+
+  SessionTime: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 5,
     color: "#414E75",
   },
 });

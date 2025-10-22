@@ -51,7 +51,7 @@ const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
     <View style={styles.pckDetails}>
       {/* sessions count */}
       <View style={styles.Sessions}>
-        <Text style={styles.Sessions}>
+        <Text style={styles.SessionsText}>
           {" "}
           {i18n.t("session_count")} ({pkg.sessions_count} {i18n.t("sessions")})
         </Text>
@@ -61,7 +61,7 @@ const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
       {/* SessionTime */}
 
       <View style={styles.SessionTime}>
-        <Text style={styles.SessionTime}>
+        <Text style={styles.SessionTimeText}>
           {" "}
           {i18n.t("sessionTime")} {pkg.session_time_in_minutes}
         </Text>
@@ -75,7 +75,8 @@ const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
     <View style={styles.Duration}>
       <Duration width={16} height={16} />
 
-      <Text style={styles.Duration}>
+      <Text style={styles.DurationText}>
+        {" "}
         {i18n.t("Duration")} {pkg.duration_months} {i18n.t("Months")}
       </Text>
     </View>
@@ -88,7 +89,6 @@ const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
     </View>
 
     {/* Button */}
-
     <CustomButton title="احجز باقة شهرية" onPress={() => {}} />
   </View>
 );

@@ -1,9 +1,9 @@
 import { StyleSheet, I18nManager } from "react-native";
-import {
-  responsiveFontSize,
-  responsiveHeight,
-  responsiveWidth,
-} from "react-native-responsive-dimensions";
+import { Dimensions } from "react-native";
+
+const { width, height } = Dimensions.get("window");
+const guidelineBaseWidth = 375;
+const scale = (size: number) => (width / guidelineBaseWidth) * size;
 
 const isRTL = I18nManager.isRTL;
 
@@ -32,14 +32,14 @@ export default StyleSheet.create({
 
   buttonTextcard: {
     color: "#2562EB",
-    fontSize: 18,
+    fontSize: scale(18),
     fontWeight: "600",
   },
 
   textcard: {
     color: "#FFFFFF",
-    fontSize: 21,
-    fontWeight: "500",
+    fontSize: scale(21),
+    fontWeight: "300",
     maxWidth: "50%",
   },
 
@@ -51,13 +51,13 @@ export default StyleSheet.create({
   },
   text1: {
     fontWeight: 500,
-    fontSize: 24,
+    fontSize: scale(24),
     paddingVertical: 20,
     marginBottom: 10,
   },
   text2: {
     fontWeight: 400,
-    fontSize: 20,
+    fontSize: scale(20),
     paddingVertical: 30,
   },
 
@@ -71,31 +71,33 @@ export default StyleSheet.create({
     width: "100%",
   },
   pckName: {
-    fontSize: 16,
     fontWeight: "700",
     color: "#172554",
     textAlign: "right",
     marginBottom: 10,
+    fontFamily: "Alexandria-Regular",
+    fontSize: scale(16),
   },
 
   pckDetails: {
     flexDirection: isRTL ? "row-reverse" : "row",
+    
     paddingVertical: 8,
     textAlign: "right",
     justifyContent: "space-between",
-    fontFamily: "Alexandria-Bold",
-    
   },
 
   packagePrice: {
     marginTop: 8,
-    fontWeight: "bold",
+    fontWeight: "600",
     color: "#414E75",
     alignItems: "center",
     backgroundColor: "#F8F9FF",
     padding: 3,
     borderRadius: 8,
     textAlign: "right",
+    fontFamily: "Alexandria-Regular",
+    fontSize: scale(12),
   },
   taxincluded: {
     fontWeight: 400,
@@ -103,24 +105,40 @@ export default StyleSheet.create({
     alignItems: "center",
     textAlign: "right",
     paddingBottom: 10,
+    fontFamily: "Alexandria-Regular",
+    fontSize: scale(10),
   },
 
   Sessions: {
     flexDirection: "row",
     alignItems: "center",
+  },
+
+  SessionsText: {
     color: "#414E75",
-    
+    fontFamily: "Alexandria-Regular",
+    fontSize: scale(12),
+    fontWeight: "400",
   },
   Duration: {
     flexDirection: "row-reverse",
     alignItems: "center",
-    gap: 5,
+  },
+
+  DurationText: {
     color: "#414E75",
+    fontFamily: "Alexandria-Regular",
+    fontSize: scale(12),
+    fontWeight: "400",
   },
 
   SessionTime: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  SessionTimeText: {
     color: "#414E75",
+    fontFamily: "Alexandria-Regular",
+    fontSize: scale(12),
   },
 });

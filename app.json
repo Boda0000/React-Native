@@ -12,9 +12,14 @@
       "resizeMode": "contain"
     },
     "plugins": [
-      "expo-localization",
-      "expo-font",
-      [
+  "expo-localization",
+  [
+    "expo-font",
+    {
+      "fonts": ["./assets/fonts/Alexandria-Bold.ttf"]
+    }
+  ],
+  [
         "expo-build-properties",
         {
           "android": {

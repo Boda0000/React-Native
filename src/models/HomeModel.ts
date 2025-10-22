@@ -27,6 +27,7 @@ export interface AllPackage {
   sessions_type: string;
   session_time_in_minutes: string;
   package_price: string;
+  tax_included: string;
 }
 
 export class Map {
@@ -59,6 +60,7 @@ export class Map {
         sessions_type,
         session_time_in_minutes,
         package_price,
+        tax_included:"السعر يشمل الضريبة",
       };
     });
   }

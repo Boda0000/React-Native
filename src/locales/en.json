@@ -15,5 +15,6 @@
   "currency": "EGP",
   "online": "Online",
   "onsite": "Onsite",
-  "Months" : "Months"
+  "Months": "Months",
+  "tax_included": "tax_included"
 }

@@ -22,7 +22,6 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Header />
-
       <View style={styles.card}>
         <Text style={styles.textcard}>احجز حصص فردية أونلاين و حضورية</Text>
         <TouchableOpacity style={styles.buttoncard}>
@@ -45,18 +44,17 @@ const HomeScreen = () => {
 };
 
 const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
-  
   <View style={styles.pckcont}>
-    
-     {/* Main Name */}
+    {/* Main Name */}
     <Text style={styles.pckName}>{pkg.title}</Text>
 
     <View style={styles.pckDetails}>
       {/* sessions count */}
       <View style={styles.Sessions}>
         <Text style={styles.Sessions}>
-          {i18n.t("session_count")}: ({pkg.sessions_count}
-          {i18n.t("sessions")} ){" "}
+          {" "}
+          {i18n.t("session_count")} ({pkg.sessions_count} {i18n.t("sessions")}{" "}
+          ){" "}
         </Text>
         <Sessions width={16} height={16} />
       </View>
@@ -65,8 +63,10 @@ const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
 
       <View style={styles.SessionTime}>
         <Text style={styles.SessionTime}>
-          {i18n.t("sessionTime")} : {pkg.session_time_in_minutes}{" "}
+          {" "}
+          {i18n.t("sessionTime")} {pkg.session_time_in_minutes}{" "}
         </Text>
+
         <SessionTime width={16} height={16} />
       </View>
     </View>
@@ -75,8 +75,10 @@ const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
 
     <View style={styles.Duration}>
       <Duration width={16} height={16} />
+
       <Text style={styles.Duration}>
-        {i18n.t("Duration")}: {pkg.duration_months} {i18n.t("Months")}
+        {" "}
+        {i18n.t("Duration")} {pkg.duration_months} {i18n.t("Months")}
       </Text>
     </View>
 
@@ -84,6 +86,7 @@ const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
 
     <View style={styles.packagePrice}>
       <Text style={styles.packagePrice}> السعر:{pkg.package_price}</Text>
+      <Text style={styles.packagePrice}> {pkg.tax_included} </Text>
     </View>
 
     {/* Button */}

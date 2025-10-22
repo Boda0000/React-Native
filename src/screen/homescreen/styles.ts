@@ -1,5 +1,9 @@
 import { StyleSheet, I18nManager } from "react-native";
-import {responsiveFontSize,responsiveHeight, responsiveWidth,} from "react-native-responsive-dimensions";
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from "react-native-responsive-dimensions";
 
 const isRTL = I18nManager.isRTL;
 
@@ -72,6 +76,7 @@ export default StyleSheet.create({
     color: "#172554",
     textAlign: "right",
     marginBottom: 10,
+    
   },
 
   pckDetails: {
@@ -79,6 +84,7 @@ export default StyleSheet.create({
     paddingVertical: 8,
     textAlign: "right",
     justifyContent: "space-between",
+    fontFamily: "Alexandria-Bold",
   },
 
   packagePrice: {
@@ -101,7 +107,6 @@ export default StyleSheet.create({
     alignItems: "center",
     gap: 5,
     color: "#414E75",
-
   },
 
   SessionTime: {

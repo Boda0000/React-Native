@@ -86,7 +86,7 @@ const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
 
     <View style={styles.packagePrice}>
       <Text style={styles.packagePrice}> السعر:{pkg.package_price}</Text>
-      <Text style={styles.packagePrice}> {pkg.tax_included} </Text>
+      <Text style={styles.taxincluded}> {pkg.tax_included} </Text>
     </View>
 
     {/* Button */}

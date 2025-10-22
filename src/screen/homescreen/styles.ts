@@ -76,7 +76,6 @@ export default StyleSheet.create({
     color: "#172554",
     textAlign: "right",
     marginBottom: 10,
-    
   },
 
   pckDetails: {
@@ -93,10 +92,18 @@ export default StyleSheet.create({
     color: "#414E75",
     alignItems: "center",
     backgroundColor: "#F8F9FF",
-    padding: 5,
+    padding: 3,
     borderRadius: 8,
     textAlign: "right",
   },
+  taxincluded: {
+    fontWeight: 400,
+    color: "#484848",
+    alignItems: "center",
+    textAlign: "right",
+    paddingBottom: 10,
+  },
+
   Sessions: {
     flexDirection: "row",
     alignItems: "center",

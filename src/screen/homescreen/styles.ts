@@ -109,6 +109,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     color: "#414E75",
+    
   },
   Duration: {
     flexDirection: "row-reverse",

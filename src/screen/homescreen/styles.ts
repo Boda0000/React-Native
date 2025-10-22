@@ -84,6 +84,7 @@ export default StyleSheet.create({
     textAlign: "right",
     justifyContent: "space-between",
     fontFamily: "Alexandria-Bold",
+    
   },
 
   packagePrice: {

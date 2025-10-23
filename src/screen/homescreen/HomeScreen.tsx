@@ -1,6 +1,6 @@
 import React, { useTransition } from "react";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
-import { useHome } from "../../Hooks/useHome";
+import { useGetPackage } from "../../Hooks/useHome";
 import styles from "./styles";
 import Header from "../../components/Header/Header";
 import { AllPackage } from "../../models/HomeModel";
@@ -15,7 +15,7 @@ import { I18nManager } from "react-native";
 const isRTL = I18nManager.isRTL;
 
 const HomeScreen = () => {
-  const { data } = useHome();
+  const { data } = useGetPackage();
   const packages = data || [];
   const { lang, toggleLanguage } = useLanguage();
 
@@ -23,15 +23,15 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <Header />
       <View style={styles.card}>
-        <Text style={styles.textcard}>احجز حصص فردية أونلاين و حضورية</Text>
+        <Text style={styles.textcard}>{i18n.t("book_session")}</Text>
         <TouchableOpacity style={styles.buttoncard}>
-          <Text style={styles.buttonTextcard}>سجل الآن</Text>
+          <Text style={styles.buttonTextcard}>{i18n.t("register_now")}</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.middlesec}>
-        <Text style={styles.text1}>الباقات</Text>
-        <Text style={styles.text2}>كل الباقات</Text>
+        <Text style={styles.text1}>{i18n.t("pakcages")}</Text>
+        <Text style={styles.text2}>{i18n.t("all_pakcages")}</Text>
       </View>
 
       <FlatList
@@ -84,12 +84,12 @@ const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
     {/* price */}
 
     <View style={styles.packagePrice}>
-      <Text style={styles.packagePrice}> السعر {pkg.package_price}</Text>
+      <Text style={styles.packagePrice}>{i18n.t("price")} {pkg.package_price}</Text>
       <Text style={styles.taxincluded}> {pkg.tax_included} </Text>
     </View>
 
     {/* Button */}
-    <CustomButton title="احجز باقة شهرية" onPress={() => {}} />
+    <CustomButton title={i18n.t("book_monthly_package")} onPress={() => {}} />
   </View>
 );
 export default HomeScreen;

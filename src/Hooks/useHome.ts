@@ -15,7 +15,7 @@ async function fetchHome() {
   return Map.parseData(data);
 }
 
-export function useHome() {
+export function useGetPackage() {
   return useQuery<AllPackage[], Error>({
     queryKey: ["homePackages"],
     queryFn: fetchHome,

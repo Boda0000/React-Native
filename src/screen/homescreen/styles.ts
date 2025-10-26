@@ -13,7 +13,7 @@ export default StyleSheet.create({
     paddingHorizontal: 16,
     backgroundColor: "#fff",
   },
-  card: {
+  banner: {
     alignItems: "center",
     paddingHorizontal: 20,
     backgroundColor: "#2463EC",
@@ -23,45 +23,47 @@ export default StyleSheet.create({
     paddingVertical: 50,
     marginBottom: 10,
   },
-  buttoncard: {
+  bannerbtn: {
     backgroundColor: "#fff",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
+    
+    
   },
 
-  buttonTextcard: {
+  bannerbtnText: {
     color: "#2562EB",
     fontSize: scale(18),
     fontWeight: "600",
   },
 
-  textcard: {
+  bannerTxt: {
     color: "#FFFFFF",
     fontSize: scale(21),
     fontWeight: "300",
     maxWidth: "50%",
   },
 
-  middlesec: {
+  midsec: {
     flexDirection: "row-reverse",
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
   },
-  text1: {
+  packages: {
     fontWeight: 500,
     fontSize: scale(24),
     paddingVertical: 20,
     marginBottom: 10,
   },
-  text2: {
+  all_packages: {
     fontWeight: 400,
     fontSize: scale(20),
     paddingVertical: 30,
   },
 
-  pckcont: {
+  Pkgcontainer: {
     backgroundColor: "#FFFFFF",
     marginBottom: 12,
     padding: 20,
@@ -70,7 +72,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     width: "100%",
   },
-  pckName: {
+  PkgName: {
     fontWeight: "700",
     color: "#172554",
     textAlign: "right",
@@ -79,9 +81,9 @@ export default StyleSheet.create({
     fontSize: scale(16),
   },
 
-  pckDetails: {
+  pkgDetails: {
     flexDirection: isRTL ? "row-reverse" : "row",
-    
+
     paddingVertical: 8,
     textAlign: "right",
     justifyContent: "space-between",
@@ -141,4 +143,20 @@ export default StyleSheet.create({
     fontFamily: "Alexandria-Regular",
     fontSize: scale(12),
   },
+
+  NoData: { fontSize: 18, color: "#777", fontWeight: "600" },
+
+  ListEmpty: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 100,
+  },
+  Loading: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+  },
+  LoadingText: { marginTop: 10, fontSize: 16, color: "#4A90E2" },
 });

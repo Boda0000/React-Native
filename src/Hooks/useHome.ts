@@ -15,9 +15,16 @@ async function fetchHome() {
   return Map.parseData(data);
 }
 
-export function useGetPackage() {
-  return useQuery<AllPackage[], Error>({
-    queryKey: ["homePackages"],
+export function usePackage() {
+  const { data, refetch, isLoading, error } = useQuery<AllPackage[], Error>({
+    queryKey: ["packages"],
     queryFn: fetchHome,
   });
+
+  return {
+    packages: data || [],
+    refetch,
+    isLoading,
+    error,
+  };
 }

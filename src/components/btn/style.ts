@@ -7,7 +7,6 @@ export default StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
     marginTop: 15,
-    width:"100%",
   },
   buttonDisabled: {
     backgroundColor: "#aaa",
@@ -15,7 +14,6 @@ export default StyleSheet.create({
   buttonText: {
     color: "#414E75",
     fontSize: 16,
-    fontWeight: "bold",
   },
   
 });

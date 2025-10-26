@@ -1,6 +1,12 @@
-import React, { useTransition } from "react";
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
-import { useGetPackage } from "../../Hooks/useHome";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  I18nManager,
+} from "react-native";
+import { usePackage } from "../../Hooks/useHome";
 import styles from "./styles";
 import Header from "../../components/Header/Header";
 import { AllPackage } from "../../models/HomeModel";
@@ -10,45 +16,74 @@ import SessionTime from "../../assets/icons/SessionTime.svg";
 import Duration from "../../assets/icons/Duration.svg";
 import { useLanguage } from "src/Hooks/useLanguage";
 import i18n from "src/locales/i18n";
-import { I18nManager } from "react-native";
 
 const isRTL = I18nManager.isRTL;
 
 const HomeScreen = () => {
-  const { data } = useGetPackage();
-  const packages = data || [];
-  const { lang, toggleLanguage } = useLanguage();
+  const { packages, refetch, isLoading } = usePackage();
+
+  const { lang } = useLanguage();
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const Refresh = async () => {
+    try {
+      setRefreshing(true);
+      await refetch();
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <View style={styles.Loading}>
+        <ActivityIndicator size="large" color="#4A90E2" />
+        <Text style={styles.LoadingText}>{i18n.t("loading")}...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <Header />
-      <View style={styles.card}>
-        <Text style={styles.textcard}>{i18n.t("book_session")}</Text>
-        <TouchableOpacity style={styles.buttoncard}>
-          <Text style={styles.buttonTextcard}>{i18n.t("register_now")}</Text>
-        </TouchableOpacity>
+
+      <View style={styles.banner}>
+        <Text style={styles.bannerTxt}>{i18n.t("book_session")}</Text>
+        <CustomButton
+          buttonStyle={styles.bannerbtn}
+          title={i18n.t("register_now")}
+          textStyle={styles.bannerbtnText}
+          onPress={() => {}}
+        />
       </View>
 
-      <View style={styles.middlesec}>
-        <Text style={styles.text1}>{i18n.t("pakcages")}</Text>
-        <Text style={styles.text2}>{i18n.t("all_pakcages")}</Text>
+      <View style={styles.midsec}>
+        <Text style={styles.packages}>{i18n.t("packages")}</Text>
+        <Text style={styles.all_packages}>{i18n.t("all_packages")}</Text>
       </View>
 
       <FlatList
         data={packages}
-        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <PackageCard pkg={item} />}
+        refreshing={refreshing}
+        onRefresh={Refresh}
+        ListEmptyComponent={
+          <View style={styles.ListEmpty}>
+            <Text style={styles.NoData}>{i18n.t("no_data_found")}</Text>
+          </View>
+        }
       />
     </View>
   );
 };
 
 const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
-  <View style={styles.pckcont}>
+  <View style={styles.Pkgcontainer}>
     {/* Main Name */}
-    <Text style={styles.pckName}>{pkg.title}</Text>
+    <Text style={styles.PkgName}>{pkg.title}</Text>
 
-    <View style={styles.pckDetails}>
+    <View style={styles.pkgDetails}>
       {/* sessions count */}
       <View style={styles.Sessions}>
         <Text style={styles.SessionsText}>
@@ -84,12 +119,22 @@ const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
     {/* price */}
 
     <View style={styles.packagePrice}>
-      <Text style={styles.packagePrice}>{i18n.t("price")} {pkg.package_price}</Text>
-      <Text style={styles.taxincluded}> {pkg.tax_included} </Text>
+      <Text style={styles.packagePrice}>
+        {i18n.t("price")} {pkg.package_price}
+      </Text>
+      <Text style={styles.taxincluded}> {i18n.t("tax_included")} </Text>
     </View>
 
     {/* Button */}
-    <CustomButton title={i18n.t("book_monthly_package")} onPress={() => {}} />
+    <CustomButton
+      title={i18n.t("book_monthly_package")}
+      textStyle={{
+        fontFamily: "Alexandria-Regular",
+        fontWeight: 500,
+        fontSize: 12,
+      }}
+      onPress={() => {}}
+    />
   </View>
 );
 export default HomeScreen;

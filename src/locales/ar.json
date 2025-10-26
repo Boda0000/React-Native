@@ -8,7 +8,7 @@
   "title": "الرئيسية",
   "book_session": "احجز حصص فردية أونلاين و حضورية",
   "register_now": "سجل الآن",
-  "all_pakcages": "كل الباقات",
+  "all_packages": "كل الباقات",
   "price": "السعر",
   "book_monthly_package": "احجز باقة شهرية",
   "Duration": "مدة الباقة",
@@ -17,6 +17,7 @@
   "tax_included": "السعر يشمل الضريبة",
   "Months" : "شهور",
   "sessions" : "حصص" ,
-  "pakcages" : "الباقات"
- 
+  "packages" : "الباقات" ,
+  "loading":"جاري التحميل" ,
+  "no_data_found": "لا يوجد بيانات"
 }

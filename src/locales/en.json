@@ -17,6 +17,8 @@
   "onsite": "Onsite",
   "Months": "Months",
   "tax_included": "tax included",
-  "session_count": "session_count"
+  "session_count": "session_count",
+  "loading": "loading" ,
+  "no_data_found": " No Data Found"
   
 }

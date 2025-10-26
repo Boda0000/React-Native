@@ -16,15 +16,9 @@ async function fetchHome() {
 }
 
 export function usePackage() {
-  const { data, refetch, isLoading, error } = useQuery<AllPackage[], Error>({
+  return useQuery<AllPackage[], Error>({
     queryKey: ["packages"],
     queryFn: fetchHome,
   });
 
-  return {
-    packages: data || [],
-    refetch,
-    isLoading,
-    error,
-  };
 }

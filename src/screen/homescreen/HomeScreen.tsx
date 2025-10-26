@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
   I18nManager,
 } from "react-native";
-import { usePackage } from "../../Hooks/useHome";
+import { usePackage } from "../../Hooks/usePackage";
 import styles from "./styles";
 import Header from "../../components/Header/Header";
 import { AllPackage } from "../../models/HomeModel";
@@ -20,7 +20,7 @@ import i18n from "src/locales/i18n";
 const isRTL = I18nManager.isRTL;
 
 const HomeScreen = () => {
-  const { packages, refetch, isLoading } = usePackage();
+  const { data:packages, refetch, isLoading } = usePackage();
 
   const { lang } = useLanguage();
 

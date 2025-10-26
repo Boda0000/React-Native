@@ -128,11 +128,7 @@ const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
     {/* Button */}
     <CustomButton
       title={i18n.t("book_monthly_package")}
-      textStyle={{
-        fontFamily: "Alexandria-Regular",
-        fontWeight: 500,
-        fontSize: 12,
-      }}
+      textStyle={styles.book_monthly_package}
       onPress={() => {}}
     />
   </View>

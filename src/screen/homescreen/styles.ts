@@ -159,4 +159,8 @@ export default StyleSheet.create({
     backgroundColor: "#fff",
   },
   LoadingText: { marginTop: 10, fontSize: 16, color: "#4A90E2" },
+
+  book_monthly_package: {fontFamily: "Alexandria-Regular",
+        fontWeight: 500,
+        fontSize: 12,},
 });

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { MainData, AllPackage, Map } from "../models/HomeModel";
+import { MainData, AllPackage, Map } from "../models/PackageModel";
 
 async function fetchHome() {
   const response = await fetch(

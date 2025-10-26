@@ -8,7 +8,7 @@ import {
 import { usePackage } from "../../Hooks/usePackage";
 import styles from "./styles";
 import Header from "../../components/Header/Header";
-import { AllPackage } from "../../models/HomeModel";
+import { AllPackage } from "../../models/PackageModel";
 import CustomButton from "src/components/btn/CustomButton";
 import Sessions from "../../assets/icons/Sessions.svg";
 import SessionTime from "../../assets/icons/SessionTime.svg";

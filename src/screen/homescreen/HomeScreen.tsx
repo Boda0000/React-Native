@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   View,
   Text,
@@ -20,20 +19,9 @@ import i18n from "src/locales/i18n";
 const isRTL = I18nManager.isRTL;
 
 const HomeScreen = () => {
-  const { data:packages, refetch, isLoading } = usePackage();
+  const { data: packages, refetch, isLoading, isRefetching } = usePackage();
 
   const { lang } = useLanguage();
-
-  const [refreshing, setRefreshing] = useState(false);
-
-  const Refresh = async () => {
-    try {
-      setRefreshing(true);
-      await refetch();
-    } finally {
-      setRefreshing(false);
-    }
-  };
 
   if (isLoading) {
     return (
@@ -66,8 +54,8 @@ const HomeScreen = () => {
       <FlatList
         data={packages}
         renderItem={({ item }) => <PackageCard pkg={item} />}
-        refreshing={refreshing}
-        onRefresh={Refresh}
+        refreshing={isRefetching}
+        onRefresh={refetch}
         ListEmptyComponent={
           <View style={styles.ListEmpty}>
             <Text style={styles.NoData}>{i18n.t("no_data_found")}</Text>

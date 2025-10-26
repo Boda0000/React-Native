@@ -28,8 +28,6 @@ export default StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
-    
-    
   },
 
   bannerbtnText: {
@@ -83,7 +81,6 @@ export default StyleSheet.create({
 
   pkgDetails: {
     flexDirection: isRTL ? "row-reverse" : "row",
-
     paddingVertical: 8,
     textAlign: "right",
     justifyContent: "space-between",
@@ -160,7 +157,9 @@ export default StyleSheet.create({
   },
   LoadingText: { marginTop: 10, fontSize: 16, color: "#4A90E2" },
 
-  book_monthly_package: {fontFamily: "Alexandria-Regular",
-        fontWeight: 500,
-        fontSize: 12,},
+  book_monthly_package: {
+    fontFamily: "Alexandria-Regular",
+    fontWeight: 500,
+    fontSize: 12,
+  },
 });

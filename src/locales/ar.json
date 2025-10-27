@@ -19,5 +19,8 @@
   "sessions" : "حصص" ,
   "packages" : "الباقات" ,
   "loading":"جاري التحميل" ,
-  "no_data_found": "لا يوجد بيانات"
+  "no_data_found": "لا يوجد بيانات",
+  "Instructor" :"افضل معلمينا",
+  "all_instructors": "كل المعلمين",
+  "book class":"احجز حصة"
 }

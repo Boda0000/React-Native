@@ -11,6 +11,7 @@ export default function App() {
   const [fontsLoaded] = useFonts({
     "Alexandria-Bold": require("./src/assets/fonts/Alexandria-Bold.ttf"),
     "Alexandria-Regular": require("./src/assets/fonts/Alexandria-Regular.ttf"),
+    "Alexandria-Medium": require ("./src/assets/fonts/Alexandria-Medium.ttf"),
   });
 
   return (

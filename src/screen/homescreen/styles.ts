@@ -1,5 +1,10 @@
 import { StyleSheet, I18nManager } from "react-native";
 import { Dimensions } from "react-native";
+import {
+  responsiveWidth,
+  responsiveHeight,
+  responsiveFontSize,
+} from "react-native-responsive-dimensions";
 
 const { width, height } = Dimensions.get("window");
 const guidelineBaseWidth = 375;
@@ -11,8 +16,10 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 16,
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFF",
+    marginHorizontal: 10,
   },
+
   banner: {
     alignItems: "center",
     paddingHorizontal: 20,
@@ -24,7 +31,7 @@ export default StyleSheet.create({
     marginBottom: 10,
   },
   bannerbtn: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFF",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
@@ -42,7 +49,7 @@ export default StyleSheet.create({
     fontWeight: "300",
     maxWidth: "50%",
   },
-
+/////////////////////////////////////////////
   midsec: {
     flexDirection: "row-reverse",
     justifyContent: "space-between",
@@ -161,5 +168,141 @@ export default StyleSheet.create({
     fontFamily: "Alexandria-Regular",
     fontWeight: 500,
     fontSize: 12,
+  },
+  /////////////////////////////////////////////////////////////////////////////
+
+  lowsec: {
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+  },
+
+  instructors: {
+    fontWeight: 500,
+    fontSize: scale(16),
+    paddingVertical: 20,
+    marginBottom: 10,
+    fontFamily: "Alexandria-Medium",
+  },
+  all_instructors: {
+    fontWeight: 400,
+    fontSize: scale(12),
+    paddingVertical: 30,
+    fontFamily: "Alexandria-Medium",
+  },
+
+  /////////////////////////////////////////////////////////////////
+
+  card: {
+    flex: 1,
+    backgroundColor: "#ffffff",
+    borderRadius: 12,
+    padding: 12,
+    margin: 6,
+    borderWidth: 1,
+    borderColor: "#E8ECF4",
+    elevation: 2,
+    minHeight: responsiveHeight(30),
+    justifyContent: "space-between",
+  },
+
+  topSectionBox: {
+    borderBottomWidth: 1,
+    borderColor: "#ECEFFF",
+    paddingBottom: responsiveHeight(1.2),
+    marginBottom: responsiveHeight(1),
+  },
+
+  topSection: {
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  teacherImage: {
+    width: responsiveWidth(10),
+    height: responsiveWidth(12),
+    borderRadius: responsiveWidth(6),
+  },
+
+  teacherName: {
+    color: "#1E1E1E",
+    fontSize: responsiveFontSize(1.7),
+    fontWeight: "500",
+    fontFamily: "Alexandria-Medium",
+    textAlign: "center",
+  },
+
+  ratingRow: {
+    flexDirection: "row-reverse",
+    alignItems: "flex-start",
+    gap: 4,
+  },
+
+  ratingText: {
+    fontSize: 14,
+    color: "#F4B400",
+    fontFamily: "Alexandria",
+    fontWeight: "500",
+  },
+  // ================== Subjects ==================
+  subjectContainer: {
+    flexDirection: I18nManager.isRTL ? "row-reverse" : "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-end",
+    marginVertical: responsiveHeight(1),
+  },
+
+  subjectBadge: {
+    backgroundColor: "#F8F9FF",
+    borderWidth: 1,
+    borderColor: "#DADADA",
+    borderRadius: responsiveWidth(2),
+    paddingHorizontal: responsiveWidth(2),
+    paddingVertical: responsiveHeight(0.4),
+    marginHorizontal: responsiveWidth(0.8),
+    marginVertical: responsiveHeight(0.4),
+  },
+
+  subjectText: {
+    fontSize: responsiveFontSize(1.5),
+    color: "#414E75",
+    fontWeight: "600",
+    fontFamily: "Alexandria",
+  },
+
+  // ================== Info Section ==================
+  infoRow: {
+    flexDirection: "column", // بدلاً من "row-reverse"
+    alignItems: "flex-end",
+    marginVertical: responsiveHeight(0.3),
+  },
+
+  location: {
+    fontSize: responsiveFontSize(1.5),
+    color: "#414E75",
+    fontFamily: "Alexandria",
+  },
+
+  // ================== Button ==================
+  bookBtn: {
+    backgroundColor: "#ECEFFF",
+    borderWidth: 1,
+    borderColor: "#E8ECF4",
+    borderRadius: responsiveWidth(2),
+    paddingVertical: responsiveHeight(0.8),
+    paddingHorizontal: responsiveWidth(5),
+    marginTop: responsiveHeight(1.5),
+
+    alignItems: "center",
+  },
+
+  bookBtnText: {
+    color: "#414E75",
+    fontWeight: "500",
+    fontFamily: "Alexandria-Regular",
+    fontSize: responsiveFontSize(1.6),
+    textAlign: "center",
   },
 });

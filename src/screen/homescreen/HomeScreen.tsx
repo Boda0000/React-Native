@@ -152,7 +152,7 @@ const InstructorCard = ({ instructor }: { instructor: Instructor }) => (
         />
 
         <View>
-          <Text numberOfLines={1} style={styles.teacherName}>
+          <Text style={styles.teacherName}>
             {instructor.name}
           </Text>
 

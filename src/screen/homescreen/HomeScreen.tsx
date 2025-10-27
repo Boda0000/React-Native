@@ -13,6 +13,7 @@ import Duration from "../../assets/icons/Duration.svg";
 import i18n from "src/locales/i18n";
 import Location from "../../assets/icons/location.svg";
 import Country from "../../assets/icons/country.svg";
+import Star from "../../assets/icons/Star.svg";
 
 const HomeScreen = () => {
   const { data: packages, refetch, isLoading, isRefetching } = usePackage();
@@ -156,9 +157,7 @@ const InstructorCard = ({ instructor }: { instructor: Instructor }) => (
           </Text>
 
           <View style={styles.ratingRow}>
-            <Text style={styles.ratingText}>
-              {instructor.average_rating} ⭐
-            </Text>
+            <Text style={styles.ratingText}>{instructor.average_rating} <Star width={16} height={16} /></Text>
           </View>
         </View>
       </View>

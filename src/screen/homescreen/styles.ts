@@ -49,7 +49,7 @@ export default StyleSheet.create({
     fontWeight: "300",
     maxWidth: "50%",
   },
-/////////////////////////////////////////////
+  /////////////////////////////////////////////
   midsec: {
     flexDirection: "row-reverse",
     justifyContent: "space-between",
@@ -238,11 +238,12 @@ export default StyleSheet.create({
     flexDirection: "row-reverse",
     alignItems: "flex-start",
     gap: 4,
+    justifyContent: "space-between",
   },
 
   ratingText: {
-    fontSize: 14,
-    color: "#F4B400",
+    fontSize: 12,
+    color: "#414E75",
     fontFamily: "Alexandria",
     fontWeight: "500",
   },

@@ -30,7 +30,6 @@ export class Map {
     const rawItems = rawResponse.included;
     if (!rawItems?.length) return [];
 
-    // 🧩 خريطة المواد: id → name (بنحوّل id لسترينج للتأكد)
     const subjectsMap = rawItems
       .filter((item) => item.type === "subject")
       .reduce((acc: Record<string, string>, item) => {
@@ -38,7 +37,6 @@ export class Map {
         return acc;
       }, {});
 
-    // 🧩 نفلتر المدرسين
     const instructors = rawItems.filter((item) => item.type === "instructor");
 
     return instructors.map((item) => {
@@ -56,11 +54,9 @@ export class Map {
         average_rating = 0,
       } = attributes;
 
-      // ✅ IDs المواد
       const subjectIds: string[] =
         relationships?.subjects?.data?.map((s: any) => s.id.toString()) || [];
 
-      // ✅ تحويل IDs إلى أسماء من الخريطة
       const subjects: string[] = subjectIds.map(
         (sid) => subjectsMap[sid] || `Subject ${sid}`
       );

@@ -152,12 +152,12 @@ const InstructorCard = ({ instructor }: { instructor: Instructor }) => (
         />
 
         <View>
-          <Text style={styles.teacherName}>
-            {instructor.name}
-          </Text>
+          <Text style={styles.teacherName}>{instructor.name}</Text>
 
           <View style={styles.ratingRow}>
-            <Text style={styles.ratingText}>{instructor.average_rating} <Star width={16} height={16} /></Text>
+            <Text style={styles.ratingText}>
+              {instructor.average_rating} <Star width={16} height={16} />
+            </Text>
           </View>
         </View>
       </View>

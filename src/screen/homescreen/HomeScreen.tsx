@@ -66,7 +66,7 @@ const HomeScreen = () => {
             />
           </View>
 
-          {/* Packages Section */}
+          {/* Middle Section */}
           <View style={styles.midsec}>
             <Text style={styles.packages}>{i18n.t("packages")}</Text>
             <Text style={styles.all_packages}>{i18n.t("all_packages")}</Text>
@@ -80,7 +80,7 @@ const HomeScreen = () => {
             </View>
           )}
 
-          {/* Instructors Header */}
+          {/* Low Section */}
           <View style={styles.lowsec}>
             <Text style={styles.instructors}>{i18n.t("Instructor")}</Text>
             <Text style={styles.all_instructors}>
@@ -103,6 +103,8 @@ const HomeScreen = () => {
     />
   );
 };
+
+// PackageCard
 
 const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
   <View style={styles.Pkgcontainer}>
@@ -147,6 +149,8 @@ const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
     />
   </View>
 );
+
+// InstructorCard
 
 const InstructorCard = ({ instructor }: { instructor: Instructor }) => (
   <View style={styles.card}>

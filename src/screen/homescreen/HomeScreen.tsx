@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, FlatList, ActivityIndicator, Image } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  Image,
+  ScrollView,
+} from "react-native";
 import { usePackage } from "../../Hooks/usePackage";
 import { useInstructors } from "../../Hooks/useinstructors";
 import styles from "./styles";
@@ -143,36 +150,38 @@ const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
 
 const InstructorCard = ({ instructor }: { instructor: Instructor }) => (
   <View style={styles.card}>
-    {/* ===== Top Section  */}
-    <View style={styles.topSectionBox}>
-      <View style={styles.topSection}>
-        <Image
-          source={{ uri: instructor.profile_picture }}
-          style={styles.teacherImage}
-        />
+    {/* Top Section */}
+    <View style={styles.topSection}>
+      <Image
+        source={{ uri: instructor.profile_picture }}
+        style={styles.teacherImage}
+      />
 
-        <View>
-          <Text style={styles.teacherName}>{instructor.name}</Text>
-
-          <View style={styles.ratingRow}>
-            <Text style={styles.ratingText}>
-              {instructor.average_rating} <Star width={16} height={16} />
-            </Text>
-          </View>
+      <View>
+        <Text style={styles.teacherName}>{instructor.name}</Text>
+        <View style={styles.ratingRow}>
+          <Star width={16} height={16} />
+          <Text style={styles.ratingText}>{instructor.average_rating}</Text>
         </View>
       </View>
     </View>
 
-    {/*Subjects*/}
-    {instructor.subjects?.length > 0 && (
-      <View style={styles.subjectContainer}>
-        {instructor.subjects.map((subject, index) => (
-          <View key={index} style={styles.subjectBadge}>
-            <Text style={styles.subjectText}>{subject}</Text>
-          </View>
-        ))}
-      </View>
-    )}
+    {/* Subjects */}
+    <View>
+      {instructor.subjects?.length > 0 && (
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.subjectContainer}
+        >
+          {instructor.subjects.map((subject, index) => (
+            <View key={index} style={styles.subjectBadge}>
+              <Text style={styles.subjectText}>{subject}</Text>
+            </View>
+          ))}
+        </ScrollView>
+      )}
+    </View>
 
     {/*Location Info*/}
     <View style={styles.infoRow}>

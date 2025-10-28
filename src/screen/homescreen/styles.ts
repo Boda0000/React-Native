@@ -11,6 +11,7 @@ const guidelineBaseWidth = 375;
 const scale = (size: number) => (width / guidelineBaseWidth) * size;
 
 const isRTL = I18nManager.isRTL;
+const CARD_PADDING_H = responsiveWidth(2);
 
 export default StyleSheet.create({
   container: {
@@ -196,28 +197,32 @@ export default StyleSheet.create({
 
   card: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#FFFFFF",
     borderRadius: 12,
-    padding: 12,
     margin: 6,
     borderWidth: 1,
-    borderColor: "#E8ECF4",
-    elevation: 2,
-    minHeight: responsiveHeight(30),
-    justifyContent: "space-between",
-  },
-
-  topSectionBox: {
-    borderBottomWidth: 1,
     borderColor: "#ECEFFF",
-    paddingBottom: responsiveHeight(1.2),
-    marginBottom: responsiveHeight(1),
+    elevation: 2,
+    width: responsiveWidth(47),
+    height: responsiveHeight(26),
+    justifyContent: "space-between",
+    paddingHorizontal: CARD_PADDING_H,
+    paddingTop: 0,
+    paddingBottom: responsiveHeight(1.5),
+    overflow: "hidden",
   },
 
   topSection: {
     flexDirection: "row-reverse",
-    justifyContent: "space-between",
     alignItems: "center",
+    justifyContent: "flex-start",
+    borderBottomWidth: 1,
+    borderColor: "#ECEFFF",
+    backgroundColor: "#FBFCFF",
+    marginHorizontal: -CARD_PADDING_H,
+    paddingHorizontal: CARD_PADDING_H,
+    paddingVertical: responsiveHeight(1),
+    gap: responsiveWidth(2),
   },
 
   teacherImage: {
@@ -231,14 +236,14 @@ export default StyleSheet.create({
     fontSize: responsiveFontSize(1.7),
     fontWeight: "500",
     fontFamily: "Alexandria-Medium",
-    textAlign: "center",
+    textAlign: "right",
+    marginBottom: responsiveHeight(0.3),
   },
 
   ratingRow: {
     flexDirection: "row-reverse",
-    alignItems: "flex-start",
+    alignItems: "center",
     gap: 4,
-    justifyContent: "space-between",
   },
 
   ratingText: {
@@ -247,12 +252,10 @@ export default StyleSheet.create({
     fontFamily: "Alexandria",
     fontWeight: "500",
   },
-  // ================== Subjects ==================
+  // Subjects
   subjectContainer: {
     flexDirection: I18nManager.isRTL ? "row-reverse" : "row",
-    flexWrap: "wrap",
-    justifyContent: "flex-end",
-    marginVertical: responsiveHeight(1),
+    paddingVertical: 1,
   },
 
   subjectBadge: {
@@ -273,11 +276,10 @@ export default StyleSheet.create({
     fontFamily: "Alexandria",
   },
 
-  // ================== Info Section ==================
+  // Info Section
   infoRow: {
-    flexDirection: "column", // بدلاً من "row-reverse"
+    flexDirection: "column",
     alignItems: "flex-end",
-    marginVertical: responsiveHeight(0.3),
   },
 
   location: {
@@ -286,17 +288,16 @@ export default StyleSheet.create({
     fontFamily: "Alexandria",
   },
 
-  // ================== Button ==================
+  // Button
   bookBtn: {
     backgroundColor: "#ECEFFF",
     borderWidth: 1,
     borderColor: "#E8ECF4",
-    borderRadius: responsiveWidth(2),
+    borderRadius: responsiveWidth(1),
     paddingVertical: responsiveHeight(0.8),
-    paddingHorizontal: responsiveWidth(5),
-    marginTop: responsiveHeight(1.5),
-
     alignItems: "center",
+    alignSelf: "stretch",
+    marginTop: responsiveHeight(1),
   },
 
   bookBtnText: {

@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     flexDirection: "row-reverse", 
     alignItems: "center", 
     marginVertical: 50,
-    gap: 90, 
+    gap: 100, 
   },
 
   img: {
@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ECEFFF",
     borderRadius: 10,
+    marginRight:10,
   },
   title: {
     fontSize: 26,

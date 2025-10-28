@@ -16,9 +16,9 @@ const CARD_PADDING_H = responsiveWidth(2);
 export default StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16,
+    paddingHorizontal: 0,
     backgroundColor: "#FFFFFF",
-    marginHorizontal: 10,
+    marginHorizontal: 2,
   },
 
   banner: {
@@ -56,6 +56,7 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
+    
   },
   packages: {
     fontWeight: 500,

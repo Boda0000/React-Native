@@ -10,12 +10,13 @@ import {
 import style from "../btn/style";
 
 interface ButtonProps {
-  title: string;
+  title?: string;
   onPress: () => void;
   loading?: boolean;
   disabled?: boolean;
-  buttonStyle?: StyleProp<ViewStyle>; 
+  buttonStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
+  children?: React.ReactNode; // ✅ دعم الأطفال
 }
 
 export default function CustomButton({
@@ -25,19 +26,22 @@ export default function CustomButton({
   disabled,
   buttonStyle,
   textStyle,
+  children,
 }: ButtonProps) {
   return (
     <TouchableOpacity
       style={[
-        style.button, 
+        style.button,
         disabled ? style.buttonDisabled : null,
-        buttonStyle, 
+        buttonStyle,
       ]}
       onPress={onPress}
       disabled={disabled || loading}
     >
       {loading ? (
         <ActivityIndicator color="#fff" />
+      ) : children ? (
+        children 
       ) : (
         <Text style={[style.buttonText, textStyle]}>{title}</Text>
       )}

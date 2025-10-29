@@ -15,12 +15,16 @@
   "sessionTime": "مدة الحصة",
   "session_count": "عدد الحصص",
   "tax_included": "السعر يشمل الضريبة",
-  "Months" : "شهور",
-  "sessions" : "حصص" ,
-  "packages" : "الباقات" ,
-  "loading":"جاري التحميل" ,
+  "Months": "شهور",
+  "sessions": "حصص",
+  "packages": "الباقات",
+  "loading": "جاري التحميل",
   "no_data_found": "لا يوجد بيانات",
-  "Instructor" :"افضل معلمينا",
+  "Instructor": "افضل معلمينا",
   "all_instructors": "كل المعلمين",
-  "book class":"احجز حصة"
+  "book class": "احجز حصة",
+  "select_photo_from_gallrey": "اختر صورة من المعرض",
+  "change_photo": "تغيير الصورة",
+  "permission_denied": "غير مسموح بالوصول الي المعرض",
+  "allow_storage_access": "السماح بالوصول الي المعرض"
 }

@@ -4,9 +4,9 @@ import {
   Text,
   FlatList,
   ActivityIndicator,
-  Image,
   ScrollView,
   RefreshControl,
+  Image,
 } from "react-native";
 import { usePackage } from "../../Hooks/usePackage";
 import { useInstructors } from "../../Hooks/useinstructors";
@@ -22,6 +22,8 @@ import i18n from "src/locales/i18n";
 import Location from "../../assets/icons/location.svg";
 import Country from "../../assets/icons/country.svg";
 import Star from "../../assets/icons/Star.svg";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import SelectImageCard from "src/components/SelectImageCard/SelectImageCard";
 
 const HomeScreen = () => {
   const { data: packages, refetch, isLoading, isRefetching } = usePackage();
@@ -61,18 +63,10 @@ const HomeScreen = () => {
       {/* Header */}
       <Header />
 
-      {/* Banner */}
-      <View style={styles.banner}>
-        <Text style={styles.bannerTxt}>{i18n.t("book_session")}</Text>
-        <CustomButton
-          buttonStyle={styles.bannerbtn}
-          title={i18n.t("register_now")}
-          textStyle={styles.bannerbtnText}
-          onPress={() => {}}
-        />
-      </View>
+      {/* photo*/}
+      <SelectImageCard />
 
-      {/* Package Section */}
+      {/* Packages */}
       {firstPackage && (
         <View>
           <View style={styles.midsec}>
@@ -84,7 +78,7 @@ const HomeScreen = () => {
         </View>
       )}
 
-      {/* Instructors FlatList */}
+      {/* Instructors */}
       <FlatList
         data={instructors}
         numColumns={2}

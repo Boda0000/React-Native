@@ -81,13 +81,6 @@ const HomeScreen = () => {
           </View>
 
           <PackageCard pkg={firstPackage} />
-
-          <View style={styles.lowsec}>
-            <Text style={styles.instructors}>{i18n.t("Instructor")}</Text>
-            <Text style={styles.all_instructors}>
-              {i18n.t("all_instructors")}
-            </Text>
-          </View>
         </View>
       )}
 
@@ -97,6 +90,14 @@ const HomeScreen = () => {
         numColumns={2}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <InstructorCard instructor={item} />}
+        ListHeaderComponent={
+          <View style={styles.lowsec}>
+            <Text style={styles.instructors}>{i18n.t("Instructor")}</Text>
+            <Text style={styles.all_instructors}>
+              {i18n.t("all_instructors")}
+            </Text>
+          </View>
+        }
         contentContainerStyle={{
           paddingBottom: 50,
           paddingHorizontal: 5,

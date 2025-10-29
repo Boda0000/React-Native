@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   Image,
   ScrollView,
+  RefreshControl,
 } from "react-native";
 import { usePackage } from "../../Hooks/usePackage";
 import { useInstructors } from "../../Hooks/useinstructors";
@@ -39,15 +40,25 @@ const HomeScreen = () => {
     );
   }
 
-  const firstPackage = packages?.[0] || null;
-
-  const Data = firstPackage
-    ? [firstPackage, ...(instructors || [])]
-    : instructors || [];
+  const firstPackage = packages?.[0];
 
   return (
-    <View style={styles.container}>
-      {/* Header ثابت */}
+    <ScrollView
+      contentContainerStyle={{
+        paddingHorizontal: 5,
+        backgroundColor: "#FFFFFF",
+      }}
+      refreshControl={
+        <RefreshControl
+          refreshing={isRefetching || loadingInstructors}
+          onRefresh={() => {
+            refetch();
+            refetchInstructors();
+          }}
+        />
+      }
+    >
+      {/* Header */}
       <Header />
 
       {/* Banner */}
@@ -61,50 +72,38 @@ const HomeScreen = () => {
         />
       </View>
 
+      {/* Package Section */}
+      {firstPackage && (
+        <View>
+          <View style={styles.midsec}>
+            <Text style={styles.packages}>{i18n.t("packages")}</Text>
+            <Text style={styles.all_packages}>{i18n.t("all_packages")}</Text>
+          </View>
+
+          <PackageCard pkg={firstPackage} />
+
+          <View style={styles.lowsec}>
+            <Text style={styles.instructors}>{i18n.t("Instructor")}</Text>
+            <Text style={styles.all_instructors}>
+              {i18n.t("all_instructors")}
+            </Text>
+          </View>
+        </View>
+      )}
+
+      {/* Instructors FlatList */}
       <FlatList
-        data={Data}
-        keyExtractor={(item, index) => ("title" in item ? "package" : item.id)}
+        data={instructors}
         numColumns={2}
-        refreshing={isRefetching || loadingInstructors}
-        onRefresh={() => {
-          refetch();
-          refetchInstructors();
-        }}
-        renderItem={({ item, index }) => {
-          if (index === 0 && firstPackage) {
-            return (
-              <View>
-                {/* Middle Section */}
-                <View style={styles.midsec}>
-                  <Text style={styles.packages}>{i18n.t("packages")}</Text>
-                  <Text style={styles.all_packages}>
-                    {i18n.t("all_packages")}
-                  </Text>
-                </View>
-
-                {/* PackageCard */}
-                <PackageCard pkg={firstPackage} />
-
-                {/* Low Section */}
-                <View style={styles.lowsec}>
-                  <Text style={styles.instructors}>{i18n.t("Instructor")}</Text>
-                  <Text style={styles.all_instructors}>
-                    {i18n.t("all_instructors")}
-                  </Text>
-                </View>
-              </View>
-            );
-          }
-
-          return <InstructorCard instructor={item as Instructor} />;
-        }}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <InstructorCard instructor={item} />}
         contentContainerStyle={{
           paddingBottom: 50,
           paddingHorizontal: 5,
           backgroundColor: "#FFFFFF",
         }}
       />
-    </View>
+    </ScrollView>
   );
 };
 

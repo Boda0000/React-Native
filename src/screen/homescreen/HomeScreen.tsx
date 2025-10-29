@@ -1,4 +1,3 @@
-import React from "react";
 import {
   View,
   Text,
@@ -22,7 +21,6 @@ import i18n from "src/locales/i18n";
 import Location from "../../assets/icons/location.svg";
 import Country from "../../assets/icons/country.svg";
 import Star from "../../assets/icons/Star.svg";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import SelectImageCard from "src/components/SelectImageCard/SelectImageCard";
 
 const HomeScreen = () => {

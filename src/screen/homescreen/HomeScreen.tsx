@@ -39,11 +39,17 @@ const HomeScreen = () => {
     );
   }
 
-  const firstPackage = packages && packages.length > 0 ? packages[0] : null;
+  const firstPackage = packages?.[0] || null;
+
+  const Data = firstPackage
+    ? [firstPackage, ...(instructors || [])]
+    : instructors || [];
 
   return (
     <View style={styles.container}>
+      {/* Header ثابت */}
       <Header />
+
       {/* Banner */}
       <View style={styles.banner}>
         <Text style={styles.bannerTxt}>{i18n.t("book_session")}</Text>
@@ -56,46 +62,42 @@ const HomeScreen = () => {
       </View>
 
       <FlatList
-        data={instructors || []}
-        keyExtractor={(item) => item.id}
+        data={Data}
+        keyExtractor={(item, index) => ("title" in item ? "package" : item.id)}
         numColumns={2}
         refreshing={isRefetching || loadingInstructors}
         onRefresh={() => {
           refetch();
           refetchInstructors();
         }}
-        ListHeaderComponent={
-          <>
-            {/* Middle Section  */}
-            <View style={styles.midsec}>
-              <Text style={styles.packages}>{i18n.t("packages")}</Text>
-              <Text style={styles.all_packages}>{i18n.t("all_packages")}</Text>
-            </View>
+        renderItem={({ item, index }) => {
+          if (index === 0 && firstPackage) {
+            return (
+              <View>
+                {/* Middle Section */}
+                <View style={styles.midsec}>
+                  <Text style={styles.packages}>{i18n.t("packages")}</Text>
+                  <Text style={styles.all_packages}>
+                    {i18n.t("all_packages")}
+                  </Text>
+                </View>
 
-            {/* Package Section*/}
-            {firstPackage ? (
-              <PackageCard pkg={firstPackage} />
-            ) : (
-              <View style={styles.ListEmpty}>
-                <Text style={styles.NoData}>{i18n.t("no_data_found")}</Text>
+                {/* PackageCard */}
+                <PackageCard pkg={firstPackage} />
+
+                {/* Low Section */}
+                <View style={styles.lowsec}>
+                  <Text style={styles.instructors}>{i18n.t("Instructor")}</Text>
+                  <Text style={styles.all_instructors}>
+                    {i18n.t("all_instructors")}
+                  </Text>
+                </View>
               </View>
-            )}
+            );
+          }
 
-            {/* Low Section*/}
-            <View style={styles.lowsec}>
-              <Text style={styles.instructors}>{i18n.t("Instructor")}</Text>
-              <Text style={styles.all_instructors}>
-                {i18n.t("all_instructors")}
-              </Text>
-            </View>
-          </>
-        }
-        renderItem={({ item }) => <InstructorCard instructor={item} />}
-        ListEmptyComponent={
-          <View style={styles.ListEmpty}>
-            <Text style={styles.NoData}>{i18n.t("no_data_found")}</Text>
-          </View>
-        }
+          return <InstructorCard instructor={item as Instructor} />;
+        }}
         contentContainerStyle={{
           paddingBottom: 50,
           paddingHorizontal: 5,

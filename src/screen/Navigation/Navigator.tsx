@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginPage from "../LoginScreen/login.screen";
 import HomeScreen from "../homescreen/HomeScreen";
+import OnboardingScreen from "../onboardingscreen/onboardingscreen";
 import { getUser } from "../../storage/storageService";
 import { initLanguage } from "../../locales/i18n";
 
@@ -14,13 +15,14 @@ export default function Navigator() {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const initializeApp = async () => {
+    const initializeApp = () => {
       try {
-        const [user] = await Promise.all([getUser(), initLanguage()]);
-        setInitialRoute(user ? "Home" : "Login");
+        // هنا بنبدأ دايمًا من الـ Onboarding
+        initLanguage();
+        setInitialRoute("Onboarding");
       } catch (error) {
         console.log("Error initializing app:", error);
-        setInitialRoute("Login");
+        setInitialRoute("Onboarding");
       } finally {
         setIsReady(true);
       }
@@ -49,10 +51,10 @@ export default function Navigator() {
         initialRouteName={initialRoute}
         screenOptions={{ headerShown: false }}
       >
+        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
-
     </NavigationContainer>
   );
 }

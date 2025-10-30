@@ -27,17 +27,30 @@
   "change_photo": "تغيير الصورة",
   "permission_denied": "غير مسموح بالوصول الي المعرض",
   "allow_storage_access": "السماح بالوصول الي المعرض",
-  "Professionalism with you until success":"مهنية معكم حتى النجاح",
-  "Enhance your readiness and improve your professional skills through our diverse range of services.": "عزز استعدادك وحسّن مهاراتك المهنية من خلال مجموعة من الخدمات المتنوعة لدينا",
-  "Courses from specialized teachers ": "دورات من مُعلمين متخصصين",
-  "Browse our courses, delivered by a team of teachers with scientific and professional expertise.":"تصفح دوراتنا التي يقدمها فريق من المُعلمين ذوي الخبرة العلمية والمهنية",
-  "Practice for tests":"تدرب على الاختبارات",
-  "Boost your readiness for the license by simulating the test via the Kafa'at app.":"عزز استعدادك للرخصة بمحاكاة الاختبار عبر تطبيق كفايات",
-  "Discuss with other trainees":"ناقش المتدربين الآخرين",
-  "Gain more experience and share your knowledge with your colleagues through the Discussions tab.":"اكتسب مزيد من الخبرة وتبادل الخبرات مع زملائك من خلال تبويب المناقشات",
-  "Browse our courses":"تصفح دوراتنا",
-  "Already have an account? Log in.":"لديك حساب بالفعل؟ سجل دخولك",
-  "Skip":"تخطي",
-  "Arabic":"العربية",
-  "English" :"الإنجليزيه"
+  "Browse our courses": "تصفح دوراتنا",
+  "Already have an account? Log in.": "لديك حساب بالفعل؟ سجل دخولك",
+  "Skip": "تخطي",
+  "Arabic": "العربية",
+  "English": "الإنجليزية",
+
+  "Onboarding": {
+    "Slides": [
+      {
+        "title": "مهنية معكم حتى النجاح",
+        "subtitle": "عزز استعدادك وحسّن مهاراتك المهنية من خلال مجموعة من الخدمات المتنوعة لدينا"
+      },
+      {
+        "title": "دورات من مُعلمين متخصصين",
+        "subtitle": "تصفح دوراتنا التي يقدمها فريق من المُعلمين ذوي الخبرة العلمية والمهنية"
+      },
+      {
+        "title": "تدرب على الاختبارات",
+        "subtitle": "عزز استعدادك للرخصة بمحاكاة الاختبار عبر تطبيق كفايات"
+      },
+      {
+        "title": "ناقش المتدربين الآخرين",
+        "subtitle": "اكتسب مزيد من الخبرة وتبادل الخبرات مع زملائك من خلال تبويب المناقشات"
+      }
+    ]
+  }
 }

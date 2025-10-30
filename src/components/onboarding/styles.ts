@@ -1,11 +1,23 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, I18nManager } from "react-native";
 
 const { width } = Dimensions.get("window");
 
 export default StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
-  slide: { width, alignItems: "center", justifyContent: "center", padding: 20 },
-  image: { width: width * 0.8, height: 300, resizeMode: "contain" },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    justifyContent: "space-between",
+  },
+  slide: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+  },
+  image: {
+    width: width * 0.8,
+    height: 300,
+    resizeMode: "contain",
+  },
   title: {
     fontSize: 24,
     fontWeight: "bold",
@@ -22,15 +34,67 @@ export default StyleSheet.create({
   dotsContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    marginVertical: 20,
+    alignItems: "center",
+    marginVertical: 15,
   },
-  dot: { height: 10, borderRadius: 5, marginHorizontal: 5 },
-  buttonContainer: {
-    flexDirection: "row",
+  dot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: "#ccc",
+    marginHorizontal: 5,
+  },
+  activeDot: {
+    width: 25,
+    backgroundColor: "#2562EB",
+  },
+
+  // الزرار اللي تحت
+  buttonsContainer: {
+    flexDirection: I18nManager.isRTL ? "row-reverse" : "row",
+    alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 20,
-    marginBottom: 30,
+    paddingHorizontal: 25,
+    marginBottom: 35,
   },
-  skipText: { fontSize: 18, color: "#2562EB" },
-  nextButton: { backgroundColor: "#2562EB", padding: 15, borderRadius: 10 },
+
+  skipButton: {
+    backgroundColor: "transparent",
+    borderWidth: 1,
+    borderColor: "#315C63",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+  },
+  skipText: {
+    fontSize: 16,
+    color: "#315C63",
+    fontWeight: "500",
+  },
+  nextButton: {
+    backgroundColor: "#315C63",
+    width: 45,
+    height: 45,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+  },
+
+  // زر تغيير اللغة
+  langSwitchContainer: {
+    position: "absolute",
+    top: 40,
+    zIndex: 5,
+  },
+  langButton: {
+    backgroundColor: "#E9EDF3",
+    borderRadius: 10,
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+  },
+  langText: {
+    fontSize: 14,
+    color: "#315C63",
+    fontWeight: "600",
+  },
 });

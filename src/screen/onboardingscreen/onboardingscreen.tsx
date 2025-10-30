@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { View, StyleSheet, StatusBar } from "react-native";
 import Onboarding from "../../components/onboarding/onboarding";
 import { getSlidesData, Slide } from "../../data/slides";
 import { useNavigation } from "@react-navigation/native";
-import { RootStackNavigationProp } from "../Navigation/Rootstack"; // النوع الصحيح للـ navigation
+import { RootStackNavigationProp } from "../Navigation/Rootstack";
 
 const OnboardingScreen: React.FC = () => {
   const navigation = useNavigation<RootStackNavigationProp>();
@@ -11,19 +11,23 @@ const OnboardingScreen: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#F4F6F8" />
       <Onboarding
         slides={slides}
         currentSlide={currentSlide}
         onSlideChange={setCurrentSlide}
-onFinish={() => navigation.replace("Login")}
+        onFinish={() => navigation.replace("Login")}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
 export default OnboardingScreen;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#F4F6F8" },
+  container: {
+    flex: 1,
+    backgroundColor: "#F4F6F8",
+  },
 });

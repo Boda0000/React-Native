@@ -1,83 +1,110 @@
-import React, { useRef } from "react";
-import { View, Text, Animated, FlatList, Image, TouchableOpacity, Dimensions, I18nManager } from "react-native";
+import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  Dimensions,
+  I18nManager,
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import i18n from "src/locales/i18n";
 import { Slide } from "../../data/slides";
 import styles from "./styles";
+import CustomButton from "../btn/CustomButton";
 
 const { width } = Dimensions.get("window");
 
-export type OnboardingProps = {
+interface OnboardingProps {
   slides: Slide[];
   currentSlide: number;
   onSlideChange: (index: number) => void;
   onFinish: () => void;
-};
+}
 
-const Onboarding: React.FC<OnboardingProps> = ({ slides, currentSlide, onSlideChange, onFinish }) => {
-  const scrollX = useRef(new Animated.Value(0)).current;
-  const flatListRef = useRef<FlatList<Slide> | null>(null);
+const Onboarding: React.FC<OnboardingProps> = ({
+  slides,
+  currentSlide,
+  onSlideChange,
+  onFinish,
+}) => {
+  const flatListRef = React.useRef<FlatList<any>>(null);
 
   const handleNext = () => {
-    const nextIndex = currentSlide + 1;
-    if (nextIndex >= slides.length) {
+    if (currentSlide < slides.length - 1) {
+      flatListRef.current?.scrollToIndex({ index: currentSlide + 1 });
+      onSlideChange(currentSlide + 1);
+    } else {
       onFinish();
-      return;
     }
-    flatListRef.current?.scrollToOffset({ offset: nextIndex * width, animated: true });
-    onSlideChange(nextIndex);
   };
 
-  const handleScrollEnd = (event: any) => {
-    const index = Math.round(event.nativeEvent.contentOffset.x / width);
-    onSlideChange(index);
-  };
+  const handleSkip = () => onFinish();
 
   return (
     <View style={styles.container}>
-      <Animated.FlatList
+      {/* Slides */}
+      <FlatList
         ref={flatListRef}
         data={slides}
+        keyExtractor={(item) => item.id}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
-        inverted={I18nManager.isRTL}
-        keyExtractor={(item) => item.id}
-        onMomentumScrollEnd={handleScrollEnd}
-        onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], { useNativeDriver: false })}
+        onMomentumScrollEnd={(e) => {
+          const index = Math.round(e.nativeEvent.contentOffset.x / width);
+          onSlideChange(index);
+        }}
         renderItem={({ item }) => (
-          <View style={styles.slide}>
-            <Image source={item.image} style={styles.image} />
+          <View style={[styles.slide, { width }]}>
+            <Image
+              source={item.image}
+              style={styles.image}
+              resizeMode="contain"
+            />
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.subtitle}>{item.subtitle}</Text>
           </View>
         )}
       />
 
-      {/* Pagination Dots */}
+      {/* Dots */}
       <View style={styles.dotsContainer}>
-        {slides.map((_, i) => {
-          const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
-          const dotWidth = scrollX.interpolate({ inputRange, outputRange: [10, 25, 10], extrapolate: "clamp" });
-          const dotColor = scrollX.interpolate({ inputRange, outputRange: ["#ccc", "#2562EB", "#ccc"], extrapolate: "clamp" });
-          return <Animated.View key={i} style={[styles.dot, { width: dotWidth, backgroundColor: dotColor }]} />;
-        })}
+        {slides.map((_, index) => (
+          <View
+            key={index}
+            style={[styles.dot, currentSlide === index && styles.activeDot]}
+          />
+        ))}
       </View>
 
       {/* Buttons */}
-      <View style={styles.buttonContainer}>
-        {currentSlide < slides.length - 1 ? (
-          <TouchableOpacity onPress={onFinish}>
-            <Text style={styles.skipText}>Skip</Text>
+        <View
+          style={[
+            styles.buttonsContainer]}
+        >
+          {/* تخطي */}
+          {currentSlide < slides.length - 1 ? (
+            <TouchableOpacity onPress={handleSkip}>
+              <Text style={styles.skipText}>{i18n.t("Skip")}</Text>
+            </TouchableOpacity>
+          ) : (
+            <View style={{ width: 50 }} />
+          )}
+
+          {/* زرار السهم */}
+          <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
+            <MaterialIcons
+              name={I18nManager.isRTL ? "arrow-back-ios" : "arrow-forward-ios"}
+              size={24}
+              color="#fff"
+            />
           </TouchableOpacity>
-        ) : (
-          <View style={{ width: 60 }} />
-        )}
-        <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
-          <MaterialIcons name={I18nManager.isRTL ? "arrow-back-ios" : "arrow-forward-ios"} size={24} color="#fff" />
-        </TouchableOpacity>
+        </View>
       </View>
-    </View>
   );
 };
 
 export default Onboarding;
+ 

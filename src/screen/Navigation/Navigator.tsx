@@ -17,7 +17,6 @@ export default function Navigator() {
   useEffect(() => {
     const initializeApp = () => {
       try {
-        // هنا بنبدأ دايمًا من الـ Onboarding
         initLanguage();
         setInitialRoute("Onboarding");
       } catch (error) {

@@ -1,100 +1,198 @@
 import { StyleSheet, Dimensions, I18nManager } from "react-native";
+import {
+  responsiveWidth,
+  responsiveHeight,
+  responsiveFontSize,
+} from "react-native-responsive-dimensions";
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    justifyContent: "space-between",
-  },
-  slide: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 20,
-  },
-  image: {
-    width: width * 0.8,
-    height: 300,
-    resizeMode: "contain",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#1E1E1E",
-    textAlign: "center",
-    marginTop: 20,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: "#414E75",
-    textAlign: "center",
-    marginTop: 10,
-  },
-  dotsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginVertical: 15,
-  },
-  dot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: "#ccc",
-    marginHorizontal: 5,
-  },
-  activeDot: {
-    width: 25,
-    backgroundColor: "#2562EB",
   },
 
-  // الزرار اللي تحت
-  buttonsContainer: {
-    flexDirection: I18nManager.isRTL ? "row-reverse" : "row",
+  langWrapper: {
+    position: "absolute",
+    top: responsiveHeight(8),
+    left: responsiveWidth(6),
+    zIndex: 20,
+  },
+
+  langButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 4,
+    paddingVertical: responsiveHeight(0.8),
+    paddingHorizontal: responsiveWidth(3.5),
+    borderWidth: 1,
+    borderColor: "#E1E1E1",
+    alignSelf: "flex-start",
+  },
+
+  langText: {
+    color: "#000000",
+    fontSize: 14,
+    fontWeight: "400",
+    marginRight: 4,
+    fontFamily: "Kalligraaf Arabic",
+  },
+
+  dropdownContainer: {
+    backgroundColor: "#fff",
+    borderRadius: responsiveWidth(2),
+    marginTop: responsiveHeight(1),
+    elevation: 5,
+    overflow: "hidden",
+  },
+
+  dropdownItem: {
+    paddingVertical: responsiveHeight(1.2),
+    paddingHorizontal: responsiveWidth(2),
+    borderBottomWidth: 1,
+    borderColor: "#eee",
+    backgroundColor: "transparent",
+  },
+
+  dropdownText: {
+    fontSize: 15,
+    color: "#333",
+    fontFamily: "Kalligraaf Arabic",
+    fontWeight: 400,
+  },
+
+  slide: {
+    width,
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+  },
+
+  image: {
+    width: width * 0.85,
+    height: height * 0.4,
+    resizeMode: "contain",
+    alignSelf: "center",
+    marginTop: responsiveHeight(10),
+  },
+
+  title: {
+    fontSize: responsiveFontSize(3.5),
+    fontWeight: "700",
+    color: "#1E1E1E",
+    textAlign: "right",
+    marginTop: responsiveHeight(4),
+    paddingHorizontal: responsiveWidth(8),
+    alignSelf: "flex-end",
+    fontFamily: "Kalligraaf Arabic Bold",
+  },
+
+  subtitle: {
+    fontSize: responsiveFontSize(1.8),
+    color: "#777777",
+    fontWeight: "400",
+    textAlign: "right",
+    lineHeight: responsiveHeight(2.8),
+    marginTop: responsiveHeight(1.5),
+    paddingHorizontal: responsiveWidth(10),
+    alignSelf: "flex-end",
+    marginBottom: 30,
+    fontFamily: "Kalligraaf Arabic",
+  },
+
+  dotsContainer: {
+    flexDirection: "row",
+    alignSelf: "flex-end",
+    marginTop: responsiveHeight(2),
+    marginRight: responsiveWidth(10),
+  },
+
+  dot: {
+    width: responsiveWidth(2.2),
+    height: responsiveWidth(2.2),
+    borderRadius: responsiveWidth(1.1),
+    backgroundColor: "#B0BEC5", 
+    marginHorizontal: responsiveWidth(1),
+    opacity: 0.5,
+  },
+
+  activeDot: {
+    width: responsiveWidth(6),
+    height: responsiveWidth(2.2),
+    borderRadius: responsiveWidth(1.1),
+    backgroundColor: "#0D3F47",
+    opacity: 1,
+  },
+
+  bottomContainer: {
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 25,
-    marginBottom: 35,
+    paddingHorizontal: responsiveWidth(8),
+    marginTop: responsiveHeight(2),
+    marginBottom: responsiveHeight(8),
+  },
+
+  arrowButton: {
+    backgroundColor: "#0D3F47",
+    paddingVertical: 9,
+    paddingHorizontal: 10,
+    borderRadius: 3,
   },
 
   skipButton: {
     backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: "#315C63",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 8,
-  },
-  skipText: {
-    fontSize: 16,
-    color: "#315C63",
-    fontWeight: "500",
-  },
-  nextButton: {
-    backgroundColor: "#315C63",
-    width: 45,
-    height: 45,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 8,
   },
 
-  // زر تغيير اللغة
-  langSwitchContainer: {
-    position: "absolute",
-    top: 40,
-    zIndex: 5,
+  skipText: {
+    color: "#0D3F47",
+    fontSize: 21,
+    fontWeight: "400",
+    textDecorationLine: "underline",
+    fontFamily: "Kalligraaf Arabic",
   },
-  langButton: {
-    backgroundColor: "#E9EDF3",
-    borderRadius: 10,
-    paddingVertical: 6,
-    paddingHorizontal: 14,
+
+  loginText: {
+    textAlign: "center",
+    color: "#000000",
+    fontSize: responsiveFontSize(1.7),
+    marginTop: 0,
+    marginBottom: responsiveHeight(2),
+    alignSelf: "center",
+    fontFamily: "Kalligraaf Arabic",
   },
-  langText: {
-    fontSize: 14,
-    color: "#315C63",
-    fontWeight: "600",
+
+  loginLink: {
+    color: "#0D3F47",
+    fontWeight: "500",
+  },
+  bottomSectionWrapper: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: responsiveHeight(10),
+  },
+
+  mainButton: {
+    backgroundColor: "#315C63",
+    borderRadius: 4,
+    paddingVertical: responsiveHeight(1.8),
+    width: "100%",
+    alignSelf: "center",
+    marginBottom: responsiveHeight(0.5),
+    fontWeight: "500",
+    fontFamily: "Kalligraaf Arabic",
+  },
+
+  textStyle: {
+    fontSize: responsiveFontSize(2),
+    color: "#FFFFFF",
+    fontWeight: "400",
+    textAlign: "center",
+    fontFamily: "Kalligraaf Arabic",
   },
 });
+
+export default styles;

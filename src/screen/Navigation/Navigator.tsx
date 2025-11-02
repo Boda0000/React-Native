@@ -2,43 +2,50 @@ import React, { useEffect, useState } from "react";
 import { View, ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+
 import LoginPage from "../LoginScreen/login.screen";
 import HomeScreen from "../homescreen/HomeScreen";
 import OnboardingScreen from "../onboardingscreen/onboardingscreen";
-import { getUser } from "../../storage/storageService";
+import LastOnboardingScreen from "../LastOnboarding/LastOnboarding";
 import { initLanguage } from "../../locales/i18n";
 
-const Stack = createStackNavigator();
+const RootStack = createStackNavigator();
+const OnboardingStack = createStackNavigator();
+
+function OnboardingFlow() {
+  return (
+    <OnboardingStack.Navigator screenOptions={{ headerShown: false }}>
+      <OnboardingStack.Screen
+        name="OnboardingMain"
+        component={OnboardingScreen}
+      />
+      <OnboardingStack.Screen
+        name="LastOnboardingScreen"
+        component={LastOnboardingScreen}
+      />
+    </OnboardingStack.Navigator>
+  );
+}
 
 export default function Navigator() {
-  const [initialRoute, setInitialRoute] = useState<string | null>(null);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const initializeApp = () => {
+    const initializeApp = async () => {
       try {
         initLanguage();
-        setInitialRoute("Onboarding");
       } catch (error) {
         console.log("Error initializing app:", error);
-        setInitialRoute("Onboarding");
       } finally {
         setIsReady(true);
       }
     };
-
     initializeApp();
   }, []);
 
-  if (!isReady || !initialRoute) {
+  if (!isReady) {
     return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" color="#000" />
       </View>
     );
@@ -46,14 +53,11 @@ export default function Navigator() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName={initialRoute}
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-        <Stack.Screen name="Login" component={LoginPage} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
+      <RootStack.Navigator screenOptions={{ headerShown: false }}>
+        <RootStack.Screen name="OnboardingFlow" component={OnboardingFlow} />
+        <RootStack.Screen name="Login" component={LoginPage} />
+        <RootStack.Screen name="Home" component={HomeScreen} />
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 }

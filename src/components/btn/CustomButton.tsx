@@ -6,6 +6,7 @@ import {
   StyleProp,
   ViewStyle,
   TextStyle,
+  View,
 } from "react-native";
 import style from "../btn/style";
 
@@ -16,7 +17,9 @@ interface ButtonProps {
   disabled?: boolean;
   buttonStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
-  children?: React.ReactNode; // ✅ دعم الأطفال
+  children?: React.ReactNode;
+  iconLeft?: React.ReactNode;
+  iconRight?: React.ReactNode;
 }
 
 export default function CustomButton({
@@ -27,6 +30,8 @@ export default function CustomButton({
   buttonStyle,
   textStyle,
   children,
+  iconLeft,
+  iconRight,
 }: ButtonProps) {
   return (
     <TouchableOpacity
@@ -37,13 +42,26 @@ export default function CustomButton({
       ]}
       onPress={onPress}
       disabled={disabled || loading}
+      activeOpacity={0.8}
     >
       {loading ? (
         <ActivityIndicator color="#fff" />
       ) : children ? (
-        children 
+        children
       ) : (
-        <Text style={[style.buttonText, textStyle]}>{title}</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {iconLeft && <View style={{ marginRight: 6 }}>{iconLeft}</View>}
+
+          {title && <Text style={[style.buttonText, textStyle]}>{title}</Text>}
+
+          {iconRight && <View style={{ marginLeft: 6 }}>{iconRight}</View>}
+        </View>
       )}
     </TouchableOpacity>
   );

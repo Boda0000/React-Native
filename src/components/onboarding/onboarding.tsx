@@ -37,14 +37,16 @@ const Onboarding: React.FC<{ slides: Slide[] }> = ({ slides }) => {
     navigation.navigate("LastOnboardingScreen" as never);
   };
 
+  // 🔹 Language Change
   const changeLanguage = async (lang: string) => {
-   await AsyncStorage.setItem("appLang", lang);
+  await AsyncStorage.setItem("appLang", lang);
     i18n.locale = lang;
     I18nManager.forceRTL(lang === "ar");
     setShowLangList(false);
     await Updates.reloadAsync();
   };
 
+  // 🔹 Render single slide
   const renderSlide = ({ item }: { item: Slide }) => (
     <View style={[styles.slide, { width }]}>
       <Image source={item.image} style={styles.image} resizeMode="contain" />
@@ -65,7 +67,7 @@ const Onboarding: React.FC<{ slides: Slide[] }> = ({ slides }) => {
           I18nManager.isRTL && { flexDirection: "row-reverse" },
         ]}
       >
-        {firstThreeSlides.map((_, index) => (
+        {slides.map((_, index) => (
           <View
             key={index}
             style={[styles.dot, currentSlide === index && styles.activeDot]}

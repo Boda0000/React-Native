@@ -39,7 +39,7 @@ const Onboarding: React.FC<{ slides: Slide[] }> = ({ slides }) => {
 
   // 🔹 Language Change
   const changeLanguage = async (lang: string) => {
-  await AsyncStorage.setItem("appLang", lang);
+    await AsyncStorage.setItem("appLang", lang);
     i18n.locale = lang;
     I18nManager.forceRTL(lang === "ar");
     setShowLangList(false);
@@ -52,7 +52,7 @@ const Onboarding: React.FC<{ slides: Slide[] }> = ({ slides }) => {
       <Image source={item.image} style={styles.image} resizeMode="contain" />
 
       <Text style={[styles.title, I18nManager.isRTL && { textAlign: "right" }]}>
-        {item.title}
+        {(item.title)}
       </Text>
 
       <Text

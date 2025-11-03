@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { I18nManager } from "react-native";
 import i18n, { changeLanguage, getCurrentLanguage } from "../locales/i18n";
+import * as Updates from "expo-updates";
 
 export function useLanguage() {
   const [lang, setLang] = useState(i18n.locale);
@@ -21,6 +22,7 @@ export function useLanguage() {
     i18n.locale = newLang;
     I18nManager.forceRTL(newLang === "ar");
     setLang(newLang);
+    await Updates.reloadAsync();
   };
 
   return { lang, toggleLanguage };

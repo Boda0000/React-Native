@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 
   langText: {
     color: "#000000",
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: "400",
     marginRight: 4,
     fontFamily: "Kalligraaf Arabic",
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     height: height * 0.4,
     resizeMode: "contain",
     alignSelf: "center",
-    marginTop: responsiveHeight(10),
+    marginTop: responsiveHeight(2),
   },
 
   title: {
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#1E1E1E",
     textAlign: "right",
-    marginTop: responsiveHeight(4),
     paddingHorizontal: responsiveWidth(8),
     alignSelf: "flex-end",
     fontFamily: "Kalligraaf Arabic Bold",
@@ -95,7 +94,6 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     textAlign: "right",
     lineHeight: responsiveHeight(2.8),
-    marginTop: responsiveHeight(1.5),
     paddingHorizontal: responsiveWidth(10),
     alignSelf: "flex-end",
     marginBottom: 30,
@@ -105,26 +103,25 @@ const styles = StyleSheet.create({
   dotsContainer: {
     flexDirection: "row",
     alignSelf: "flex-end",
-    marginTop: responsiveHeight(2),
     marginRight: responsiveWidth(10),
   },
 
-  dot: {
-    width: responsiveWidth(2.2),
-    height: responsiveWidth(2.2),
-    borderRadius: responsiveWidth(1.1),
-    backgroundColor: "#B0BEC5", 
-    marginHorizontal: responsiveWidth(1),
-    opacity: 0.5,
-  },
+dot: {
+  width: responsiveWidth(3.5),
+  height: responsiveHeight(0.6),
+  borderRadius: responsiveWidth(6), 
+  backgroundColor: "#B0BEC5",
+  marginHorizontal: responsiveWidth(1),
+  opacity: 0.5,
+},
 
-  activeDot: {
-    width: responsiveWidth(6),
-    height: responsiveWidth(2.2),
-    borderRadius: responsiveWidth(1.1),
-    backgroundColor: "#0D3F47",
-    opacity: 1,
-  },
+activeDot: {
+  width: responsiveWidth(7), 
+  height: responsiveHeight(0.6),
+  borderRadius: responsiveWidth(6),
+  backgroundColor: "#0D3F47",
+  opacity: 1,
+},
 
   bottomContainer: {
     flexDirection: "row",
@@ -138,7 +135,8 @@ const styles = StyleSheet.create({
   arrowButton: {
     backgroundColor: "#0D3F47",
     paddingVertical: 9,
-    paddingHorizontal: 10,
+    paddingLeft: 13,
+    paddingRight:7,
     borderRadius: 3,
     justifyContent:"center",
     alignSelf:"center",

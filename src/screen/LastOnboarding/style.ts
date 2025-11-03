@@ -20,14 +20,12 @@ export default StyleSheet.create({
     height: height * 0.4,
     resizeMode: "contain",
     alignSelf: "center",
-    marginTop: responsiveHeight(10),
   },
   title: {
     fontSize: responsiveFontSize(3.5),
     fontWeight: "700",
     color: "#1E1E1E",
     textAlign: "right",
-    marginTop: responsiveHeight(4),
     paddingHorizontal: responsiveWidth(8),
     alignSelf: "flex-end",
     fontFamily: "Kalligraaf Arabic Bold",
@@ -39,7 +37,6 @@ export default StyleSheet.create({
     fontWeight: "400",
     textAlign: "right",
     lineHeight: responsiveHeight(2.8),
-    marginTop: responsiveHeight(1.5),
     paddingHorizontal: responsiveWidth(10),
     alignSelf: "flex-end",
     marginBottom: 30,
@@ -51,7 +48,7 @@ export default StyleSheet.create({
     paddingVertical: responsiveHeight(1.8),
     width: "100%",
     alignSelf: "center",
-    marginBottom: responsiveHeight(0.5),
+    marginTop: responsiveHeight(20),
     fontWeight: "500",
     fontFamily: "Kalligraaf Arabic",
   },
@@ -76,5 +73,53 @@ export default StyleSheet.create({
   loginLink: {
     color: "#0D3F47",
     fontWeight: "500",
+  },
+  dropdownContainer: {
+    backgroundColor: "#fff",
+    borderRadius: responsiveWidth(2),
+    marginTop: responsiveHeight(1),
+    elevation: 5,
+    overflow: "hidden",
+  },
+
+  dropdownItem: {
+    paddingVertical: responsiveHeight(1.2),
+    paddingHorizontal: responsiveWidth(2),
+    borderBottomWidth: 1,
+    borderColor: "#eee",
+    backgroundColor: "transparent",
+  },
+
+  dropdownText: {
+    fontSize: 15,
+    color: "#333",
+    fontFamily: "Kalligraaf Arabic",
+    fontWeight: 400,
+  },
+   langWrapper: {
+    position: "absolute",
+    top: responsiveHeight(8),
+    left: responsiveWidth(6),
+    zIndex: 20,
+  },
+
+  langButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 4,
+    paddingVertical: responsiveHeight(0.8),
+    paddingHorizontal: responsiveWidth(3.5),
+    borderWidth: 1,
+    borderColor: "#E1E1E1",
+    alignSelf: "flex-start",
+  },
+
+  langText: {
+    color: "#000000",
+    fontSize: 15,
+    fontWeight: "400",
+    marginRight: 4,
+    fontFamily: "Kalligraaf Arabic",
   },
 });

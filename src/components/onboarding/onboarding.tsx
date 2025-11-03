@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   View,
   Text,
@@ -15,6 +15,8 @@ import styles from "./styles";
 import CustomButton from "../btn/CustomButton";
 import { Slide } from "../../data/slides";
 import { useNavigation } from "@react-navigation/native";
+import Arabic from "src/assets/icons/arabic.svg";
+
 
 const { width } = Dimensions.get("window");
 
@@ -23,8 +25,21 @@ const Onboarding: React.FC<{ slides: Slide[] }> = ({ slides }) => {
   const flatListRef = useRef<FlatList<any>>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showLangList, setShowLangList] = useState(false);
+  const [lang, setLang] = useState(i18n.locale);
 
   const firstThreeSlides = slides.slice(0, 3);
+
+  useEffect(() => {
+    const loadLang = async () => {
+      const savedLang = await AsyncStorage.getItem("appLang");
+      if (savedLang) {
+        i18n.locale = savedLang;
+        setLang(savedLang);
+        I18nManager.forceRTL(savedLang === "ar");
+      }
+    };
+    loadLang();
+  }, []);
 
   const handleNext = () => {
     if (currentSlide < firstThreeSlides.length - 1) {
@@ -37,22 +52,22 @@ const Onboarding: React.FC<{ slides: Slide[] }> = ({ slides }) => {
     navigation.navigate("LastOnboardingScreen" as never);
   };
 
-  // 🔹 Language Change
-  const changeLanguage = async (lang: string) => {
-    await AsyncStorage.setItem("appLang", lang);
-    i18n.locale = lang;
-    I18nManager.forceRTL(lang === "ar");
+  const changeLanguage = async (newLang: string) => {
+    if (newLang === lang) return;
+    await AsyncStorage.setItem("appLang", newLang);
+    i18n.locale = newLang;
+    setLang(newLang);
+    I18nManager.forceRTL(newLang === "ar");
     setShowLangList(false);
-    await Updates.reloadAsync();
+    await Updates.reloadAsync(); 
   };
 
-  // 🔹 Render single slide
   const renderSlide = ({ item }: { item: Slide }) => (
     <View style={[styles.slide, { width }]}>
       <Image source={item.image} style={styles.image} resizeMode="contain" />
 
       <Text style={[styles.title, I18nManager.isRTL && { textAlign: "right" }]}>
-        {(item.title)}
+        {item.title}
       </Text>
 
       <Text
@@ -67,7 +82,7 @@ const Onboarding: React.FC<{ slides: Slide[] }> = ({ slides }) => {
           I18nManager.isRTL && { flexDirection: "row-reverse" },
         ]}
       >
-        {slides.map((_, index) => (
+        {firstThreeSlides.map((_, index) => (
           <View
             key={index}
             style={[styles.dot, currentSlide === index && styles.activeDot]}
@@ -89,36 +104,31 @@ const Onboarding: React.FC<{ slides: Slide[] }> = ({ slides }) => {
           onPress={() => setShowLangList(!showLangList)}
           buttonStyle={styles.langButton}
         >
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.langText}>
-              {i18n.locale === "ar" ? "العربية" : "English"}
-            </Text>
-            <MaterialIcons
-              name={showLangList ? "arrow-drop-up" : "arrow-drop-down"}
-              size={22}
-              color="#006D77"
-            />
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
+            <Text style={styles.langText}>العربية</Text>
+
+            <Arabic width={30} height={20} />
           </View>
         </CustomButton>
 
         {showLangList && (
           <View style={styles.dropdownContainer}>
             <CustomButton
-              title="العربية"
               onPress={() => changeLanguage("ar")}
               buttonStyle={styles.dropdownItem}
-              textStyle={styles.dropdownText}
-            />
-            <CustomButton
-              title="English"
-              onPress={() => changeLanguage("en")}
-              buttonStyle={styles.dropdownItem}
-              textStyle={styles.dropdownText}
-            />
+            >
+              <View
+                style={{ flexDirection: "row", alignItems: "center", gap: 8 }}
+              >
+                <Text style={styles.dropdownText}>العربية</Text>
+                <Arabic width={30} height={20} />
+              </View>
+            </CustomButton>
           </View>
         )}
       </View>
 
+      {/*Slides*/}
       <FlatList
         ref={flatListRef}
         data={firstThreeSlides}
@@ -140,11 +150,7 @@ const Onboarding: React.FC<{ slides: Slide[] }> = ({ slides }) => {
         ]}
       >
         <CustomButton onPress={handleNext} buttonStyle={styles.arrowButton}>
-          <MaterialIcons
-            name={I18nManager.isRTL ? "arrow-forward-ios" : "arrow-back-ios"}
-            size={20}
-            color="#FFFFFF"
-          />
+          <MaterialIcons name="arrow-back-ios" size={20} color="#FFFFFF" />
         </CustomButton>
 
         <CustomButton

@@ -140,6 +140,9 @@ const styles = StyleSheet.create({
     paddingVertical: 9,
     paddingHorizontal: 10,
     borderRadius: 3,
+    justifyContent:"center",
+    alignSelf:"center",
+    alignItems:"center",
   },
 
   skipButton: {
@@ -193,6 +196,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Kalligraaf Arabic",
   },
+
+ 
+
 });
 
 export default styles;

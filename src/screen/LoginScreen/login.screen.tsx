@@ -80,12 +80,16 @@ export default function LoginPage() {
               onPress={() => handleSubmit()}
               loading={isLoading}
               key={`login-${lang}`}
+              buttonStyle={styles.loginButton}
+              textStyle={styles.loginButtonText}
             />
 
             <CustomButton
               title={lang === "en" ? "العربية" : "English"}
               onPress={toggleLanguage}
               key={`lang-${lang}`}
+              buttonStyle={styles.langButton}
+              textStyle={styles.langButtonText}
             />
           </>
         )}

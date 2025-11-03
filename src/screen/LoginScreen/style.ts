@@ -6,7 +6,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#f7d6d6ff",
+    backgroundColor: "#FFFFFF",
   },
   title: {
     fontSize: 24,
@@ -42,8 +42,39 @@ export default StyleSheet.create({
     marginBottom: 10,
   },
   logo: {
-    width: 200,
+    width: 150,
     height: 150,
-    marginVertical: 20,
+    resizeMode: "contain",
+    alignSelf: "center",
+    marginVertical: 30,
+  },
+
+  loginButton: {
+    backgroundColor: "#315C63",
+    borderRadius: 4,
+    width: "100%",
+    alignSelf: "center",
+    fontWeight: "500",
+    fontFamily: "Kalligraaf Arabic",
+  },
+
+  loginButtonText: {
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: 500,
+  },
+
+  langButton: {
+      backgroundColor: "#C6E5DE",
+    borderRadius: 4,
+    width: "100%",
+    alignSelf: "center",
+    fontWeight: "500",
+    fontFamily: "Kalligraaf Arabic",
+  },
+  langButtonText: {
+      color: "#0D3F47",
+    fontSize: 18,
+    fontWeight: 500,
   },
 });

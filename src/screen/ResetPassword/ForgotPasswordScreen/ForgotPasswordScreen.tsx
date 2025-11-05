@@ -55,7 +55,7 @@ const ForgotPasswordScreen: React.FC = () => {
       >
         <View style={styles.container}>
           
-\          <View style={styles.header}>
+         <View style={styles.header}>
             <TouchableOpacity
               onPress={() => navigation.goBack()}
               style={styles.backIcon} 

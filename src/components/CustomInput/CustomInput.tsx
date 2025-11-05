@@ -63,11 +63,12 @@ export default function FormInput({
           <View
             style={{
               position: "absolute",
-              [lockPosition]: 14,
+              [lockPosition]: 1,
               top: "50%",
               transform: [{ translateY: -9 }],
               opacity: 0.6,
               zIndex: 1,
+              paddingHorizontal: 1,
             }}
           >
             {leftIcon}
@@ -80,10 +81,8 @@ export default function FormInput({
             touched && error ? style.inputError : null,
             inputStyle,
             {
-              paddingLeft:
-                !isRTL && leftIcon ? 35 : 35,
-              paddingRight:
-                isRTL && leftIcon ? 35 : 35, 
+              paddingLeft: !isRTL && leftIcon ? 30 : 20, 
+              paddingRight: isRTL && leftIcon ? 30 : 20, 
               textAlign: isRTL ? "left" : "right",
             },
           ]}

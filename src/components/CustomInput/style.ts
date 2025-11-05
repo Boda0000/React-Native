@@ -33,6 +33,7 @@ export default StyleSheet.create({
     position: "relative",
     flexDirection: I18nManager.isRTL ? "row-reverse" : "row", 
     alignItems: "center",
+    
   },
   iconInside: {
     position: "absolute",
@@ -46,7 +47,6 @@ export default StyleSheet.create({
   // Custom placeholder style
   placeholderText: {
     position: "absolute",
-    left: 15,
     top: 15,  
     fontSize: 14,
     color: "#000",

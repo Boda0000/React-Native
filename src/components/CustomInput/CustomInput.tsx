@@ -64,11 +64,7 @@ export default function FormInput({
             style={{
               position: "absolute",
               [lockPosition]: 1,
-              top: "50%",
-              transform: [{ translateY: -9 }],
-              opacity: 0.6,
-              zIndex: 1,
-              paddingHorizontal: 1,
+             
             }}
           >
             {leftIcon}

@@ -45,7 +45,7 @@ headerTitle: {
     alignSelf: "center",
     marginBottom: 25,
     tintColor: "#E1F2EE",
-    borderRadius: 30,
+    borderRadius: 70,
   },
   subtitle: {
     textAlign: "center",

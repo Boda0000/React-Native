@@ -90,9 +90,10 @@ const NewPasswordScreen: React.FC = () => {
             </Text>
           </View>
 
-          <Image
-            source={require("../../../assets/images/Lock.jpg")}
+           <Image
+            source={require("../../../assets/images/AppIcon.png")}
             style={styles.icon}
+            resizeMode="contain" 
           />
 
           <Text style={styles.subtitle}>{i18n.t("new_password_subtitle")}</Text>

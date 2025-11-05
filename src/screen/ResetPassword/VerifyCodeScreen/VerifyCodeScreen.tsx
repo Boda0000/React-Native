@@ -94,10 +94,11 @@ const VerifyCodeScreen: React.FC = () => {
           <Text style={styles.headerTitle}>{i18n.t("Password recovery")}</Text>
         </View>
 
-        <Image
-          source={require("../../../assets/images/Lock.jpg")}
-          style={styles.icon}
-        />
+         <Image
+            source={require("../../../assets/images/AppIcon.png")}
+            style={styles.icon}
+            resizeMode="contain" 
+          />
 
         <Text style={styles.subtitle}>{i18n.t("verify_code_subtitle")}</Text>
 

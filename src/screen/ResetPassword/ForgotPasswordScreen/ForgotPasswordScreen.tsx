@@ -75,8 +75,9 @@ const ForgotPasswordScreen: React.FC = () => {
 
           {/*Image-Subtitle*/}
           <Image
-            source={require("../../../assets/images/Lock.jpg")}
+            source={require("../../../assets/images/AppIcon.png")}
             style={styles.icon}
+            resizeMode="contain" 
           />
 
           <Text style={styles.subtitle}>

@@ -32,10 +32,22 @@
   "Skip": "Skip",
   "Arabic": "Arabic",
   "English": "English",
-   "browseCourses": "Browse our courses",
-"haveAccount": "Already have an account?",
-"signIn": "Sign in",
-
+  "browseCourses": "Browse our courses",
+  "haveAccount": "Already have an account?",
+  "signIn": "Sign in",
+  "Forgot Password": "Forgot Password",
+  "Password recovery": "Password Recovery",
+  "forgot_password_subtitle": "Enter your mobile number or email address to create a new password.",
+  "email_or_phone": "Mobile number or Email*",
+  "Confirm": "Confirm",
+  "enter_email_or_phone": "Mobile number or Email*",
+  "verify_code_subtitle": "Enter the code sent to your mobile number or Email to recover your password.",
+  "new_password_subtitle": "Enter your password and confirm it.",
+  "New Password": "New Password",
+  "Confirm Password": "Confirm Password",
+  "Resend code": "Resend code",
+  "enter_new_password": "New Password",
+  
   "Onboarding": {
     "Slides": [
       {

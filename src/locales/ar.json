@@ -35,6 +35,18 @@
   "browseCourses":"تصفح دوراتنا",
   "haveAccount":"لديك حساب بالفعل؟",
   "signIn":"سجل دخولك",
+  "Forgot Password":"هل نسيت كلمة المرور ؟  ",
+  "Password recovery":"استعادة كلمة المرور",
+  "forgot_password_subtitle":"أدخل رقم الجوال أو البريد الإلكتروني لتتمكن من إنشاء كلمة مرور جديدة",
+  "Confirm":"تأكيد",
+  "email_or_phone":"رقم الجوال أو البريد الإلكتروني*",
+  "enter_email_or_phone":"رقم الجوال أو البريد الإلكتروني*",
+  "verify_code_subtitle":"قم بإدخال الكود المرسل إلى رقم جوالك اوالايميل لاستعادة كلمة المرور",
+  "new_password_subtitle":"قم بإدخال كلمة المرور وتأكيدها",
+  "New Password":"كلمة المرور الجديدة* ",
+  "Confirm Password":"تأكيد كلمة المرور* ",
+  "Resend code":"اعادة ارسال",
+  "enter_new_password":"كلمة المرور",
 
   "Onboarding": {
     "Slides": [

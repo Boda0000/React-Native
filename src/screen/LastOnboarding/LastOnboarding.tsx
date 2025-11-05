@@ -17,7 +17,6 @@ const LastOnboardingScreen = () => {
     navigation.navigate("Login" as never);
   };
 
-  // 🟢 تغيير اللغة
   const changeLanguage = async (newLang: string) => {
     if (newLang === lang) return;
     await AsyncStorage.setItem("appLang", newLang);

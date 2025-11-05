@@ -65,7 +65,7 @@ export default StyleSheet.create({
   },
 
   langButton: {
-      backgroundColor: "#C6E5DE",
+    backgroundColor: "#C6E5DE",
     borderRadius: 4,
     width: "100%",
     alignSelf: "center",
@@ -73,8 +73,29 @@ export default StyleSheet.create({
     fontFamily: "Kalligraaf Arabic",
   },
   langButtonText: {
-      color: "#0D3F47",
+    color: "#0D3F47",
     fontSize: 18,
     fontWeight: 500,
+  },
+  labelStyle: {
+    fontSize: 16,
+    color: "#0D3F47",
+    marginBottom: 6,
+    textAlign: "right",
+    fontFamily: "Kalligraaf Arabic",
+    fontWeight: 400,
+  },
+
+  inputStyle: {
+    borderColor: "#232323",
+    borderWidth: 1,
+    borderRadius: 4,
+    fontSize: 16,
+    fontFamily: "Kalligraaf Arabic",
+    textAlign: "right",
+  },
+
+  x: {
+    width: "100%",
   },
 });

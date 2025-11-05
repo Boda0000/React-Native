@@ -3,29 +3,16 @@ import { View, ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import LoginPage from "../LoginScreen/login.screen";
-import HomeScreen from "../homescreen/HomeScreen";
 import OnboardingScreen from "../onboardingscreen/onboardingscreen";
 import LastOnboardingScreen from "../LastOnboarding/LastOnboarding";
+import LoginPage from "../LoginScreen/login.screen";
+import ForgotPasswordScreen from "../ResetPassword/ForgotPasswordScreen/ForgotPasswordScreen";
+import VerifyCodeScreen from "../ResetPassword/VerifyCodeScreen/VerifyCodeScreen";
+import NewPasswordScreen from "../ResetPassword/NewPasswordScreen/NewPasswordScreen";
+import HomeScreen from "../homescreen/HomeScreen";
 import { initLanguage } from "../../locales/i18n";
 
-const RootStack = createStackNavigator();
-const OnboardingStack = createStackNavigator();
-
-function OnboardingFlow() {
-  return (
-    <OnboardingStack.Navigator screenOptions={{ headerShown: false }}>
-      <OnboardingStack.Screen
-        name="OnboardingMain"
-        component={OnboardingScreen}
-      />
-      <OnboardingStack.Screen
-        name="LastOnboardingScreen"
-        component={LastOnboardingScreen}
-      />
-    </OnboardingStack.Navigator>
-  );
-}
+const Stack = createStackNavigator();
 
 export default function Navigator() {
   const [isReady, setIsReady] = useState(false);
@@ -33,7 +20,7 @@ export default function Navigator() {
   useEffect(() => {
     const initializeApp = async () => {
       try {
-        initLanguage();
+        await initLanguage();
       } catch (error) {
         console.log("Error initializing app:", error);
       } finally {
@@ -53,11 +40,26 @@ export default function Navigator() {
 
   return (
     <NavigationContainer>
-      <RootStack.Navigator screenOptions={{ headerShown: false }}>
-        <RootStack.Screen name="OnboardingFlow" component={OnboardingFlow} />
-        <RootStack.Screen name="Login" component={LoginPage} />
-        <RootStack.Screen name="Home" component={HomeScreen} />
-      </RootStack.Navigator>
+      <Stack.Navigator
+        initialRouteName="Onboarding"
+        screenOptions={{ headerShown: false }}
+      >
+        {/* Onboarding flow */}
+        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+        <Stack.Screen
+          name="LastOnboardingScreen"
+          component={LastOnboardingScreen}
+        />
+
+        {/* Auth flow */}
+        <Stack.Screen name="Login" component={LoginPage} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+        <Stack.Screen name="VerifyCode" component={VerifyCodeScreen} />
+        <Stack.Screen name="NewPassword" component={NewPasswordScreen} />
+
+        {/* Main app */}
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

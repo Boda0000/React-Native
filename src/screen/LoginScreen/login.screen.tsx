@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import styles from "./style";
@@ -8,6 +8,7 @@ import CustomButton from "../../components/btn/CustomButton";
 import i18n from "../../locales/i18n";
 import { useLogin } from "../../Hooks/useLogin";
 import { useLanguage } from "../../Hooks/useLanguage";
+import { useNavigation } from "@react-navigation/native"; 
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string()
@@ -21,6 +22,7 @@ const LoginSchema = Yup.object().shape({
 export default function LoginPage() {
   const { lang, toggleLanguage } = useLanguage();
   const { mutate, isPending, isLoading } = useLogin();
+  const navigation = useNavigation(); // 👈 إضافه
 
   const loading = isPending || isLoading;
 
@@ -52,28 +54,42 @@ export default function LoginPage() {
           touched,
         }) => (
           <>
-            <CustomInput
-              label={i18n.t("username_label")}
-              placeholder={i18n.t("username_placeholder")}
-              onChangeText={handleChange("username")}
-              onBlur={handleBlur("username")}
-              value={values.username}
-              error={errors.username}
-              touched={touched.username}
-              key={`username-${lang}`}
-            />
+            <View style={styles.x}>
+              <CustomInput
+                label={i18n.t("username_label")}
+                placeholder={i18n.t("username_placeholder")}
+                onChangeText={handleChange("username")}
+                onBlur={handleBlur("username")}
+                value={values.username}
+                error={errors.username}
+                touched={touched.username}
+                 reverseIcon
+                key={`username-${lang}`}
+                labelStyle={[styles.labelStyle]}
+                inputStyle={styles.inputStyle}
+              />
 
-            <CustomInput
-              label={i18n.t("password_label")}
-              placeholder={i18n.t("password_placeholder")}
-              onChangeText={handleChange("password")}
-              onBlur={handleBlur("password")}
-              value={values.password}
-              touched={touched.password}
-              error={errors.password}
-              isPassword
-              key={`password-${lang}`}
-            />
+              <CustomInput
+                label={i18n.t("password_label")}
+                placeholder={i18n.t("password_placeholder")}
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
+                value={values.password}
+                touched={touched.password}
+                error={errors.password}
+                isPassword
+                reverseIcon
+                key={`password-${lang}`}
+                labelStyle={[styles.labelStyle]}
+                inputStyle={styles.inputStyle}
+              />
+            </View>
+
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ForgotPassword" as never)}
+            >
+              <Text>{i18n.t("Forgot Password")}</Text>
+            </TouchableOpacity>
 
             <CustomButton
               title={i18n.t("login")}

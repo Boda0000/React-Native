@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
@@ -6,7 +6,6 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  TouchableOpacity,
 } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -41,22 +40,22 @@ const VerifyCodeScreen: React.FC = () => {
   const navigation = useNavigation<VerifyCodeNavProp>();
   const route = useRoute<VerifyCodeRouteProp>();
   const { emailOrPhone } = route.params;
+
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  const handleVerify = (code: string) => {
-    if (code === "123456") {
-
-      setErrorMessage(null);
-      navigation.navigate("NewPassword", { emailOrPhone });
-    } else {
-
-      setErrorMessage("الكود غلط");
-    }
-  };
-
-
   const [timer, setTimer] = useState(30);
   const [canResend, setCanResend] = useState(false);
+
+  const handleVerify = useCallback(
+    (code: string) => {
+      if (code === "123456") {
+        setErrorMessage(null);
+        navigation.navigate("NewPassword", { emailOrPhone });
+      } else {
+        setErrorMessage("");
+      }
+    },
+    [emailOrPhone, navigation]
+  );
 
   useEffect(() => {
     if (timer === 0) {
@@ -67,11 +66,10 @@ const VerifyCodeScreen: React.FC = () => {
     return () => clearInterval(interval);
   }, [timer]);
 
-  const handleResend = () => {
+  const handleResend = useCallback(() => {
     setTimer(30);
     setCanResend(false);
-    console.log("🔁 تم إعادة إرسال الكود");
-  };
+  }, []);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -88,37 +86,40 @@ const VerifyCodeScreen: React.FC = () => {
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
       >
+        {/* Header */}
         <View style={styles.header}>
-          <TouchableOpacity
+          <CustomButton
             onPress={() => navigation.goBack()}
-            style={styles.backIcon}
-          >
-            <MaterialIcons name="arrow-forward-ios" size={20} color="#1E1E1E" />
-          </TouchableOpacity>
+            buttonStyle={styles.backIcon}
+            icon={<MaterialIcons name="arrow-forward-ios" size={20} color="#1E1E1E" />}
+          />
           <Text style={styles.headerTitle}>{i18n.t("Password recovery")}</Text>
         </View>
 
+        {/* Lock Icon */}
         <Image
           source={require("../../../assets/images/Lock.jpg")}
           style={styles.icon}
         />
 
+        {/* Subtitle */}
         <Text style={styles.subtitle}>{i18n.t("verify_code_subtitle")}</Text>
 
+        {/* Form */}
         <Formik
           initialValues={{ code: "" }}
           validationSchema={VerifyCodeSchema}
           onSubmit={({ code }) => handleVerify(code)}
         >
-          {({ handleSubmit, values, setFieldValue, errors, touched }) => {
-            const hasError = !!errorMessage; 
+          {({ handleSubmit, values, setFieldValue }) => {
+            const hasError = !!errorMessage;
+
             return (
               <>
                 <OtpInput
                   length={6}
                   value={values.code}
                   onChange={(code) => {
-
                     setFieldValue("code", code);
                     if (errorMessage) setErrorMessage(null);
                   }}
@@ -151,12 +152,16 @@ const VerifyCodeScreen: React.FC = () => {
                   {!canResend ? (
                     <Text style={styles.Timer}>{formatTime(timer)}</Text>
                   ) : (
-                    <TouchableOpacity onPress={handleResend}>
-                      <Text style={styles.Resend}>
-                        <Reload width={12} height={7} fill="#315C63" />{" "}
-                        {i18n.t("Resend code")}
-                      </Text>
-                    </TouchableOpacity>
+                    <CustomButton
+                      onPress={handleResend}
+                      title={
+                        <>
+                          <Reload width={12} height={7} fill="#315C63" />{" "}
+                          {i18n.t("Resend code")}
+                        </>
+                      }
+                      buttonStyle={styles.Resend}
+                    />
                   )}
                 </View>
               </>

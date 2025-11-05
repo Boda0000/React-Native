@@ -6,17 +6,17 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  TouchableOpacity,
 } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useNavigation } from "@react-navigation/native";
+import { MaterialIcons } from "@expo/vector-icons";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
 import CustomInput from "../../../components/CustomInput/CustomInput";
 import CustomButton from "../../../components/btn/CustomButton";
 import styles from "./style";
 import i18n from "../../../locales/i18n";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useNavigation } from "@react-navigation/native";
-import { MaterialIcons } from "@expo/vector-icons";
 
 type RootStackParamList = {
   Login: undefined;
@@ -54,34 +54,36 @@ const ForgotPasswordScreen: React.FC = () => {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.container}>
-          
-         <View style={styles.header}>
-            <TouchableOpacity
+          {/*Header*/}
+          <View style={styles.header}>
+            <CustomButton
               onPress={() => navigation.goBack()}
-              style={styles.backIcon} 
-            >
-              <MaterialIcons
-                name="arrow-forward-ios"
-                size={20}
-                color="#1E1E1E"
-                style={{ alignSelf: "center" }} 
-              />
-            </TouchableOpacity>
+              buttonStyle={styles.backIcon}
+              icon={
+                <MaterialIcons
+                  name="arrow-forward-ios"
+                  size={20}
+                  color="#1E1E1E"
+                />
+              }
+            />
 
             <Text style={styles.headerTitle}>
               {i18n.t("Password recovery")}
             </Text>
           </View>
 
+          {/*Image-Subtitle*/}
           <Image
-          source={require("../../../assets/images/Lock.jpg")}
-          style={styles.icon}
-        />
+            source={require("../../../assets/images/Lock.jpg")}
+            style={styles.icon}
+          />
 
           <Text style={styles.subtitle}>
             {i18n.t("forgot_password_subtitle")}
           </Text>
 
+          {/*Form*/}
           <Formik
             initialValues={{ emailOrPhone: "" }}
             validationSchema={ForgotPasswordSchema}
@@ -96,19 +98,17 @@ const ForgotPasswordScreen: React.FC = () => {
               touched,
             }) => (
               <>
-                <View>
-                  <CustomInput
-                    label={i18n.t("email_or_phone")}
-                    placeholder={i18n.t("enter_email_or_phone")}
-                    onChangeText={handleChange("emailOrPhone")}
-                    onBlur={handleBlur("emailOrPhone")}
-                    value={values.emailOrPhone}
-                    reverseIcon
-                    keyboardType="phone-pad"
-                    labelStyle={[styles.labelStyle]}
-                    placeholderStyle={styles.placeholderStyle}
-                  />
-                </View>
+                <CustomInput
+                  label={i18n.t("email_or_phone")}
+                  placeholder={i18n.t("enter_email_or_phone")}
+                  onChangeText={handleChange("emailOrPhone")}
+                  onBlur={handleBlur("emailOrPhone")}
+                  value={values.emailOrPhone}
+                  reverseIcon
+                  keyboardType="phone-pad"
+                  labelStyle={styles.labelStyle}
+                  placeholderStyle={styles.placeholderStyle}
+                />
 
                 <CustomButton
                   title={i18n.t("Confirm")}

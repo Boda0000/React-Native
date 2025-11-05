@@ -19,7 +19,6 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-
 type RootStackParamList = {
   Login: undefined;
   NewPassword: { emailOrPhone: string };
@@ -33,11 +32,11 @@ type NewPasswordRouteProp = RouteProp<RootStackParamList, "NewPassword">;
 
 const NewPasswordSchema = Yup.object().shape({
   newPassword: Yup.string()
-    .required("كلمة المرور مطلوبة")
-    .min(8, "كلمة المرور يجب أن تكون 8 أحرف على الأقل"),
+    .required(i18n.t("Password required"))
+    .min(8, i18n.t("The password must be at least 8 characters long.")),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref("newPassword")], "كلمتا المرور غير متطابقتين")
-    .required("يرجى تأكيد كلمة المرور"),
+    .oneOf([Yup.ref("newPassword")], i18n.t("The Passwords don't match."))
+    .required(i18n.t("Confirm Password")),
 });
 
 const NewPasswordScreen: React.FC = () => {
@@ -56,11 +55,11 @@ const NewPasswordScreen: React.FC = () => {
       //   emailOrPhone,
       //   newPassword: values.newPassword,
       // });
-      Alert.alert("", "تم تحديث كلمة المرور بنجاح", [
-        { text: "حسناً", onPress: () => navigation.navigate("Login") },
+      Alert.alert("", i18n.t("Password has been successfully updated."), [
+        { text: i18n.t("Okay"), onPress: () => navigation.navigate("Login") },
       ]);
     } catch (err) {
-      Alert.alert("", "حدث خطأ أثناء تحديث كلمة المرور");
+      Alert.alert("", i18n.t("An error occurred while updating your password."));
     } finally {
       setLoading(false);
     }
@@ -73,17 +72,16 @@ const NewPasswordScreen: React.FC = () => {
     >
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
-
           <View style={styles.header}>
             <TouchableOpacity
               onPress={() => navigation.goBack()}
-              style={styles.backIcon} 
+              style={styles.backIcon}
             >
               <MaterialIcons
                 name="arrow-forward-ios"
                 size={20}
                 color="#1E1E1E"
-                style={{ alignSelf: "center" }} 
+                style={{ alignSelf: "center" }}
               />
             </TouchableOpacity>
 
@@ -93,9 +91,9 @@ const NewPasswordScreen: React.FC = () => {
           </View>
 
           <Image
-          source={require("../../../assets/images/Lock.jpg")}
-          style={styles.icon}
-        />
+            source={require("../../../assets/images/Lock.jpg")}
+            style={styles.icon}
+          />
 
           <Text style={styles.subtitle}>{i18n.t("new_password_subtitle")}</Text>
 
@@ -139,7 +137,6 @@ const NewPasswordScreen: React.FC = () => {
                   reverseIcon
                   labelStyle={styles.labelStyle}
                   placeholderStyle={styles.placeholderStyle}
-                  
                 />
 
                 <CustomButton

@@ -44,9 +44,20 @@
   "verify_code_subtitle":"قم بإدخال الكود المرسل إلى رقم جوالك اوالايميل لاستعادة كلمة المرور",
   "new_password_subtitle":"قم بإدخال كلمة المرور وتأكيدها",
   "New Password":"كلمة المرور الجديدة* ",
-  "Confirm Password":"تأكيد كلمة المرور* ",
+  "Confirm Password":"يرجى تأكيد كلمة المرور",
   "Resend code":"اعادة ارسال",
   "enter_new_password":"كلمة المرور",
+  "This field is required":"هذا الحقل مطلوب",
+  "Enter a valid phone number":"أدخل رقم هاتف صحيح",
+  "Password required":"كلمة المرور مطلوبة",
+  "The password must be at least 8 characters long.":"كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+  "The Passwords don't match.":"كلمتا المرور غير متطابقتين",
+  "Password has been successfully updated.":"تم تحديث كلمة المرور بنجاح",
+  "Okay":"حسناً",
+  "An error occurred while updating your password.":"حدث خطأ أثناء تحديث كلمة المرور",
+  "Code required":"الكود مطلوب",
+  "The code must be 6 digits long.":"يجب أن يكون الكود 6 أرقام",
+  "The code is incorrect. Please check it and try again.": "الرمز غير صحيح برجاء التأكد منه والمحاولة مرة أخرى",
 
   "Onboarding": {
     "Slides": [

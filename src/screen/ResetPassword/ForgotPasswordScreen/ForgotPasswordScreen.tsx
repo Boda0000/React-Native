@@ -32,8 +32,8 @@ type ForgotPasswordNavProp = NativeStackNavigationProp<
 const ForgotPasswordSchema = Yup.object().shape({
   emailOrPhone: Yup.string()
     .trim()
-    .required("هذا الحقل مطلوب")
-    .matches(/^(\+20|0)?1[0-9]{9}$/, "أدخل رقم هاتف صحيح"),
+    .required(i18n.t("This field is required"))
+    .matches(/^(\+20|0)?1[0-9]{9}$/, (i18n.t("Enter a valid phone number"))),
 });
 
 const ForgotPasswordScreen: React.FC = () => {

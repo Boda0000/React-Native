@@ -33,8 +33,8 @@ type VerifyCodeRouteProp = RouteProp<RootStackParamList, "VerifyCode">;
 
 const VerifyCodeSchema = Yup.object().shape({
   code: Yup.string()
-    .required("الكود مطلوب")
-    .length(6, "يجب أن يكون الكود 6 أرقام"),
+    .required(i18n.t("Code required"))
+    .length(6, i18n.t("The code must be 6 digits long.")),
 });
 
 const VerifyCodeScreen: React.FC = () => {
@@ -45,15 +45,12 @@ const VerifyCodeScreen: React.FC = () => {
 
   const handleVerify = (code: string) => {
     if (code === "123456") {
-
       setErrorMessage(null);
       navigation.navigate("NewPassword", { emailOrPhone });
     } else {
-
       setErrorMessage("الكود غلط");
     }
   };
-
 
   const [timer, setTimer] = useState(30);
   const [canResend, setCanResend] = useState(false);
@@ -70,7 +67,6 @@ const VerifyCodeScreen: React.FC = () => {
   const handleResend = () => {
     setTimer(30);
     setCanResend(false);
-    console.log("🔁 تم إعادة إرسال الكود");
   };
 
   const formatTime = (seconds: number) => {
@@ -111,14 +107,13 @@ const VerifyCodeScreen: React.FC = () => {
           onSubmit={({ code }) => handleVerify(code)}
         >
           {({ handleSubmit, values, setFieldValue, errors, touched }) => {
-            const hasError = !!errorMessage; 
+            const hasError = !!errorMessage;
             return (
               <>
                 <OtpInput
                   length={6}
                   value={values.code}
                   onChange={(code) => {
-
                     setFieldValue("code", code);
                     if (errorMessage) setErrorMessage(null);
                   }}
@@ -133,7 +128,7 @@ const VerifyCodeScreen: React.FC = () => {
                 <CustomButton
                   title={
                     hasError
-                      ? "الرمز غير صحيح برجاء التأكد منه والمحاولة مرة أخرى"
+                      ? i18n.t("The code is incorrect. Please check it and try again.")
                       : i18n.t("Confirm")
                   }
                   onPress={() => handleSubmit()}

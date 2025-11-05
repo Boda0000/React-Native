@@ -17,6 +17,7 @@ import CustomButton from "../../../components/btn/CustomButton";
 import styles from "./style";
 import i18n from "../../../locales/i18n";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import lock from "../../../assets/icons/lock.svg"
 
 type RootStackParamList = {
   Login: undefined;

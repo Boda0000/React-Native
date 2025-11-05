@@ -129,7 +129,7 @@ const VerifyCodeScreen: React.FC = () => {
                 <CustomButton
                   title={
                     hasError
-                      ? i18n.t("The code is incorrect. Please check it and try again.")
+                      ? i18n.t("Wrong Code")
                       : i18n.t("Confirm")
                   }
                   onPress={() => handleSubmit()}

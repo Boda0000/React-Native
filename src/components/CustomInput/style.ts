@@ -4,7 +4,6 @@ const { width, height } = Dimensions.get("window");
 
 
 export default StyleSheet.create({
-  // ===== الاستايلات القديمة =====
   label: {
     fontSize: 16,
     marginBottom: 6,
@@ -32,7 +31,7 @@ export default StyleSheet.create({
   },
   inputContainer: {
     position: "relative",
-    flexDirection: I18nManager.isRTL ? "row-reverse" : "row", // ✅ الاتجاه حسب اللغة
+    flexDirection: I18nManager.isRTL ? "row-reverse" : "row", 
     alignItems: "center",
   },
   iconInside: {
@@ -43,30 +42,28 @@ export default StyleSheet.create({
     alignItems: "center",
   },
 
-  // ===== إضافات جديدة =====
 
   // Custom placeholder style
   placeholderText: {
     position: "absolute",
-    left: 15, // padding افتراضي
-    top: 15,  // padding افتراضي
+    left: 15,
+    top: 15,  
     fontSize: 14,
-    color: "#000", // placeholder أسود
-    fontFamily: "KalligraafArabic", // مثال على خط مخصص
+    color: "#000",
+    fontFamily: "KalligraafArabic", 
   },
 
-  // Responsive اختياري بدون تغيير القديم
   responsiveLabel: {
-    fontSize: width * 0.04, // حوالي 16px
+    fontSize: width * 0.04, 
     marginBottom: height * 0.005,
   },
   responsiveInput: {
     width: width - 30,
-    fontSize: width * 0.035, // حوالي 14px
+    fontSize: width * 0.035, 
     paddingVertical: height * 0.015,
   },
   responsiveErrorText: {
-    fontSize: width * 0.032, // حوالي 12px
+    fontSize: width * 0.032, 
     marginTop: height * 0.005,
   },
   responsiveIconInside: {

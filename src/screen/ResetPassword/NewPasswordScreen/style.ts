@@ -83,6 +83,8 @@ headerTitle: {
     fontFamily: "Kalligraaf Arabic",
     textAlign: "right",
     fontWeight: "400",
+    
+    
   },
 });
 

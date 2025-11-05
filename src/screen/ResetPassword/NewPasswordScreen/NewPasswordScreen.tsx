@@ -18,6 +18,7 @@ import i18n from "../../../locales/i18n";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
+import Lock from "../../../assets/icons/lock.svg";
 
 type RootStackParamList = {
   Login: undefined;
@@ -59,7 +60,10 @@ const NewPasswordScreen: React.FC = () => {
         { text: i18n.t("Okay"), onPress: () => navigation.navigate("Login") },
       ]);
     } catch (err) {
-      Alert.alert("", i18n.t("An error occurred while updating your password."));
+      Alert.alert(
+        "",
+        i18n.t("An error occurred while updating your password.")
+      );
     } finally {
       setLoading(false);
     }
@@ -90,10 +94,10 @@ const NewPasswordScreen: React.FC = () => {
             </Text>
           </View>
 
-           <Image
+          <Image
             source={require("../../../assets/images/AppIcon.png")}
             style={styles.icon}
-            resizeMode="contain" 
+            resizeMode="contain"
           />
 
           <Text style={styles.subtitle}>{i18n.t("new_password_subtitle")}</Text>
@@ -115,6 +119,7 @@ const NewPasswordScreen: React.FC = () => {
                 <CustomInput
                   label={i18n.t("New Password")}
                   placeholder={i18n.t("enter_new_password")}
+                  leftIcon={<Lock width={16} height={16} />}
                   onChangeText={handleChange("newPassword")}
                   onBlur={handleBlur("newPassword")}
                   value={values.newPassword}
@@ -127,6 +132,7 @@ const NewPasswordScreen: React.FC = () => {
 
                 <CustomInput
                   label={i18n.t("Confirm Password")}
+                   leftIcon={<Lock width={16} height={16} />}
                   placeholder={i18n.t("enter_new_password")}
                   onChangeText={handleChange("confirmPassword")}
                   onBlur={handleBlur("confirmPassword")}
@@ -138,6 +144,7 @@ const NewPasswordScreen: React.FC = () => {
                   reverseIcon
                   labelStyle={styles.labelStyle}
                   placeholderStyle={styles.placeholderStyle}
+                 
                 />
 
                 <CustomButton

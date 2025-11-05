@@ -57,7 +57,7 @@
      "An error occurred while updating your password.":"An error occurred while updating your password.",
      "Code required":"Code required",
        "The code must be 6 digits long.":"The code must be 6 digits long.",
-       "The code is incorrect. Please check it and try again.":"The code is incorrect. Please check it and try again.",
+       "Wrong Code":"The code is incorrect. Please check it and try again.",
 
 
   

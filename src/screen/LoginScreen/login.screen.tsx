@@ -8,7 +8,7 @@ import CustomButton from "../../components/btn/CustomButton";
 import i18n from "../../locales/i18n";
 import { useLogin } from "../../Hooks/useLogin";
 import { useLanguage } from "../../Hooks/useLanguage";
-import { useNavigation } from "@react-navigation/native"; 
+import { useNavigation } from "@react-navigation/native";
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string()
@@ -63,7 +63,7 @@ export default function LoginPage() {
                 value={values.username}
                 error={errors.username}
                 touched={touched.username}
-                 reverseIcon
+                reverseIcon
                 key={`username-${lang}`}
                 labelStyle={[styles.labelStyle]}
                 inputStyle={styles.inputStyle}

@@ -40,8 +40,8 @@
   "forgot_password_subtitle":"أدخل رقم الجوال أو البريد الإلكتروني لتتمكن من إنشاء كلمة مرور جديدة",
   "Confirm":"تأكيد",
   "email_or_phone":"رقم الجوال أو البريد الإلكتروني*",
-  "enter_email_or_phone":"رقم الجوال أو البريد الإلكتروني*",
-  "verify_code_subtitle":"قم بإدخال الكود المرسل إلى رقم جوالك اوالايميل لاستعادة كلمة المرور",
+  "enter_email_or_phone":"رقم الجوال أو البريد الإلكتروني",
+  "verify_code_subtitle":"قم بإدخال الكود المرسل إلى رقم جوالك لاستعادة كلمة المرور",
   "new_password_subtitle":"قم بإدخال كلمة المرور وتأكيدها",
   "New Password":"كلمة المرور الجديدة* ",
   "Confirm Password":"يرجى تأكيد كلمة المرور",
@@ -57,7 +57,7 @@
   "An error occurred while updating your password.":"حدث خطأ أثناء تحديث كلمة المرور",
   "Code required":"الكود مطلوب",
   "The code must be 6 digits long.":"يجب أن يكون الكود 6 أرقام",
-  "The code is incorrect. Please check it and try again.": "الرمز غير صحيح برجاء التأكد منه والمحاولة مرة أخرى",
+  "Wrong Code": "الرمز غير صحيح برجاء التأكد منه والمحاولة مرة أخرى",
 
   "Onboarding": {
     "Slides": [

@@ -5,7 +5,6 @@ import {
   TextInput,
   TextInputProps,
   TouchableOpacity,
-  StyleSheet,
   Dimensions,
   I18nManager,
 } from "react-native";
@@ -25,7 +24,9 @@ interface FormInputProps extends TextInputProps {
   errorStyle?: object;
   iconStyle?: object;
   placeholderStyle?: object;
-  reverseIcon?: boolean; 
+  reverseIcon?: boolean;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
 }
 
 export default function FormInput({
@@ -41,46 +42,68 @@ export default function FormInput({
   labelStyle,
   errorStyle,
   iconStyle,
-  placeholderStyle,
   placeholder,
   reverseIcon,
+  leftIcon,
+  rightIcon,
   ...rest
 }: FormInputProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const isRTL = I18nManager.isRTL;
 
-  const isRTL = I18nManager.isRTL; 
-  const iconOnLeft = reverseIcon || isRTL;
+  const lockPosition = isRTL ? "left" : "right";
+  const eyePosition = isRTL ? "right" : "left";
 
   return (
     <View style={containerStyle}>
       {!!label && <Text style={[style.label, labelStyle]}>{label}</Text>}
 
-      <View
-        style={[
-          style.inputContainer,
-          { flexDirection: iconOnLeft ? "row-reverse" : "row" },
-        ]}
-      >
+      <View style={[style.inputContainer, { position: "relative" }]}>
+        {leftIcon && (
+          <View
+            style={{
+              position: "absolute",
+              [lockPosition]: 14,
+              top: "50%",
+              transform: [{ translateY: -9 }],
+              opacity: 0.6,
+              zIndex: 1,
+            }}
+          >
+            {leftIcon}
+          </View>
+        )}
+
         <TextInput
           style={[
             style.input,
             touched && error ? style.inputError : null,
             inputStyle,
-            { textAlign: reverseIcon ? "right" : "left"},
+            {
+              paddingLeft:
+                !isRTL && leftIcon ? 35 : 35,
+              paddingRight:
+                isRTL && leftIcon ? 35 : 35, 
+              textAlign: isRTL ? "left" : "right",
+            },
           ]}
           value={value}
           onChangeText={onChangeText}
           onBlur={onBlur}
           secureTextEntry={isPassword && !showPassword}
           placeholder={placeholder}
-          placeholderTextColor="#CACACA"
+          placeholderTextColor="#BDBDBD"
           {...rest}
         />
 
         {isPassword && (
           <TouchableOpacity
-            style={[style.iconInside, iconStyle ,  reverseIcon ? { left: 10, right: "auto" } : { right: 10, left: "auto" }, ]}
-            
+            style={{
+              position: "absolute",
+              [eyePosition]: 10,
+              top: "50%",
+              transform: [{ translateY: -10 }],
+            }}
             onPress={() => setShowPassword(!showPassword)}
           >
             <Ionicons

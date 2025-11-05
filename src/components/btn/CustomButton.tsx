@@ -2,83 +2,67 @@ import React from "react";
 import {
   TouchableOpacity,
   Text,
-  View,
   ActivityIndicator,
   StyleProp,
   ViewStyle,
   TextStyle,
+  View,
 } from "react-native";
+import style from "../btn/style";
 
-type CustomButtonProps = {
-  title?: string | React.ReactNode;
-  onPress?: () => void;
-  disabled?: boolean;
+interface ButtonProps {
+  title?: string;
+  onPress: () => void;
   loading?: boolean;
+  disabled?: boolean;
   buttonStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
-  icon?: React.ReactNode; 
-};
+  children?: React.ReactNode;
+  iconLeft?: React.ReactNode;
+  iconRight?: React.ReactNode;
+}
 
-const CustomButton: React.FC<CustomButtonProps> = ({
+export default function CustomButton({
   title,
   onPress,
-  disabled = false,
-  loading = false,
+  loading,
+  disabled,
   buttonStyle,
   textStyle,
-  icon,
-}) => {
+  children,
+  iconLeft,
+  iconRight,
+}: ButtonProps) {
   return (
     <TouchableOpacity
-      activeOpacity={0.7}
-      onPress={onPress}
-      disabled={disabled || loading}
       style={[
-        {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-          paddingVertical: 12,
-          borderRadius: 10,
-          backgroundColor: disabled ? "#ccc" : "#1E1E1E",
-        },
+        style.button,
+        disabled ? style.buttonDisabled : null,
         buttonStyle,
       ]}
+      onPress={onPress}
+      disabled={disabled || loading}
+      activeOpacity={0.8}
     >
       {loading ? (
         <ActivityIndicator color="#fff" />
+      ) : children ? (
+        children
       ) : (
         <View
           style={{
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "center",
-            gap: 6,
           }}
         >
-          {icon && <View>{icon}</View>}
+          {iconLeft && <View style={{ marginRight: 6 }}>{iconLeft}</View>}
 
-          {title &&
-            (typeof title === "string" ? (
-              <Text
-                style={[
-                  {
-                    color: "#fff",
-                    fontSize: 16,
-                    fontWeight: "600",
-                  },
-                  textStyle,
-                ]}
-              >
-                {title}
-              </Text>
-            ) : (
-              title
-            ))}
+          {title && <Text style={[style.buttonText, textStyle]}>{title}</Text>}
+
+          {iconRight && <View style={{ marginLeft: 6 }}>{iconRight}</View>}
         </View>
       )}
     </TouchableOpacity>
   );
-};
-
-export default CustomButton;
+}

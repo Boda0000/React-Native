@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -17,6 +18,7 @@ import i18n from "../../../locales/i18n";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
+
 
 type RootStackParamList = {
   Login: undefined;
@@ -50,11 +52,14 @@ const NewPasswordScreen: React.FC = () => {
   }) => {
     setLoading(true);
     try {
-      // await axios.post("/auth/reset-password", { emailOrPhone, newPassword: values.newPassword });
+      // await axios.post("/auth/reset-password", {
+      //   emailOrPhone,
+      //   newPassword: values.newPassword,
+      // });
       Alert.alert("", "تم تحديث كلمة المرور بنجاح", [
         { text: "حسناً", onPress: () => navigation.navigate("Login") },
       ]);
-    } catch {
+    } catch (err) {
       Alert.alert("", "حدث خطأ أثناء تحديث كلمة المرور");
     } finally {
       setLoading(false);
@@ -68,26 +73,32 @@ const NewPasswordScreen: React.FC = () => {
     >
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
-          {/* Header */}
+
           <View style={styles.header}>
-            <CustomButton
+            <TouchableOpacity
               onPress={() => navigation.goBack()}
-              buttonStyle={styles.backIcon}
-              icon={<MaterialIcons name="arrow-forward-ios" size={20} color="#1E1E1E" />}
-            />
-            <Text style={styles.headerTitle}>{i18n.t("Password recovery")}</Text>
+              style={styles.backIcon} 
+            >
+              <MaterialIcons
+                name="arrow-forward-ios"
+                size={20}
+                color="#1E1E1E"
+                style={{ alignSelf: "center" }} 
+              />
+            </TouchableOpacity>
+
+            <Text style={styles.headerTitle}>
+              {i18n.t("Password recovery")}
+            </Text>
           </View>
 
-          {/* Icon */}
           <Image
-            source={require("../../../assets/images/Lock.jpg")}
-            style={styles.icon}
-          />
+          source={require("../../../assets/images/Lock.jpg")}
+          style={styles.icon}
+        />
 
-          {/* Subtitle */}
           <Text style={styles.subtitle}>{i18n.t("new_password_subtitle")}</Text>
 
-          {/* Form */}
           <Formik
             initialValues={{ newPassword: "", confirmPassword: "" }}
             validationSchema={NewPasswordSchema}
@@ -128,6 +139,7 @@ const NewPasswordScreen: React.FC = () => {
                   reverseIcon
                   labelStyle={styles.labelStyle}
                   placeholderStyle={styles.placeholderStyle}
+                  
                 />
 
                 <CustomButton

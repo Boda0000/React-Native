@@ -6,17 +6,17 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-
 import CustomInput from "../../../components/CustomInput/CustomInput";
 import CustomButton from "../../../components/btn/CustomButton";
 import styles from "./style";
 import i18n from "../../../locales/i18n";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type RootStackParamList = {
   Login: undefined;
@@ -56,17 +56,17 @@ const ForgotPasswordScreen: React.FC = () => {
         <View style={styles.container}>
           {/*Header*/}
           <View style={styles.header}>
-            <CustomButton
+            <TouchableOpacity
               onPress={() => navigation.goBack()}
-              buttonStyle={styles.backIcon}
-              icon={
-                <MaterialIcons
-                  name="arrow-forward-ios"
-                  size={20}
-                  color="#1E1E1E"
-                />
-              }
-            />
+              style={styles.backIcon}
+            >
+              <MaterialIcons
+                name="arrow-forward-ios"
+                size={20}
+                color="#1E1E1E"
+                style={{ alignSelf: "center" }}
+              />
+            </TouchableOpacity>
 
             <Text style={styles.headerTitle}>
               {i18n.t("Password recovery")}

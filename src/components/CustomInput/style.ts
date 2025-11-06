@@ -28,6 +28,8 @@ export default StyleSheet.create({
     color: "red",
     fontSize: 12,
     margin: 5,
+    justifyContent:"center",
+    alignContent:"center",
   },
   inputContainer: {
     position: "relative",

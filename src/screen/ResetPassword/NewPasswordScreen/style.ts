@@ -86,6 +86,11 @@ headerTitle: {
     
     
   },
+  errorStyle:{
+    color: "red", fontSize: 12,
+    textAlign: 'center',
+    marginTop: 4, 
+  },
 });
 
 export default styles;

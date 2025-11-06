@@ -15,7 +15,7 @@ import CustomButton from "../../../components/btn/CustomButton";
 import styles from "./style";
 import i18n from "../../../locales/i18n";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Reload from "src/assets/icons/Reload.svg";
 
@@ -29,7 +29,6 @@ type VerifyCodeNavProp = NativeStackNavigationProp<
   RootStackParamList,
   "VerifyCode"
 >;
-type VerifyCodeRouteProp = RouteProp<RootStackParamList, "VerifyCode">;
 
 const VerifyCodeSchema = Yup.object().shape({
   code: Yup.string()
@@ -39,11 +38,23 @@ const VerifyCodeSchema = Yup.object().shape({
 
 const VerifyCodeScreen: React.FC = () => {
   const navigation = useNavigation<VerifyCodeNavProp>();
-  const route = useRoute<VerifyCodeRouteProp>();
+  const route = useRoute<any>();
   const { emailOrPhone } = route.params;
+
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [timer, setTimer] = useState(30);
+  const [canResend, setCanResend] = useState(false);
+
+  const [emptyCodeError, setEmptyCodeError] = useState(false);
 
   const handleVerify = (code: string) => {
+    if (!code || code.trim() === "") {
+      setErrorMessage(null);
+      setEmptyCodeError(true);
+      return;
+    }
+
+    setEmptyCodeError(false); 
     if (code === "123456") {
       setErrorMessage(null);
       navigation.navigate("NewPassword", { emailOrPhone });
@@ -51,9 +62,6 @@ const VerifyCodeScreen: React.FC = () => {
       setErrorMessage("الكود غلط");
     }
   };
-
-  const [timer, setTimer] = useState(30);
-  const [canResend, setCanResend] = useState(false);
 
   useEffect(() => {
     if (timer === 0) {
@@ -84,6 +92,7 @@ const VerifyCodeScreen: React.FC = () => {
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
       >
+        {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -94,21 +103,25 @@ const VerifyCodeScreen: React.FC = () => {
           <Text style={styles.headerTitle}>{i18n.t("Password recovery")}</Text>
         </View>
 
-         <Image
-            source={require("../../../assets/images/AppIcon.png")}
-            style={styles.icon}
-            resizeMode="contain" 
-          />
+        {/* Image */}
+        <Image
+          source={require("../../../assets/images/AppIcon.png")}
+          style={styles.icon}
+          resizeMode="contain"
+        />
 
+        {/* Subtitle */}
         <Text style={styles.subtitle}>{i18n.t("verify_code_subtitle")}</Text>
 
+        {/* Formik + OtpInput */}
         <Formik
           initialValues={{ code: "" }}
           validationSchema={VerifyCodeSchema}
           onSubmit={({ code }) => handleVerify(code)}
         >
-          {({ handleSubmit, values, setFieldValue, errors, touched }) => {
+          {({ handleSubmit, values, setFieldValue }) => {
             const hasError = !!errorMessage;
+
             return (
               <>
                 <OtpInput
@@ -128,18 +141,23 @@ const VerifyCodeScreen: React.FC = () => {
 
                 <CustomButton
                   title={
-                    hasError
-                      ? i18n.t("Wrong Code")
-                      : i18n.t("Confirm")
+                    emptyCodeError
+                      ? i18n.t("Please Enter The Code")
+                      : hasError
+                        ? i18n.t("Wrong Code")
+                        : i18n.t("Confirm")
                   }
-                  onPress={() => handleSubmit()}
+                 
+                  onPress={() => handleVerify(values.code)}
                   buttonStyle={[
                     styles.nextButton,
-                    hasError ? styles.nextButtonError : null,
+                    hasError || emptyCodeError ? styles.nextButtonError : null,
                   ]}
                   textStyle={[
                     styles.nextButtonText,
-                    hasError ? styles.nextButtonTextError : null,
+                    hasError || emptyCodeError
+                      ? styles.nextButtonTextError
+                      : null,
                   ]}
                 />
 

@@ -22,11 +22,8 @@ interface FormInputProps extends TextInputProps {
   inputStyle?: object;
   labelStyle?: object;
   errorStyle?: object;
-  iconStyle?: object;
   placeholderStyle?: object;
-  reverseIcon?: boolean;
   leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
 }
 
 export default function FormInput({
@@ -41,11 +38,8 @@ export default function FormInput({
   inputStyle,
   labelStyle,
   errorStyle,
-  iconStyle,
   placeholder,
-  reverseIcon,
   leftIcon,
-  rightIcon,
   ...rest
 }: FormInputProps) {
   const [showPassword, setShowPassword] = useState(false);
@@ -111,7 +105,7 @@ export default function FormInput({
       </View>
 
       {touched && !!error && (
-        <Text style={[style.errorText, errorStyle]}>{error}</Text>
+        <Text style={[style.errorText, errorStyle, { marginTop: 4 }]}>{error}</Text>
       )}
     </View>
   );

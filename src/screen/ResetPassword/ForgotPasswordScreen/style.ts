@@ -88,6 +88,12 @@ const styles = StyleSheet.create({
     fontWeight: 400,
   },
 
+  errorStyle:{
+    color: "red", fontSize: 12,
+    justifyContent:"center",
+    textAlign: 'center',
+  },
+
   //////////////////////////
 });
 

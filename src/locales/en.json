@@ -47,17 +47,18 @@
   "Confirm Password": "Confirm Password",
   "Resend code": "Resend code",
   "enter_new_password": "New Password",
-  "This field is required":"This field is required",
+   "The field required":"This field is required",
   "Enter a valid phone number":"Enter a valid phone number",
   "Password required":"Password required",
   "The password must be at least 8 characters long.":"The password must be at least 8 characters long.",
-    "The Passwords don't match.":"The Passwords don't match.",
-    "Password has been successfully updated.":"Password has been successfully updated.",
+    "Password has been successfully updated":"Password has been successfully updated.",
      "Okay": "Okay",
      "An error occurred while updating your password.":"An error occurred while updating your password.",
      "Code required":"Code required",
        "The code must be 6 digits long.":"The code must be 6 digits long.",
        "Wrong Code":"The code is incorrect. Please check it and try again.",
+       "The Passwords don't match":"The Passwords don't match.",
+       "Please Enter The Code":"Please Enter The Code",
 
 
   

@@ -47,17 +47,19 @@
   "Confirm Password":"يرجى تأكيد كلمة المرور",
   "Resend code":"اعادة ارسال",
   "enter_new_password":"كلمة المرور",
-  "This field is required":"هذا الحقل مطلوب",
+  "The field required":"هذا الحقل مطلوب",
   "Enter a valid phone number":"أدخل رقم هاتف صحيح",
   "Password required":"كلمة المرور مطلوبة",
   "The password must be at least 8 characters long.":"كلمة المرور يجب أن تكون 8 أحرف على الأقل",
-  "The Passwords don't match.":"كلمتا المرور غير متطابقتين",
-  "Password has been successfully updated.":"تم تحديث كلمة المرور بنجاح",
+  "Password has been successfully updated":"تم تحديث كلمة المرور بنجاح",
   "Okay":"حسناً",
   "An error occurred while updating your password.":"حدث خطأ أثناء تحديث كلمة المرور",
   "Code required":"الكود مطلوب",
   "The code must be 6 digits long.":"يجب أن يكون الكود 6 أرقام",
   "Wrong Code": "الرمز غير صحيح برجاء التأكد منه والمحاولة مرة أخرى",
+  "The Passwords don't match":"كلمات المرور غير متطابقتين",
+  "Please Enter The Code": "من فضلك ادخل الكود",
+  
 
   "Onboarding": {
     "Slides": [

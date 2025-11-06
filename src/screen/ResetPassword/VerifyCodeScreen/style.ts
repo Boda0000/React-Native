@@ -65,15 +65,13 @@ const styles = StyleSheet.create({
     fontFamily: "Cairo Semi Bold",
     fontWeight: "600",
     backgroundColor: "#FFFFFF",
-    color:"#0D3F47",
+    color: "#0D3F47",
   },
   otpInputError: {
-    borderColor: "#E35757", 
-    backgroundColor: "#FDF5F5", 
-     color:"#E35757",
+    borderColor: "#E35757",
+    backgroundColor: "#FDF5F5",
+    color: "#E35757",
   },
-
-  
 
   nextButton: {
     marginTop: 20,
@@ -92,13 +90,13 @@ const styles = StyleSheet.create({
   },
 
   nextButtonError: {
-    backgroundColor: "#E35757", 
+    backgroundColor: "#E35757",
   },
   nextButtonTextError: {
     color: "#FFFFFF",
-    fontFamily:"Kalligraaf Arabic",
-    fontWeight:400,
-    fontSize:18,
+    fontFamily: "Kalligraaf Arabic",
+    fontWeight: 400,
+    fontSize: 18,
   },
 
   Timer: {
@@ -114,6 +112,12 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     textDecorationLine: "underline",
     fontFamily: "Kalligraaf Arabic",
+  },
+  errorText: {
+    color: "red",
+    fontSize: 12,
+    justifyContent: "center",
+    textAlign: "center",
   },
 });
 

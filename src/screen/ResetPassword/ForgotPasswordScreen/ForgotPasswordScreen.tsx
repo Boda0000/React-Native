@@ -17,7 +17,6 @@ import CustomButton from "../../../components/btn/CustomButton";
 import styles from "./style";
 import i18n from "../../../locales/i18n";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import lock from "../../../assets/icons/lock.svg"
 
 type RootStackParamList = {
   Login: undefined;
@@ -33,7 +32,7 @@ type ForgotPasswordNavProp = NativeStackNavigationProp<
 const ForgotPasswordSchema = Yup.object().shape({
   emailOrPhone: Yup.string()
     .trim()
-    .required(i18n.t("This field is required"))
+    .required(i18n.t("The field required"))
     .matches(/^(\+20|0)?1[0-9]{9}$/, (i18n.t("Enter a valid phone number"))),
 });
 
@@ -106,12 +105,13 @@ const ForgotPasswordScreen: React.FC = () => {
                   onChangeText={handleChange("emailOrPhone")}
                   onBlur={handleBlur("emailOrPhone")}
                   value={values.emailOrPhone}
-                  reverseIcon
-                  keyboardType="phone-pad"
                   labelStyle={styles.labelStyle}
                   placeholderStyle={styles.placeholderStyle}
+                  errorStyle={styles.errorStyle}
+                  error={touched.emailOrPhone ? errors.emailOrPhone : undefined}
+                  touched={touched.emailOrPhone}
+                  keyboardType="phone-pad"
                 />
-
                 <CustomButton
                   title={i18n.t("Confirm")}
                   onPress={() => handleSubmit()}

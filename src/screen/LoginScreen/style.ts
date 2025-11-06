@@ -87,12 +87,10 @@ export default StyleSheet.create({
   },
 
   inputStyle: {
-    borderColor: "#232323",
-    borderWidth: 1,
-    borderRadius: 4,
     fontSize: 16,
     fontFamily: "Kalligraaf Arabic",
     textAlign: "right",
+    marginBottom: 2,
   },
 
   x: {

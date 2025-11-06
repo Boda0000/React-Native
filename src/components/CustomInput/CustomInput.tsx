@@ -9,7 +9,7 @@ import {
   I18nManager,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import style from "./style";
+import styles from "./style";
 
 const { width } = Dimensions.get("window");
 
@@ -45,35 +45,35 @@ export default function FormInput({
   const [showPassword, setShowPassword] = useState(false);
   const isRTL = I18nManager.isRTL;
 
-  const lockPosition = isRTL ? "left" : "right";
-  const eyePosition = isRTL ? "right" : "left";
-
   return (
     <View style={containerStyle}>
-      {!!label && <Text style={[style.label, labelStyle]}>{label}</Text>}
+      {/* Label */}
+      {label && <Text style={[styles.label, labelStyle]}>{label}</Text>}
 
-      <View style={[style.inputContainer, { position: "relative" }]}>
+      {/* Input Container */}
+      <View
+        style={[
+          styles.inputContainer,
+          {
+            borderWidth: 1,
+            borderColor: touched && error ? "red" : "#E1E1E1",
+          },
+        ]}
+      >
+        {/*Lock Icon*/}
         {leftIcon && (
-          <View
-            style={{
-              position: "absolute",
-              [lockPosition]: 1,
-             
-            }}
-          >
-            {leftIcon}
-          </View>
+          <View style={styles.leftIconContainer}>{leftIcon}</View>
         )}
 
+        {/*Text*/}
         <TextInput
           style={[
-            style.input,
-            touched && error ? style.inputError : null,
+            styles.input,
             inputStyle,
             {
-              paddingLeft: !isRTL && leftIcon ? 30 : 20, 
-              paddingRight: isRTL && leftIcon ? 30 : 20, 
+              flex: 1,
               textAlign: isRTL ? "left" : "right",
+              color: "#000",
             },
           ]}
           value={value}
@@ -85,15 +85,11 @@ export default function FormInput({
           {...rest}
         />
 
+        {/*Eye*/}
         {isPassword && (
           <TouchableOpacity
-            style={{
-              position: "absolute",
-              [eyePosition]: 10,
-              top: "50%",
-              transform: [{ translateY: -10 }],
-            }}
             onPress={() => setShowPassword(!showPassword)}
+            style={styles.rightIconContainer}
           >
             <Ionicons
               name={showPassword ? "eye-off" : "eye"}
@@ -104,8 +100,9 @@ export default function FormInput({
         )}
       </View>
 
-      {touched && !!error && (
-        <Text style={[style.errorText, errorStyle, { marginTop: 4 }]}>{error}</Text>
+      {/* Error */}
+      {touched && error && (
+        <Text style={[styles.errorText, errorStyle]}>{error}</Text>
       )}
     </View>
   );

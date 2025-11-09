@@ -63,7 +63,6 @@ export default function LoginPage() {
                 value={values.username}
                 error={errors.username}
                 touched={touched.username}
-                reverseIcon
                 key={`username-${lang}`}
                 labelStyle={[styles.labelStyle]}
                 inputStyle={styles.inputStyle}
@@ -78,7 +77,6 @@ export default function LoginPage() {
                 touched={touched.password}
                 error={errors.password}
                 isPassword
-                reverseIcon
                 key={`password-${lang}`}
                 labelStyle={[styles.labelStyle]}
                 inputStyle={styles.inputStyle}
@@ -106,6 +104,12 @@ export default function LoginPage() {
               key={`lang-${lang}`}
               buttonStyle={styles.langButton}
               textStyle={styles.langButtonText}
+            />
+            <CustomButton
+              title={i18n.t("register")}
+              onPress={() => navigation.navigate("Registration" as never)}
+              buttonStyle={styles.registerButton}
+              textStyle={styles.registerButtonText}
             />
           </>
         )}

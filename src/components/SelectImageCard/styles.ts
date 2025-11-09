@@ -7,25 +7,26 @@ import {
 export default StyleSheet.create({
   container: {
     alignItems: "center",
-    marginTop: 15,
+   
   },
 
   image: {
-    width: 200,
-    height: 200,
-    borderRadius: 16,
-    marginBottom: 10,
-    backgroundColor: "#EAF3FF",
+    width: 90,
+    height: 90,
+    borderRadius: 60,
+    borderWidth: 1,
+    borderColor: "#D0D4DD",
+    backgroundColor: "#FFFFFF",
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   button: {
-    backgroundColor: "#ECEFFF",
-    borderWidth: 1,
-    borderColor: "#E8ECF4",
-    borderRadius: responsiveWidth(1),
+    backgroundColor: "transparent",
+    borderWidth: 0,
     alignItems: "center",
     alignSelf: "center",
-    marginTop: responsiveHeight(1),
+    marginTop: responsiveHeight(2),
   },
 
   buttonText: {

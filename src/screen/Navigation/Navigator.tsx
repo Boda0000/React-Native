@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import OnboardingScreen from "../onboardingscreen/onboardingscreen";
 import LastOnboardingScreen from "../LastOnboarding/LastOnboarding";
 import LoginPage from "../LoginScreen/login.screen";
+import Registration from "../Registration/Registration";
 import ForgotPasswordScreen from "../ResetPassword/ForgotPasswordScreen/ForgotPasswordScreen";
 import VerifyCodeScreen from "../ResetPassword/VerifyCodeScreen/VerifyCodeScreen";
 import NewPasswordScreen from "../ResetPassword/NewPasswordScreen/NewPasswordScreen";
@@ -53,6 +54,7 @@ export default function Navigator() {
 
         {/* Auth flow */}
         <Stack.Screen name="Login" component={LoginPage} />
+        <Stack.Screen name="Registration" component={Registration} />
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
         <Stack.Screen name="VerifyCode" component={VerifyCodeScreen} />
         <Stack.Screen name="NewPassword" component={NewPasswordScreen} />

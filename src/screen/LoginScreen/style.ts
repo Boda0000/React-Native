@@ -96,4 +96,18 @@ export default StyleSheet.create({
   x: {
     width: "100%",
   },
+  registerButton: {
+    backgroundColor: "#C6E5DE",
+    borderRadius: 4,
+    width: "100%",
+    alignSelf: "center",
+    fontWeight: "500",
+    fontFamily: "Kalligraaf Arabic",
+  },
+
+  registerButtonText: {
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: 500,
+  },
 });

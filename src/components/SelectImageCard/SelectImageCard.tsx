@@ -1,7 +1,6 @@
-import { View, Image, Alert } from "react-native";
+import { View, Image, Alert, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import CustomButton from "src/components/btn/CustomButton";
 import i18n from "src/locales/i18n";
 import styles from "./styles";
 
@@ -35,23 +34,21 @@ const SelectImageCard = () => {
 
   return (
     <View style={styles.container}>
-      {selectedImage && (
-        <Image
-          source={{ uri: selectedImage }}
-          style={styles.image}
-          resizeMode="cover"
-        />
-      )}
-      <CustomButton
-        title={
-          selectedImage
-            ? i18n.t("change_photo")
-            : i18n.t("select_photo_from_gallrey")
-        }
-        onPress={handlePickImage}
-        buttonStyle={styles.button}
-        textStyle={styles.buttonText}
-      />
+      <TouchableOpacity onPress={handlePickImage}>
+        {selectedImage ? (
+          <Image
+            source={{ uri: selectedImage }}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        ) : (
+          <Image
+            source={require("../../assets/images/Addpic.png")}
+            style={{ width: 90, height: 90 }}
+            resizeMode="contain"
+          />
+        )}
+      </TouchableOpacity>
     </View>
   );
 };

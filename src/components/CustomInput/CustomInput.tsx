@@ -24,6 +24,7 @@ interface FormInputProps extends TextInputProps {
   errorStyle?: object;
   placeholderStyle?: object;
   leftIcon?: React.ReactNode;
+  style?: object; // استايل الحاوية الخارجية
 }
 
 export default function FormInput({
@@ -40,6 +41,7 @@ export default function FormInput({
   errorStyle,
   placeholder,
   leftIcon,
+   style,
   ...rest
 }: FormInputProps) {
   const [showPassword, setShowPassword] = useState(false);
@@ -93,7 +95,7 @@ export default function FormInput({
           >
             <Ionicons
               name={showPassword ? "eye-off" : "eye"}
-              size={width * 0.05}
+              size={width * 0.04}
               color="#B9B9B9"
             />
           </TouchableOpacity>

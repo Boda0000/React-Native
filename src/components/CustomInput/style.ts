@@ -5,24 +5,28 @@ const { width, height } = Dimensions.get("window");
 export default StyleSheet.create({
   label: {
     fontSize: 16,
-    marginBottom: 6,
+    marginBottom: 3,
     color: "black",
+    marginTop:4,
   },
 
   inputContainer: {
     flexDirection: "row-reverse",
     alignItems: "center",
     borderRadius: 4,
-    paddingVertical: 9,
-    paddingHorizontal: 10,
+    paddingVertical:7,
+    paddingHorizontal: 8,
     backgroundColor: "#FFFFFF",
+    margin:1,
   },
 
   input: {
     flex: 1,
-    marginVertical: 8,
-    fontSize: 14,
+    marginVertical: 3,
+    fontSize: 16,
     color: "#000",
+    fontFamily: "Kalligraaf Arabic",
+    fontWeight:400,
   },
 
   leftIconContainer: {

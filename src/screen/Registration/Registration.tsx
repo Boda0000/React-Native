@@ -1,4 +1,3 @@
-import React from "react";
 import {
   View,
   Text,
@@ -32,7 +31,7 @@ type RegisterScreenNavProp = NativeStackNavigationProp<
   "Register"
 >;
 
-const RegisterScreen: React.FC = () => {
+const RegisterScreen = () => {
   const navigation = useNavigation<RegisterScreenNavProp>();
 
   const validationSchema = Yup.object().shape({

@@ -1,209 +1,87 @@
-import {
-  View,
-  Text,
-  FlatList,
-  ActivityIndicator,
-  ScrollView,
-  RefreshControl,
-  Image,
-} from "react-native";
-import { usePackage } from "../../Hooks/usePackage";
-import { useInstructors } from "../../Hooks/useinstructors";
+import { View, Text, FlatList } from "react-native";
 import styles from "./styles";
-import Header from "../../components/Header/Header";
-import { AllPackage } from "../../models/PackageModel";
-import { Instructor } from "../../models/InstructorsModel";
-import CustomButton from "src/components/btn/CustomButton";
-import Sessions from "../../assets/icons/Sessions.svg";
-import SessionTime from "../../assets/icons/SessionTime.svg";
-import Duration from "../../assets/icons/Duration.svg";
-import i18n from "src/locales/i18n";
-import Location from "../../assets/icons/location.svg";
-import Country from "../../assets/icons/country.svg";
-import Star from "../../assets/icons/Star.svg";
-import SelectImageCard from "src/components/SelectImageCard/SelectImageCard";
 
-const HomeScreen = () => {
-  const { data: packages, refetch, isLoading, isRefetching } = usePackage();
-  const {
-    data: instructors,
-    isLoading: loadingInstructors,
-    refetch: refetchInstructors,
-  } = useInstructors();
+type Order = {
+  id: string;
+  ordernumber: string;
+  price: number;
+  date: string;
+  status: string;
+};
 
-  if (isLoading || loadingInstructors) {
-    return (
-      <View style={styles.Loading}>
-        <ActivityIndicator size="large" color="#4A90E2" />
-        <Text style={styles.LoadingText}>{i18n.t("loading")}...</Text>
-      </View>
-    );
-  }
+const orders: Order[] = [
+  {
+    id: "1",
+    ordernumber: "6526851",
+    price: 29,
+    date: "24/12/2024",
+    status: "تم الاستلام",
+  },
+  {
+    id: "2",
+    ordernumber: "6526851",
+    price: 29,
+    date: "24/12/2024",
+    status: "تم الاستلام",
+  },
+  {
+    id: "3",
+    ordernumber: "6526851",
+    price: 29,
+    date: "24/12/2024",
+    status: "تم الاستلام",
+  },
+  {
+    id: "4",
+    ordernumber: "6526851",
+    price: 18,
+    date: "23/12/2024",
+    status: "ملغي",
+  },
+  {
+    id: "5",
+    ordernumber: "6526851",
+    price: 18,
+    date: "23/12/2024",
+    status: "ملغي",
+  },
+];
 
-  const firstPackage = packages?.[0];
+const OrderCard = ({ item }: { item: Order }) => {
+  const isReceived = item.status === "تم الاستلام";
 
   return (
-    <ScrollView
-      contentContainerStyle={{
-        paddingHorizontal: 5,
-        backgroundColor: "#FFFFFF",
-      }}
-      refreshControl={
-        <RefreshControl
-          refreshing={isRefetching || loadingInstructors}
-          onRefresh={() => {
-            refetch();
-            refetchInstructors();
-          }}
-        />
-      }
-    >
-      {/* Header */}
-      <Header />
+    <View style={styles.card1}>
+      <View style={styles.h1}>
+        <Text style={styles.orderNumber}>رقم الطلب #{item.ordernumber}</Text>
+        <Text style={styles.price}>{item.price} ر.س</Text>
+      </View>
 
-      {/* photo*/}
-      <SelectImageCard />
+      <View style={styles.h2}>
+        <Text
+          style={[
+            styles.statusText,
+            { color: isReceived ? "#00A86B" : "#D1003F" },
+          ]}
+        >
+          {item.status}
+        </Text>
 
-      {/* Packages */}
-      {firstPackage && (
-        <View>
-          <View style={styles.midsec}>
-            <Text style={styles.packages}>{i18n.t("packages")}</Text>
-            <Text style={styles.all_packages}>{i18n.t("all_packages")}</Text>
-          </View>
-
-          <PackageCard pkg={firstPackage} />
-        </View>
-      )}
-
-      {/* Instructors */}
-      <FlatList
-        data={instructors}
-        numColumns={2}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <InstructorCard instructor={item} />}
-        ListHeaderComponent={
-          <View style={styles.lowsec}>
-            <Text style={styles.instructors}>{i18n.t("Instructor")}</Text>
-            <Text style={styles.all_instructors}>
-              {i18n.t("all_instructors")}
-            </Text>
-          </View>
-        }
-        contentContainerStyle={{
-          paddingBottom: 50,
-          paddingHorizontal: 5,
-          backgroundColor: "#FFFFFF",
-        }}
-      />
-    </ScrollView>
+        <Text style={styles.date}>{item.date}</Text>
+      </View>
+    </View>
   );
 };
 
-// PackageCard
-
-const PackageCard = ({ pkg }: { pkg: AllPackage }) => (
-  <View style={styles.Pkgcontainer}>
-    {/* Main Name */}
-    <Text style={styles.PkgName}>{pkg.title}</Text>
-
-    <View style={styles.pkgDetails}>
-      {/* sessions count */}
-      <View style={styles.Sessions}>
-        <Text style={styles.SessionsText}>
-          {i18n.t("session_count")} ({pkg.sessions_count} {i18n.t("sessions")})
-        </Text>
-        <Sessions width={16} height={16} />
-      </View>
-      {/* SessionTime */}
-      <View style={styles.SessionTime}>
-        <Text style={styles.SessionTimeText}>
-          {i18n.t("sessionTime")} {pkg.session_time_in_minutes}
-        </Text>
-        <SessionTime width={16} height={16} />
-      </View>
-    </View>
-    {/* Duration in months */}
-    <View style={styles.Duration}>
-      <Duration width={16} height={16} />
-      <Text style={styles.DurationText}>
-        {i18n.t("Duration")} {pkg.duration_months} {i18n.t("Months")}
-      </Text>
-    </View>
-    {/* price */}
-    <View style={styles.packagePrice}>
-      <Text style={styles.packagePrice}>
-        {i18n.t("price")} {pkg.package_price}
-      </Text>
-      <Text style={styles.taxincluded}>{i18n.t("tax_included")}</Text>
-    </View>
-    {/* Button */}
-    <CustomButton
-      title={i18n.t("book_monthly_package")}
-      textStyle={styles.book_monthly_package}
-      onPress={() => {}}
-    />
-  </View>
-);
-
-// InstructorCard
-
-const InstructorCard = ({ instructor }: { instructor: Instructor }) => (
-  <View style={styles.card}>
-    {/* Top Section */}
-    <View style={styles.topSection}>
-      <Image
-        source={{ uri: instructor.profile_picture }}
-        style={styles.teacherImage}
-      />
-
-      <View>
-        <Text style={styles.teacherName}>{instructor.name}</Text>
-        <View style={styles.ratingRow}>
-          <Star width={16} height={16} />
-          <Text style={styles.ratingText}>{instructor.average_rating}</Text>
-        </View>
-      </View>
-    </View>
-
-    {/* Subjects */}
-    <View>
-      {instructor.subjects?.length > 0 && (
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.subjectContainer}
-        >
-          {instructor.subjects.map((subject, index) => (
-            <View key={index} style={styles.subjectBadge}>
-              <Text style={styles.subjectText}>{subject}</Text>
-            </View>
-          ))}
-        </ScrollView>
-      )}
-    </View>
-
-    {/*Location Info*/}
-    <View style={styles.infoRow}>
-      <Text style={styles.location}>
-        <Location width={10} height={10} />
-        {instructor.city_label}, {instructor.country_label}
-      </Text>
-      <Text style={styles.location}>
-        <Country width={10} height={10} /> {instructor.nationality_label}
-      </Text>
-    </View>
-
-    {/*Button*/}
-    <View>
-      <CustomButton
-        title={i18n.t("book class")}
-        textStyle={styles.bookBtnText}
-        buttonStyle={styles.bookBtn}
-        onPress={() => {}}
+export default function OrdersScreen() {
+  return (
+    <View style={styles.container1}>
+      <FlatList
+        data={orders}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <OrderCard item={item} />}
+        showsVerticalScrollIndicator={false}
       />
     </View>
-  </View>
-);
-
-export default HomeScreen;
+  );
+}

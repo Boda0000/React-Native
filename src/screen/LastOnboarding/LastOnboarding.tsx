@@ -14,7 +14,7 @@ const LastOnboardingScreen = () => {
   const [lang, setLang] = useState(i18n.locale);
 
   const handleStart = () => {
-    navigation.navigate("Login" as never);
+    navigation.navigate("Home" as never);
   };
 
   const changeLanguage = async (newLang: string) => {

@@ -24,6 +24,8 @@ interface FormInputProps extends TextInputProps {
   errorStyle?: object;
   placeholderStyle?: object;
   leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+
   style?: object; // استايل الحاوية الخارجية
 }
 
@@ -41,7 +43,8 @@ export default function FormInput({
   errorStyle,
   placeholder,
   leftIcon,
-   style,
+  rightIcon,
+  style,
   ...rest
 }: FormInputProps) {
   const [showPassword, setShowPassword] = useState(false);
@@ -63,9 +66,7 @@ export default function FormInput({
         ]}
       >
         {/*Lock Icon*/}
-        {leftIcon && (
-          <View style={styles.leftIconContainer}>{leftIcon}</View>
-        )}
+        {leftIcon && <View style={styles.leftIconContainer}>{leftIcon}</View>}
 
         {/*Text*/}
         <TextInput
@@ -86,6 +87,8 @@ export default function FormInput({
           placeholderTextColor="#BDBDBD"
           {...rest}
         />
+
+        {rightIcon && <View style={styles.rightIcon}>{rightIcon}</View>}
 
         {/*Eye*/}
         {isPassword && (

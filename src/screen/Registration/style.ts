@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 4,
     height: 50,
+    marginBottom:0,
   },
   nextButtonText: {
     fontSize: 18,
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     color: "#0D3F47",
     textAlign: "right",
     fontFamily: "Kalligraaf Arabic",
-    right: 5,
+    marginRight: 5,
     fontWeight: 400,
   },
 

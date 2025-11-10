@@ -7,17 +7,17 @@ export default StyleSheet.create({
     fontSize: 16,
     marginBottom: 2,
     color: "black",
-    marginTop:3,
+    marginTop: 3,
   },
 
   inputContainer: {
     flexDirection: "row-reverse",
     alignItems: "center",
     borderRadius: 4,
-    paddingVertical:7,
+    paddingVertical: 7,
     paddingHorizontal: 8,
     backgroundColor: "#FFFFFF",
-    margin:1,
+    marginBottom: 2,
   },
 
   input: {
@@ -26,7 +26,7 @@ export default StyleSheet.create({
     fontSize: 16,
     color: "#000",
     fontFamily: "Kalligraaf Arabic",
-    fontWeight:400,
+    fontWeight: 400,
   },
 
   leftIconContainer: {
@@ -34,6 +34,10 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
 
+  rightIcon: {
+    justifyContent: "center",
+    right: 10,
+  },
   rightIconContainer: {
     justifyContent: "center",
     alignItems: "center",

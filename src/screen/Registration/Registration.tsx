@@ -89,7 +89,6 @@ const RegisterScreen = () => {
             }}
             validationSchema={validationSchema}
             onSubmit={() => navigation.navigate("Login")}
-          
           >
             {({
               handleChange,
@@ -112,6 +111,7 @@ const RegisterScreen = () => {
                     label={i18n.t("First Name")}
                     placeholder={i18n.t("first Name")}
                     leftIcon={<Username width={12} height={12} />}
+                    rightIcon={<Username width={12} height={12} />}
                     value={values.firstName}
                     onChangeText={handleChange("firstName")}
                     onBlur={handleBlur("firstName")}
@@ -209,7 +209,6 @@ const RegisterScreen = () => {
                 />
 
                 {/* Footer */}
-                <View style={styles.login}>
                   <CustomButton
                     onPress={() => navigation.navigate("Login" as never)}
                     buttonStyle={styles.login}
@@ -220,7 +219,6 @@ const RegisterScreen = () => {
                     <Text style={styles.Signin}>{i18n.t("Sign in")}</Text>
                   </CustomButton>
                 </View>
-              </View>
             )}
           </Formik>
         </View>

@@ -80,7 +80,6 @@ export default function OrdersScreen() {
         data={orders}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <OrderCard item={item} />}
-        showsVerticalScrollIndicator={false}
       />
     </View>
   );

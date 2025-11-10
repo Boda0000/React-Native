@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 7,
+    paddingHorizontal: 8,
     paddingTop: height * 0.07,
   },
   header: {
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
-    right: 0,
     borderColor: "#F5F5F5",
   },
 
@@ -51,25 +50,24 @@ const styles = StyleSheet.create({
   },
 
   login: {
-  flexDirection: "row-reverse", 
-  alignItems: "center", 
-  justifyContent: "center", 
-  marginTop: 0,
-  backgroundColor:"#FFFFFF",
-},
+    flexDirection: "row-reverse",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FFFFFF",
+  },
 
   alreadytext: {
     fontFamily: "Kalligraaf Arabic",
     fontWeight: "400",
     fontSize: 14,
-     color:"#777777",
+    color: "#777777",
   },
 
   Signin: {
     fontFamily: "Kalligraaf Arabic Medium",
     fontWeight: "500",
     fontSize: 14,
-    color:"#0D3F47",
+    color: "#0D3F47",
   },
 
   //custom input //
@@ -83,18 +81,12 @@ const styles = StyleSheet.create({
     fontWeight: 400,
   },
 
-
-
   errorStyle: {
     color: "red",
     fontSize: 12,
     justifyContent: "center",
     textAlign: "center",
   },
-
- 
-
-  
 });
 
 export default styles;

@@ -214,7 +214,7 @@ const RegisterScreen = () => {
                 <View style={styles.login}>
                   <CustomButton
                     onPress={() => navigation.navigate("Login" as never)}
-                    buttonStyle={styles.login} 
+                    buttonStyle={styles.login}
                   >
                     <Text style={styles.alreadytext}>
                       {i18n.t("Already have an account?")}{" "}

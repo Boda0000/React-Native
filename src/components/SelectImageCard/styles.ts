@@ -7,7 +7,6 @@ import {
 export default StyleSheet.create({
   container: {
     alignItems: "center",
-   
   },
 
   image: {
@@ -23,10 +22,8 @@ export default StyleSheet.create({
 
   button: {
     backgroundColor: "transparent",
-    borderWidth: 0,
     alignItems: "center",
     alignSelf: "center",
-    marginTop: responsiveHeight(2),
   },
 
   buttonText: {

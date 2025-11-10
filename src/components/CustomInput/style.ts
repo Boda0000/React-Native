@@ -5,9 +5,9 @@ const { width, height } = Dimensions.get("window");
 export default StyleSheet.create({
   label: {
     fontSize: 16,
-    marginBottom: 3,
+    marginBottom: 2,
     color: "black",
-    marginTop:4,
+    marginTop:3,
   },
 
   inputContainer: {

@@ -57,7 +57,6 @@ const RegisterScreen = () => {
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
       >
         <View style={styles.container}>
           {/* Header */}
@@ -90,8 +89,7 @@ const RegisterScreen = () => {
             }}
             validationSchema={validationSchema}
             onSubmit={() => navigation.navigate("Login")}
-            validateOnBlur
-            validateOnChange
+          
           >
             {({
               handleChange,

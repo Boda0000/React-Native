@@ -1,4 +1,3 @@
-import React from "react";
 import { View, Text, FlatList } from "react-native";
 import styles from "./styles";
 import SAR from "../../assets/icons/SAR.svg";
@@ -60,8 +59,7 @@ const OrderCard = ({ item }: { item: Order }) => {
 
         <View style={styles.priceContainer}>
           <Text style={styles.price}>{item.price}</Text>
-         <SAR width={20} height={17} />
-
+          <SAR width={20} height={17} />
         </View>
       </View>
 
@@ -84,8 +82,8 @@ const OrderCard = ({ item }: { item: Order }) => {
   );
 };
 
-export default function OrdersScreen() {
-  return (
+const OrdersScreen = () => {
+ return (
     <View style={styles.container1}>
       <FlatList
         data={orders}
@@ -95,3 +93,5 @@ export default function OrdersScreen() {
     </View>
   );
 }
+
+export default OrdersScreen;

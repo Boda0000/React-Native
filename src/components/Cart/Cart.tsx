@@ -62,10 +62,11 @@ const styles = StyleSheet.create({
 
   deleteBtn: {
     backgroundColor: colors.error500,
-    paddingHorizontal: 7,
-    paddingVertical: 10,
-    alignItems: "center",
+    paddingHorizontal: 6,
+    paddingVertical: 6,
     justifyContent: "center",
+    width: 30,
+    height: 30,
   },
   qtyContainer: {
     flexDirection: "row",

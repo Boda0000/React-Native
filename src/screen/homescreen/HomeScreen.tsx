@@ -101,7 +101,7 @@ const OrdersScreen = () => {
 const styles = StyleSheet.create({
   container1: {
     flex: 1,
-    backgroundColor: "#f4f6f8",
+    backgroundColor: "#FFFFFF",
     padding: 15,
     paddingTop: Platform.OS === "android" ? 50 : 80,
   },

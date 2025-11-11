@@ -81,6 +81,9 @@
   "ordernumber": "Order Number #",
   "Received": "Received",
   "Cancelled": "Cancelled",
+  "Orange juice":"Orange juice",
+  "Continue payment":"Continue payment",
+  "Total":"Total",
   "Onboarding": {
     "Slides": [
       {

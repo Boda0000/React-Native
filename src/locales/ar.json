@@ -81,6 +81,9 @@
   "ordernumber": "رقم الطلب #",
   "Received": "تم الاستلام",
   "Cancelled": "ملغي",
+  "Orange juice":"عصير برتقال",
+  "Continue payment":"متابعة دفع ",
+  "Total":"الإجمالي",
   "Onboarding": {
     "Slides": [
       {

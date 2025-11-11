@@ -12,6 +12,8 @@ import VerifyCodeScreen from "../ResetPassword/VerifyCodeScreen/VerifyCodeScreen
 import NewPasswordScreen from "../ResetPassword/NewPasswordScreen/NewPasswordScreen";
 import HomeScreen from "../homescreen/HomeScreen";
 import { initLanguage } from "../../locales/i18n";
+import CartScreen from "../cart/cartScreen";
+
 
 const Stack = createStackNavigator();
 
@@ -61,6 +63,7 @@ export default function Navigator() {
 
         {/* Main app */}
         <Stack.Screen name="Home" component={HomeScreen} />
+         <Stack.Screen name="CartScreen" component={CartScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -2,7 +2,9 @@ import { View, Text, FlatList, StyleSheet, Platform } from "react-native";
 import SAR from "../../assets/icons/SAR.svg";
 import Calender from "../../assets/icons/Calender.svg";
 import i18n from "src/locales/i18n";
-import { colors } from "../../assets/colors/colors"; 
+import { colors } from "../../assets/colors/colors";
+import CustomButton from "../../components/btn/CustomButton";
+import { useNavigation } from "@react-navigation/native";
 
 type Order = {
   id: string;
@@ -88,6 +90,8 @@ const OrderCard = ({ item }: { item: Order }) => {
 };
 
 const OrdersScreen = () => {
+  const navigation = useNavigation<any>(); 
+
   return (
     <View style={styles.container1}>
       <FlatList
@@ -95,6 +99,15 @@ const OrdersScreen = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <OrderCard item={item} />}
       />
+
+      <View style={styles.footer}>
+        <CustomButton
+          title={i18n.t("Next")}
+          onPress={() => navigation.navigate("CartScreen")}
+          buttonStyle={styles.nextButton}
+          textStyle={styles.nextButtonText}
+        />
+      </View>
     </View>
   );
 };
@@ -182,6 +195,26 @@ const styles = StyleSheet.create({
     fontFamily: "IBMPlexSansArabic-Bold",
     backgroundColor: colors.neutral150,
     padding: 7,
+  },
+
+  footer: {
+    position: "absolute",
+    bottom: 15,
+    left: 15,
+    right: 15,
+  },
+
+  nextButton: {
+    backgroundColor: "#315C63",
+    width: "100%",
+    borderRadius: 4,
+    height: 50,
+  },
+  nextButtonText: {
+    fontSize: 18,
+    fontWeight: "500",
+    color: "#fff",
+    fontFamily: "Kalligraaf Arabic Medium",
   },
 });
 

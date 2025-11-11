@@ -1,5 +1,8 @@
+import React from "react";
 import { View, Text, FlatList } from "react-native";
 import styles from "./styles";
+import SAR from "../../assets/icons/SAR.svg";
+import Calender from "../../assets/icons/Calender.svg";
 
 type Order = {
   id: string;
@@ -54,7 +57,12 @@ const OrderCard = ({ item }: { item: Order }) => {
     <View style={styles.card1}>
       <View style={styles.h1}>
         <Text style={styles.orderNumber}>رقم الطلب #{item.ordernumber}</Text>
-        <Text style={styles.price}>{item.price} ر.س</Text>
+
+        <View style={styles.priceContainer}>
+          <Text style={styles.price}>{item.price}</Text>
+         <SAR width={20} height={17} />
+
+        </View>
       </View>
 
       <View style={styles.h2}>
@@ -67,7 +75,10 @@ const OrderCard = ({ item }: { item: Order }) => {
           {item.status}
         </Text>
 
-        <Text style={styles.date}>{item.date}</Text>
+        <View style={styles.dateContainer}>
+          <Calender width={13} height={13} />
+          <Text style={styles.date}>{item.date}</Text>
+        </View>
       </View>
     </View>
   );

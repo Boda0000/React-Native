@@ -16,6 +16,9 @@ export default function App() {
     "Kalligraaf Arabic Bold" : require ("./src/assets/fonts/Kalligraaf Arabic Bold.otf"),
     "Kalligraaf Arabic Medium" : require ("./src/assets/fonts/Kalligraaf Arabic Medium.otf"),
     "Cairo Semi Bold" : require ("./src/assets/fonts/Cairo-SemiBold.ttf"),
+    "IBMPlexSansArabic-Bold" : require ("./src/assets/fonts/IBMPlexSansArabic-Bold.ttf"),
+    "IBM Plex Sans Arabic":require("./src/assets/fonts/IBMPlexSansArabic-Regular.ttf"),
+    "IBMPlexSansArabic-Medium" : require ("./src/assets/fonts/IBMPlexSansArabic-Medium.ttf"),
   });
 
   return (

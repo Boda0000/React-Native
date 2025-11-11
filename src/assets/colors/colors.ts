@@ -1,5 +1,6 @@
 export const palette = {
   neutral100: "#FFFFFF",
+  neutral150:"#FFFFFF66",
   neutral200: "#F4F6F8",
   neutral300: "#D9E1E5",
   neutral400: "#B0BFC6",
@@ -15,6 +16,7 @@ export const palette = {
   error100: "#FDECEA",
   cardLight: "#DCF1F3", 
   borderLight: "#BEDBDE", 
+  shadow:"#DCEBEC",
 } as const;
 
 export const colors = {

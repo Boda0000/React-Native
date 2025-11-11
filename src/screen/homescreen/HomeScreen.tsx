@@ -2,6 +2,7 @@ import { View, Text, FlatList, StyleSheet, Platform } from "react-native";
 import SAR from "../../assets/icons/SAR.svg";
 import Calender from "../../assets/icons/Calender.svg";
 import i18n from "src/locales/i18n";
+import { colors } from "../../assets/colors/colors"; 
 
 type Order = {
   id: string;
@@ -70,8 +71,8 @@ const OrderCard = ({ item }: { item: Order }) => {
         <Text
           style={[
             styles.statusText,
-            { color: isReceived ? "#289CA5" : "#CE0043" },
-            { borderColor: isReceived ? "#289CA5" : "#CE0043" },
+            { color: isReceived ? colors.primary500 : colors.error500 },
+            { borderColor: isReceived ? colors.primary500 : colors.error500 },
           ]}
         >
           {item.status}
@@ -101,13 +102,13 @@ const OrdersScreen = () => {
 const styles = StyleSheet.create({
   container1: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.white,
     padding: 15,
     paddingTop: Platform.OS === "android" ? 50 : 80,
   },
 
   card1: {
-    backgroundColor: "#DCF1F3",
+    backgroundColor: colors.neutral100,
     borderRadius: 14,
     marginHorizontal: 9,
     marginBottom: 20,
@@ -115,9 +116,9 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     height: 100,
     borderWidth: 1,
-    borderColor: "#BEDBDE",
+    borderColor: colors.borderLight,
 
-    shadowColor: "#DCEBEC",
+    shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 1,
     shadowRadius: 4,
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
   orderNumber: {
     textAlign: "right",
     fontSize: 16,
-    color: "#385052",
+    color: colors.text,
     marginTop: 2,
     fontWeight: "500",
     fontFamily: "IBMPlexSansArabic-Medium",
@@ -153,7 +154,7 @@ const styles = StyleSheet.create({
   },
 
   price: {
-    color: "#289CA5",
+    color: colors.primary500,
     fontWeight: "700",
     fontSize: 14,
     textAlign: "right",
@@ -170,17 +171,16 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "400",
     fontFamily: "IBMPlexSansArabic-Medium",
-    color: "#385052",
+    color: colors.text,
   },
 
   statusText: {
     fontWeight: "700",
     fontSize: 14,
     borderWidth: 1,
-    borderColor: "#289CA5",
     borderRadius: 8,
     fontFamily: "IBMPlexSansArabic-Bold",
-    backgroundColor: "#FFFFFF66",
+    backgroundColor: colors.neutral150,
     padding: 7,
   },
 });

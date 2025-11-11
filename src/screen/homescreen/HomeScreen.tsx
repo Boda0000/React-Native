@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
 
   card1: {
-    backgroundColor: colors.neutral100,
+    backgroundColor: colors.cardLight,
     borderRadius: 14,
     marginHorizontal: 9,
     marginBottom: 20,

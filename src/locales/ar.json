@@ -61,29 +61,26 @@
   "Please Enter The Code": "من فضلك ادخل الكود",
   "register": "التسجيل",
   "First Name": "الاسم الأول*",
-  "first Name":"الاسم الأول",
+  "first Name": "الاسم الأول",
   "LastName": "الاسم الثاني*",
   "lastName": "الاسم الثاني",
-  "Email":"البريد الالكتروني*",
-  "email":"البريد الالكتروني",
-  "Mobile Number":"رقم الجوال*",
-  "mobile number":"رقم الجوال",
-  "Password":"كلمة المرور * ",
-  "confirmpassword":"تأكيد كلمة المرور* ",
-  "Next":"التالي",
-  "Already have an account?":"لديك حساب بالفعل؟  ",
-  "Sign in":"سجل دخولك",
-  "First name required":"الاسم الأول مطلوب",
-  "Last name required":"الاسم الثاني مطلوب",
-  "Invalid email address":"البريد الإلكتروني غير صالح",
-  "Email required":"البريد الإلكتروني مطلوب",
-  "Mobile number required":"رقم الجوال مطلوب",
-  
-
-
-
- 
-
+  "Email": "البريد الالكتروني*",
+  "email": "البريد الالكتروني",
+  "Mobile Number": "رقم الجوال*",
+  "mobile number": "رقم الجوال",
+  "Password": "كلمة المرور * ",
+  "confirmpassword": "تأكيد كلمة المرور* ",
+  "Next": "التالي",
+  "Already have an account?": "لديك حساب بالفعل؟  ",
+  "Sign in": "سجل دخولك",
+  "First name required": "الاسم الأول مطلوب",
+  "Last name required": "الاسم الثاني مطلوب",
+  "Invalid email address": "البريد الإلكتروني غير صالح",
+  "Email required": "البريد الإلكتروني مطلوب",
+  "Mobile number required": "رقم الجوال مطلوب",
+  "ordernumber": "رقم الطلب #",
+  "Received": "تم الاستلام",
+  "Cancelled": "ملغي",
   "Onboarding": {
     "Slides": [
       {

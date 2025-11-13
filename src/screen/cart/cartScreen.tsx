@@ -22,7 +22,7 @@ const CartScreen = () => {
 
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
   const [isPopupVisible, setPopupVisible] = useState(false);
-  const [isPaymentModalVisible, setPaymentModalVisible] = useState(false);
+  const [isPaymentSuccessfullBottomSheetModal, setPaymentSuccessModalVisible] = useState(false);
 
   const increaseQuantity = (id: number) => {
     setCartItems((prev) =>
@@ -87,7 +87,7 @@ const CartScreen = () => {
         <CustomButton
           title={`${i18n.t("Continue payment")} ${total}`}
           iconLeft={<SAR2 width={15} height={15} />}
-          onPress={() => setPaymentModalVisible(true)}
+          onPress={() => setPaymentSuccessModalVisible(true)}
           buttonStyle={styles.checkoutBtn}
           textStyle={styles.checkoutText}
         />
@@ -101,8 +101,8 @@ const CartScreen = () => {
       />
 
       <BottomSheetModal
-        visible={isPaymentModalVisible}
-        onClose={() => setPaymentModalVisible(false)}
+        visible={isPaymentSuccessfullBottomSheetModal}
+        onClose={() => setPaymentSuccessModalVisible(false)}
       />
     </View>
   );

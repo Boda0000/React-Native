@@ -8,6 +8,7 @@ export const palette = {
   neutral600: "#5A6A70",
   neutral700: "#39474B",
   neutral800: "#385052", 
+  neutral900:"rgba(125, 139, 145, 0.5)",
   primary500: "#289CA5", 
   primaryCustom: "#0A84FF", 
   secondary500: "#75B83B",

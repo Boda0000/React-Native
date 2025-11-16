@@ -20,6 +20,7 @@ interface ButtonProps {
   children?: React.ReactNode;
   iconLeft?: React.ReactNode;
   iconRight?: React.ReactNode;
+   icon?: React.ReactNode;
 }
 
 export default function CustomButton({
@@ -32,6 +33,7 @@ export default function CustomButton({
   children,
   iconLeft,
   iconRight,
+  icon,
 }: ButtonProps) {
   return (
     <TouchableOpacity
@@ -56,6 +58,8 @@ export default function CustomButton({
             justifyContent: "center",
           }}
         >
+
+          {icon && <View style={{ marginLeft: 4 }}>{icon}</View>}
           {iconLeft && <View style={{ marginRight: 6 }}>{iconLeft}</View>}
 
           {title && <Text style={[style.buttonText, textStyle]}>{title}</Text>}

@@ -90,7 +90,7 @@ const OrderCard = ({ item }: { item: Order }) => {
 };
 
 const OrdersScreen = () => {
-  const navigation = useNavigation<any>(); 
+  const navigation = useNavigation<any>();
 
   return (
     <View style={styles.container1}>
@@ -105,6 +105,12 @@ const OrdersScreen = () => {
           title={i18n.t("Next")}
           onPress={() => navigation.navigate("CartScreen")}
           buttonStyle={styles.nextButton}
+          textStyle={styles.nextButtonText}
+        />
+        <CustomButton
+          title={i18n.t("Next")}
+          onPress={() => navigation.navigate("ProductsScreen")}
+          buttonStyle={[styles.nextButton, { marginTop: 10 }]} 
           textStyle={styles.nextButtonText}
         />
       </View>

@@ -13,11 +13,15 @@ export const palette = {
   primaryCustom: "#0A84FF", 
   secondary500: "#75B83B",
   secondary100: "#DBEDCC",
+  secondary200:"#C9E1E4",
+  secondry300:"#3dbacb",
   error500: "#CE0043", 
   error100: "#FDECEA",
   cardLight: "#DCF1F3", 
   borderLight: "#BEDBDE", 
+  activetab:"#253536",
   shadow:"#DCEBEC",
+  shadow2:"#ADD1D5",
 } as const;
 
 export const colors = {

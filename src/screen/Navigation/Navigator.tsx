@@ -13,7 +13,7 @@ import NewPasswordScreen from "../ResetPassword/NewPasswordScreen/NewPasswordScr
 import HomeScreen from "../homescreen/HomeScreen";
 import { initLanguage } from "../../locales/i18n";
 import CartScreen from "../cart/cartScreen";
-
+import ProductsScreen from "../ProductsScreen/ProductsScreen";
 
 const Stack = createStackNavigator();
 
@@ -63,7 +63,8 @@ export default function Navigator() {
 
         {/* Main app */}
         <Stack.Screen name="Home" component={HomeScreen} />
-         <Stack.Screen name="CartScreen" component={CartScreen} />
+        <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
+        <Stack.Screen name="CartScreen" component={CartScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

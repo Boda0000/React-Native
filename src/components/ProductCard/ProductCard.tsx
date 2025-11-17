@@ -7,17 +7,25 @@ import { colors } from "src/assets/colors/colors";
 
 interface ProductCardProps {
   item: any;
-  onIncrease: () => void;
-  onDecrease: () => void;
+
   onAddToCart: () => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
   item,
-  onIncrease,
-  onDecrease,
+
   onAddToCart,
 }) => {
+  const [count, setCount] = React.useState(item.count);
+
+  const onIncrease = () => {
+    setCount(count + 1);
+  };
+  const onDecrease = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  };
   return (
     <View style={styles.card}>
       <Image source={item.image} style={styles.image} />
@@ -48,7 +56,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <Ionicons name="add" size={14} color={colors.neutral800} />
           </TouchableOpacity>
 
-          <Text style={styles.count}>{item.count}</Text>
+          <Text style={styles.count}>{count}</Text>
 
           <TouchableOpacity onPress={onDecrease} style={styles.countBtn}>
             <Ionicons name="remove" size={14} color={colors.neutral800} />

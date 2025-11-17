@@ -1,16 +1,9 @@
 import { useState } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  Platform,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, FlatList, StyleSheet, Platform } from "react-native";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { colors } from "src/assets/colors/colors";
 import i18n from "src/locales/i18n";
+import ProductTab from "../../components/ProductTab/ProductTab";
 
 interface Product {
   id: number;
@@ -35,7 +28,7 @@ const ProductsScreen = () => {
       label: i18n.t("fastfood"),
       hasImage: false,
     },
-  ];
+  ] as const;
 
   const juices = [
     {
@@ -87,38 +80,10 @@ const ProductsScreen = () => {
 
   const [products, setProducts] = useState<Product[]>(juices);
 
-  const updateCount = (id: number, delta: number) =>
-    setProducts((prev) =>
-      prev.map((p) =>
-        p.id === id ? { ...p, count: Math.max(0, p.count + delta) } : p
-      )
-    );
-
   const handleTabPress = (key: "juices" | "fast") => {
     setActiveTab(key);
     setProducts(key === "juices" ? juices : fastMeals);
   };
-
-  const renderTab = ({ item }: any) => (
-    <TouchableOpacity
-      onPress={() => handleTabPress(item.key)}
-      style={[styles.tab, activeTab === item.key && styles.activeTab]}
-    >
-      <Text
-        style={[styles.tabText, activeTab === item.key && styles.activeText]}
-      >
-        {item.label}
-      </Text>
-
-      {item.hasImage ? (
-        <View style={styles.circleImage}>
-          <Image source={item.icon} style={styles.imageInsideCircle} />
-        </View>
-      ) : (
-        <View style={styles.circle} />
-      )}
-    </TouchableOpacity>
-  );
 
   return (
     <View style={styles.container}>
@@ -133,7 +98,13 @@ const ProductsScreen = () => {
           paddingBottom: 8,
         }}
         style={{ maxHeight: 80 }}
-        renderItem={renderTab}
+        renderItem={({ item }) => (
+          <ProductTab
+            item={item}
+            activeTab={activeTab}
+            onPress={handleTabPress}
+          />
+        )}
       />
 
       {/* Header */}
@@ -149,8 +120,6 @@ const ProductsScreen = () => {
         renderItem={({ item }) => (
           <ProductCard
             item={item}
-            onIncrease={() => updateCount(item.id, +1)}
-            onDecrease={() => updateCount(item.id, -1)}
             onAddToCart={() => console.log("Add:", item.id)}
           />
         )}
@@ -167,54 +136,6 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: colors.background,
     paddingTop: Platform.OS === "android" ? 50 : 80,
-  },
-
-  tab: {
-    flexDirection: "row",
-    width: 160,
-    height: 50,
-    borderRadius: 23,
-    backgroundColor: colors.cardLight,
-    alignItems: "center",
-    justifyContent: "flex-end",
-    marginLeft: 12,
-    elevation: 3,
-    gap: 10,
-  },
-
-  activeTab: {
-    backgroundColor: colors.neutral800,
-    elevation: 6,
-  },
-
-  tabText: {
-    fontSize: 18,
-    color: colors.neutral800,
-    fontFamily: "IBMPlexSansArabic-Medium",
-  },
-
-  activeText: {
-    color: colors.white,
-    fontFamily: "IBMPlexSansArabic-Bold",
-  },
-
-  circle: {
-    width: 45,
-    height: 45,
-    borderRadius: 22.5,
-    backgroundColor: colors.circle,
-  },
-
-  circleImage: {
-    width: 45,
-    height: 45,
-    borderRadius: 22.5,
-    overflow: "hidden",
-  },
-
-  imageInsideCircle: {
-    width: "100%",
-    height: "100%",
   },
 
   header: {

@@ -22,6 +22,7 @@ export const palette = {
   activetab:"#253536",
   shadow:"#DCEBEC",
   shadow2:"#ADD1D5",
+  circle:"#D9D9D9",
 } as const;
 
 export const colors = {
@@ -52,4 +53,5 @@ export const colors = {
   transparent: "rgba(0,0,0,0)",
   black: "#000000",
   white: "#FFFFFF",
+  
 };

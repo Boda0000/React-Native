@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { colors } from "src/assets/colors/colors";
+import i18n from "src/locales/i18n";
 
 interface Product {
   id: number;
@@ -25,13 +26,13 @@ const ProductsScreen = () => {
   const tabs = [
     {
       key: "juices",
-      label: "العصائر",
+      label: i18n.t("juices"),
       icon: require("../../assets/images/Ellips.png"),
       hasImage: true,
     },
     {
       key: "fast",
-      label: "وجبات سريعة",
+      label: i18n.t("fastfood"),
       hasImage: false,
     },
   ];
@@ -39,28 +40,28 @@ const ProductsScreen = () => {
   const juices = [
     {
       id: 1,
-      title: "عصير فراولة",
+      title: i18n.t("Strawberry juice"),
       price: 16,
       count: 0,
       image: require("../../assets/images/222222.png"),
     },
     {
       id: 2,
-      title: "عصير برتقال",
+      title: i18n.t("Orange juice"),
       price: 18,
       count: 0,
       image: require("../../assets/images/orangejuice.png"),
     },
     {
       id: 3,
-      title: "عصير ليمون",
+      title: i18n.t("Lemon juice"),
       price: 10,
-      count: 2,
+      count: 0,
       image: require("../../assets/images/rfsfs.png"),
     },
     {
       id: 4,
-      title: "عصير كانتالوب",
+      title: i18n.t("Cantaloupe juice"),
       price: 24,
       count: 0,
       image: require("../../assets/images/rrrrrr.png"),
@@ -70,17 +71,17 @@ const ProductsScreen = () => {
   const fastMeals = [
     {
       id: 5,
-      title: "برجر",
+      title: i18n.t("Burger"),
       price: 40,
       count: 0,
       image: require("../../assets/images/burger.jpg"),
     },
     {
       id: 6,
-      title: "بيتزا",
+      title: i18n.t("Pizaa"),
       price: 60,
-      count: 1,
-      image: require("../../assets/images/pizza.jpg "),
+      count: 0,
+      image: require("../../assets/images/pizza.jpg"),
     },
   ];
 
@@ -136,7 +137,7 @@ const ProductsScreen = () => {
       />
 
       {/* Header */}
-      <Text style={styles.header}>المنتجات</Text>
+      <Text style={styles.header}>{i18n.t("Products")}</Text>
 
       {/* Products */}
       <FlatList
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
     width: 160,
     height: 50,
     borderRadius: 23,
-    backgroundColor: "#E8F7FA",
+    backgroundColor: colors.cardLight,
     alignItems: "center",
     justifyContent: "flex-end",
     marginLeft: 12,
@@ -182,18 +183,18 @@ const styles = StyleSheet.create({
   },
 
   activeTab: {
-    backgroundColor: "#274043",
+    backgroundColor: colors.neutral800,
     elevation: 6,
   },
 
   tabText: {
     fontSize: 18,
-    color: "#3C4A4B",
+    color: colors.neutral800,
     fontFamily: "IBMPlexSansArabic-Medium",
   },
 
   activeText: {
-    color: "white",
+    color: colors.white,
     fontFamily: "IBMPlexSansArabic-Bold",
   },
 
@@ -201,7 +202,7 @@ const styles = StyleSheet.create({
     width: 45,
     height: 45,
     borderRadius: 22.5,
-    backgroundColor: "#D9D9D9",
+    backgroundColor: colors.circle,
   },
 
   circleImage: {

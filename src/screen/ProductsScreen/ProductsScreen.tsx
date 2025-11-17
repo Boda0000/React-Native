@@ -6,9 +6,9 @@ import {
   StyleSheet,
   Platform,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import ProductCard from "../../components/ProductCard/ProductCard";
-import CustomButton from "src/components/btn/CustomButton";
 import { colors } from "src/assets/colors/colors";
 
 interface Product {
@@ -22,7 +22,21 @@ interface Product {
 const ProductsScreen = () => {
   const [activeTab, setActiveTab] = useState<"juices" | "fast">("juices");
 
-  const [products, setProducts] = useState<Product[]>([
+  const tabs = [
+    {
+      key: "juices",
+      label: "العصائر",
+      icon: require("../../assets/images/Ellips.png"),
+      hasImage: true,
+    },
+    {
+      key: "fast",
+      label: "وجبات سريعة",
+      hasImage: false,
+    },
+  ];
+
+  const juices = [
     {
       id: 1,
       title: "عصير فراولة",
@@ -51,78 +65,94 @@ const ProductsScreen = () => {
       count: 0,
       image: require("../../assets/images/rrrrrr.png"),
     },
-  ]);
+  ];
 
-  const increase = (id: number) =>
-    setProducts((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, count: p.count + 1 } : p))
-    );
+  const fastMeals = [
+    {
+      id: 5,
+      title: "برجر",
+      price: 40,
+      count: 0,
+      image: require("../../assets/images/burger.jpg"),
+    },
+    {
+      id: 6,
+      title: "بيتزا",
+      price: 60,
+      count: 1,
+      image: require("../../assets/images/pizza.jpg "),
+    },
+  ];
 
-  const decrease = (id: number) =>
+  const [products, setProducts] = useState<Product[]>(juices);
+
+  const updateCount = (id: number, delta: number) =>
     setProducts((prev) =>
       prev.map((p) =>
-        p.id === id && p.count > 0 ? { ...p, count: p.count - 1 } : p
+        p.id === id ? { ...p, count: Math.max(0, p.count + delta) } : p
       )
     );
 
-  const addToCart = (id: number) => {
-    console.log("Added to cart:", id);
+  const handleTabPress = (key: "juices" | "fast") => {
+    setActiveTab(key);
+    setProducts(key === "juices" ? juices : fastMeals);
   };
 
-  const renderItem = ({ item }: { item: Product }) => (
-    <ProductCard
-      item={item}
-      onIncrease={() => increase(item.id)}
-      onDecrease={() => decrease(item.id)}
-      onAddToCart={() => addToCart(item.id)}
-    />
+  const renderTab = ({ item }: any) => (
+    <TouchableOpacity
+      onPress={() => handleTabPress(item.key)}
+      style={[styles.tab, activeTab === item.key && styles.activeTab]}
+    >
+      <Text
+        style={[styles.tabText, activeTab === item.key && styles.activeText]}
+      >
+        {item.label}
+      </Text>
+
+      {item.hasImage ? (
+        <View style={styles.circleImage}>
+          <Image source={item.icon} style={styles.imageInsideCircle} />
+        </View>
+      ) : (
+        <View style={styles.circle} />
+      )}
+    </TouchableOpacity>
   );
 
   return (
     <View style={styles.container}>
       {/* Tabs */}
-      <View style={styles.tabs}>
-        <CustomButton
-          title="العصائر"
-          iconRight={
-            <Image
-              source={require("../../assets/images/Ellips.png")}
-              style={{ width: 20, height: 20 }}
-            />
-          }
-          onPress={() => setActiveTab("juices")}
-          buttonStyle={[
-            styles.tab,
-            activeTab === "juices" ? styles.activeTab : undefined,
-          ]}
-          textStyle={[
-            styles.tabText,
-            activeTab === "juices" ? styles.activeText : undefined,
-          ]}
-        />
-        <CustomButton
-          title="وجبات سريعة"
-          onPress={() => setActiveTab("fast")}
-          buttonStyle={[
-            styles.tab,
-            activeTab === "fast" ? styles.activeTab : undefined,
-          ]}
-          textStyle={[
-            styles.tabText,
-            activeTab === "fast" ? styles.activeText : undefined,
-          ]}
-        />
-      </View>
+      <FlatList
+        data={tabs}
+        keyExtractor={(item) => item.key}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{
+          flexDirection: "row-reverse",
+          paddingBottom: 8,
+        }}
+        style={{ maxHeight: 80 }}
+        renderItem={renderTab}
+      />
 
+      {/* Header */}
       <Text style={styles.header}>المنتجات</Text>
 
+      {/* Products */}
       <FlatList
         data={products}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={renderItem}
         numColumns={2}
         columnWrapperStyle={{ justifyContent: "space-between" }}
         contentContainerStyle={{ paddingTop: 10 }}
+        renderItem={({ item }) => (
+          <ProductCard
+            item={item}
+            onIncrease={() => updateCount(item.id, +1)}
+            onDecrease={() => updateCount(item.id, -1)}
+            onAddToCart={() => console.log("Add:", item.id)}
+          />
+        )}
       />
     </View>
   );
@@ -137,42 +167,59 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     paddingTop: Platform.OS === "android" ? 50 : 80,
   },
-  tabs: {
-    flexDirection: "row-reverse",
-    marginBottom: 15,
-  },
+
   tab: {
-    paddingVertical: 8,
-    paddingHorizontal: 20,
-    borderRadius: 20,
-    backgroundColor: colors.cardLight,
-    marginRight: 10,
+    flexDirection: "row",
+    width: 160,
+    height: 50,
+    borderRadius: 23,
+    backgroundColor: "#E8F7FA",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    marginLeft: 12,
+    elevation: 3,
+    gap: 10,
   },
+
   activeTab: {
-    backgroundColor: colors.activetab,
-    shadowColor: colors.shadow2,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
-    elevation: 4,
+    backgroundColor: "#274043",
+    elevation: 6,
   },
+
   tabText: {
-    fontSize: 16,
-    color: colors.neutral700,
-    fontWeight: "500",
+    fontSize: 18,
+    color: "#3C4A4B",
     fontFamily: "IBMPlexSansArabic-Medium",
   },
+
   activeText: {
-    color: colors.cardLight,
-    fontWeight: "700",
+    color: "white",
     fontFamily: "IBMPlexSansArabic-Bold",
-    fontSize: 16,
   },
+
+  circle: {
+    width: 45,
+    height: 45,
+    borderRadius: 22.5,
+    backgroundColor: "#D9D9D9",
+  },
+
+  circleImage: {
+    width: 45,
+    height: 45,
+    borderRadius: 22.5,
+    overflow: "hidden",
+  },
+
+  imageInsideCircle: {
+    width: "100%",
+    height: "100%",
+  },
+
   header: {
     textAlign: "right",
     fontSize: 18,
     fontWeight: "700",
-    marginBottom: 10,
     color: colors.neutral800,
     fontFamily: "IBMPlexSansArabic-Bold",
   },

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import SAR from "../../assets/icons/SAR.svg";
 import CustomButton from "../btn/CustomButton";
@@ -22,7 +22,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
     <View style={styles.card}>
       <Image source={item.image} style={styles.image} />
 
-      {/* Title + Price on same row */}
       <View style={styles.contentRow}>
         <Text style={styles.title}>{item.title}</Text>
 
@@ -32,7 +31,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </View>
       </View>
 
-      {/* Controls with border top */}
       <View style={styles.controls}>
         <CustomButton
           onPress={onAddToCart}
@@ -46,19 +44,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
         />
 
         <View style={styles.counter}>
-          <CustomButton
-            onPress={onIncrease}
-            buttonStyle={styles.countBtn}
-            icon={<Ionicons name="add" size={10} color={colors.neutral800} />}
-          />
+          <TouchableOpacity onPress={onIncrease} style={styles.countBtn}>
+            <Ionicons name="add" size={14} color={colors.neutral800} />
+          </TouchableOpacity>
+
           <Text style={styles.count}>{item.count}</Text>
-          <CustomButton
-            onPress={onDecrease}
-            buttonStyle={styles.countBtn}
-            icon={
-              <Ionicons name="remove" size={10} color={colors.neutral800} />
-            }
-          />
+
+          <TouchableOpacity onPress={onDecrease} style={styles.countBtn}>
+            <Ionicons name="remove" size={14} color={colors.neutral800} />
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -143,21 +137,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: colors.neutral150,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
+    padding: 4,
     borderRadius: 4,
   },
 
   countBtn: {
     backgroundColor: colors.neutral100,
-    padding: 4,
+    width: 24,
+    height: 24,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 2,
   },
 
   count: {
-    marginHorizontal: 8,
+    marginHorizontal: 12,
     fontSize: 16,
     fontWeight: "600",
     textAlign: "center",

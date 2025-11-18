@@ -1,10 +1,13 @@
-import { View, Text, FlatList, StyleSheet, Platform } from "react-native";
+import { View, Text, FlatList, StyleSheet, Platform, TouchableOpacity } from "react-native";
 import SAR from "../../assets/icons/SAR.svg";
 import Calender from "../../assets/icons/Calender.svg";
 import i18n from "src/locales/i18n";
 import { colors } from "../../assets/colors/colors";
 import CustomButton from "../../components/btn/CustomButton";
 import { useNavigation } from "@react-navigation/native";
+import SidebarModal from "src/components/modal/SidebarModal";
+import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
 
 type Order = {
   id: string;
@@ -52,48 +55,62 @@ const orders: Order[] = [
   },
 ];
 
-const OrderCard = ({ item }: { item: Order }) => {
-  const isReceived = item.status === i18n.t("Received");
-
-  return (
-    <View style={styles.card1}>
-      <View style={styles.h1}>
-        <Text style={styles.orderNumber}>
-          {i18n.t("ordernumber")}
-          {item.ordernumber}
-        </Text>
-
-        <View style={styles.priceContainer}>
-          <Text style={styles.price}>{item.price}</Text>
-          <SAR width={20} height={17} />
-        </View>
-      </View>
-
-      <View style={styles.h2}>
-        <Text
-          style={[
-            styles.statusText,
-            { color: isReceived ? colors.primary500 : colors.error500 },
-            { borderColor: isReceived ? colors.primary500 : colors.error500 },
-          ]}
-        >
-          {item.status}
-        </Text>
-
-        <View style={styles.dateContainer}>
-          <Calender width={13} height={13} />
-          <Text style={styles.date}>{item.date}</Text>
-        </View>
-      </View>
-    </View>
-  );
-};
-
 const OrdersScreen = () => {
   const navigation = useNavigation<any>();
+  const [sidebarVisible, setSidebarVisible] = useState(false);
+
+  const OrderCard = ({ item }: { item: Order }) => {
+    const isReceived = item.status === i18n.t("Received");
+
+    return (
+      <View style={styles.card1}>
+        <View style={styles.h1}>
+          <Text style={styles.orderNumber}>
+            {i18n.t("ordernumber")}
+            {item.ordernumber}
+          </Text>
+
+          <View style={styles.priceContainer}>
+            <Text style={styles.price}>{item.price}</Text>
+            <SAR width={20} height={17} />
+          </View>
+        </View>
+
+        <View style={styles.h2}>
+          <Text
+            style={[
+              styles.statusText,
+              { color: isReceived ? colors.primary500 : colors.error500 },
+              {
+                borderColor: isReceived
+                  ? colors.primary500
+                  : colors.error500,
+              },
+            ]}
+          >
+            {item.status}
+          </Text>
+
+          <View style={styles.dateContainer}>
+            <Calender width={13} height={13} />
+            <Text style={styles.date}>{item.date}</Text>
+          </View>
+        </View>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container1}>
+
+      {/* زر القائمة */}
+      <TouchableOpacity
+        onPress={() => setSidebarVisible(true)}
+        style={{ position: "absolute", top: Platform.OS === "android" ? 55 : 90, right: 20, zIndex: 10 }}
+      >
+        <Ionicons name="menu" size={28} color={colors.neutral800} />
+      </TouchableOpacity>
+
       <FlatList
         data={orders}
         keyExtractor={(item) => item.id}
@@ -110,10 +127,13 @@ const OrdersScreen = () => {
         <CustomButton
           title={i18n.t("Next")}
           onPress={() => navigation.navigate("ProductsScreen")}
-          buttonStyle={[styles.nextButton, { marginTop: 10 }]} 
+          buttonStyle={[styles.nextButton, { marginTop: 10 }]}
           textStyle={styles.nextButtonText}
         />
       </View>
+
+      {/* ✨ Sidebar */}
+      <SidebarModal visible={sidebarVisible} onClose={() => setSidebarVisible(false)} />
     </View>
   );
 };

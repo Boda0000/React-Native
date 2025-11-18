@@ -98,6 +98,11 @@
   "Burger": "Burger",
   "Pizaa": "Pizaa",
   "Products": "Products",
+  "Menu":"Menu",
+   "Notifications": "Notifications",
+   "Change language":"Change language",
+    "Log out": "Log out",
+     "Delete account": "Delete account",
   "Onboarding": {
     "Slides": [
       {

@@ -1,3 +1,5 @@
+import { overlay } from "reactotron-react-native";
+
 export const palette = {
   neutral100: "#FFFFFF",
   neutral150:"#FFFFFF66",
@@ -23,6 +25,9 @@ export const palette = {
   shadow:"#DCEBEC",
   shadow2:"#ADD1D5",
   circle:"#D9D9D9",
+  overlay:"#000D33",
+  line:"#E5E5E5",
+  sidebardelete:"#6C798D",
 } as const;
 
 export const colors = {

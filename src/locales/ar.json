@@ -98,6 +98,11 @@
   "Burger": "برجر",
   "Pizaa": "بيتزا",
   "Products": "المنتجات",
+  "Menu":"القائمة",
+  "Notifications":"الإشعارات",
+  "Change language":"تغيير اللغة",
+  "Log out":"تسجيل الخروج",
+  "Delete account":"حذف الحساب",
   "Onboarding": {
     "Slides": [
       {

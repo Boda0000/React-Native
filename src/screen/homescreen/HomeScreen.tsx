@@ -1,4 +1,11 @@
-import { View, Text, FlatList, StyleSheet, Platform, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+} from "react-native";
 import SAR from "../../assets/icons/SAR.svg";
 import Calender from "../../assets/icons/Calender.svg";
 import i18n from "src/locales/i18n";
@@ -82,9 +89,7 @@ const OrdersScreen = () => {
               styles.statusText,
               { color: isReceived ? colors.primary500 : colors.error500 },
               {
-                borderColor: isReceived
-                  ? colors.primary500
-                  : colors.error500,
+                borderColor: isReceived ? colors.primary500 : colors.error500,
               },
             ]}
           >
@@ -102,11 +107,14 @@ const OrdersScreen = () => {
 
   return (
     <View style={styles.container1}>
-
-      {/* زر القائمة */}
       <TouchableOpacity
         onPress={() => setSidebarVisible(true)}
-        style={{ position: "absolute", top: Platform.OS === "android" ? 55 : 90, right: 20, zIndex: 10 }}
+        style={{
+          position: "absolute",
+          top: Platform.OS === "android" ? 55 : 90,
+          right: 20,
+          zIndex: 10,
+        }}
       >
         <Ionicons name="menu" size={28} color={colors.neutral800} />
       </TouchableOpacity>
@@ -115,6 +123,9 @@ const OrdersScreen = () => {
         data={orders}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <OrderCard item={item} />}
+        contentContainerStyle={{
+          paddingTop: Platform.OS === "android" ? 100 : 60,
+        }}
       />
 
       <View style={styles.footer}>
@@ -132,8 +143,10 @@ const OrdersScreen = () => {
         />
       </View>
 
-      {/* ✨ Sidebar */}
-      <SidebarModal visible={sidebarVisible} onClose={() => setSidebarVisible(false)} />
+      <SidebarModal
+        visible={sidebarVisible}
+        onClose={() => setSidebarVisible(false)}
+      />
     </View>
   );
 };

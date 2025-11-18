@@ -16,7 +16,7 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/Alexandria-Bold.ttf"]
+        "fonts": ["./src/assets/fonts/Alexandria-Bold.ttf"]
         }
       ],
       [

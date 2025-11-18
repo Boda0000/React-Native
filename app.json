@@ -12,14 +12,14 @@
       "resizeMode": "contain"
     },
     "plugins": [
-  "expo-localization",
-  [
-    "expo-font",
-    {
-      "fonts": ["./assets/fonts/Alexandria-Bold.ttf"]
-    }
-  ],
-  [
+      "expo-localization",
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/Alexandria-Bold.ttf"]
+        }
+      ],
+      [
         "expo-build-properties",
         {
           "android": {
@@ -28,7 +28,11 @@
             "compileSdkVersion": 35
           },
           "ios": {
-            "deploymentTarget": "15.1"
+            "deploymentTarget": "15.1",
+            "bundleIdentifier": "com.mehaneya.myapp",
+            "buildNumber": "1.0.0",
+            "supportsTablet": true,
+            "infoPlist": {}
           }
         }
       ]
@@ -62,7 +66,6 @@
           ],
           "category": ["BROWSABLE", "DEFAULT"]
         }
-       
       ],
       "userInterfaceStyle": "dark",
       "softwareKeyboardLayoutMode": "pan",
@@ -76,7 +79,8 @@
       "infoPlist": {
         "NSCameraUsageDescription": "We need camera access to upload your profile photo.",
         "NSPhotoLibraryUsageDescription": "We need photo library access to select images.",
-        "NSLocationWhenInUseUsageDescription": "We use your location to improve your experience."
+        "NSLocationWhenInUseUsageDescription": "We use your location to improve your experience.",
+        "ITSAppUsesNonExemptEncryption": false
       },
       "runtimeVersion": {
         "policy": "appVersion"

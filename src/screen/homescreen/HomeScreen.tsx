@@ -128,7 +128,7 @@ const OrdersScreen = () => {
         }}
       />
 
-      <View style={styles.footer}>
+      {/* <View style={styles.footer}>
         <CustomButton
           title={i18n.t("Next")}
           onPress={() => navigation.navigate("CartScreen")}
@@ -141,7 +141,7 @@ const OrdersScreen = () => {
           buttonStyle={[styles.nextButton, { marginTop: 10 }]}
           textStyle={styles.nextButtonText}
         />
-      </View>
+      </View> */}
 
       <SidebarModal
         visible={sidebarVisible}
@@ -236,25 +236,25 @@ const styles = StyleSheet.create({
     padding: 7,
   },
 
-  footer: {
-    position: "absolute",
-    bottom: 15,
-    left: 15,
-    right: 15,
-  },
+  // footer: {
+  //   position: "absolute",
+  //   bottom: 15,
+  //   left: 15,
+  //   right: 15,
+  // },
 
-  nextButton: {
-    backgroundColor: "#315C63",
-    width: "100%",
-    borderRadius: 4,
-    height: 50,
-  },
-  nextButtonText: {
-    fontSize: 18,
-    fontWeight: "500",
-    color: "#fff",
-    fontFamily: "Kalligraaf Arabic Medium",
-  },
+  // nextButton: {
+  //   backgroundColor: "#315C63",
+  //   width: "100%",
+  //   borderRadius: 4,
+  //   height: 50,
+  // },
+  // nextButtonText: {
+  //   fontSize: 18,
+  //   fontWeight: "500",
+  //   color: "#fff",
+  //   fontFamily: "Kalligraaf Arabic Medium",
+  // },
 });
 
 export default OrdersScreen;

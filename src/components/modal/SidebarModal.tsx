@@ -5,6 +5,7 @@ import { colors } from "src/assets/colors/colors";
 import i18n from "src/locales/i18n";
 import { useNavigation } from "@react-navigation/native";
 import CustomButton from "src/components/btn/CustomButton";
+import { useLanguage } from "../../Hooks/useLanguage";
 
 interface SidebarProps {
   visible: boolean;
@@ -12,20 +13,24 @@ interface SidebarProps {
 }
 
 const SidebarModal: React.FC<SidebarProps> = ({ visible, onClose }) => {
+  const { lang, toggleLanguage } = useLanguage();
   const navigation = useNavigation<any>();
   const MenuItem = ({
     icon,
     text,
     screen,
+    action,
   }: {
     icon: string;
     text: string;
     screen?: string;
+    action?: () => void;
   }) => (
     <CustomButton
       onPress={() => {
         onClose(); 
-        if (screen) navigation.navigate(screen);
+        if (screen) navigation.navigate(screen); 
+        if (action) action(); 
       }}
       buttonStyle={styles.item}
       textStyle={styles.itemText}
@@ -82,7 +87,13 @@ const SidebarModal: React.FC<SidebarProps> = ({ visible, onClose }) => {
               icon="notifications-outline"
               text={i18n.t("Notifications")}
             />
-            <MenuItem icon="globe-outline" text={i18n.t("Change language")} />
+
+            <MenuItem
+              icon="globe-outline"
+              text={lang === "en" ? "العربية" : "English"}
+              action={toggleLanguage}
+            />
+
             <MenuItem icon="cart" text={i18n.t("Cart")} screen="CartScreen" />
             <MenuItem
               icon="list-circle-outline"

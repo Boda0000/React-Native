@@ -8,7 +8,7 @@ import { colors } from "src/assets/colors/colors";
 import i18n from "src/locales/i18n";
 
 const ProductsScreen = () => {
-  const { data: categories} = useCategories();
+  const { data: categories } = useCategories();
 
   const tabs =
     categories?.map((cat) => ({
@@ -35,10 +35,7 @@ const ProductsScreen = () => {
     data: products,
     isLoading: productsLoading,
     error,
-  } = useProducts(
-    "https://api.demo.ouredu.net/canteen/api/v1/ar/products/student/products",
-    activeTab?.endpoint
-  );
+  } = useProducts(activeTab?.endpoint);
 
   const handleTabPress = (key: string) => {
     const tab = tabs.find((t) => t.key === key);

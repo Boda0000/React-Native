@@ -14,7 +14,7 @@ const ProductsScreen = () => {
     categories?.map((cat) => ({
       key: cat.id,
       label: cat.name,
-      endpoint: cat.id,
+      endpoint: cat.action_endpoint,
       image_url: cat.image_url,
     })) || [];
 
@@ -22,10 +22,11 @@ const ProductsScreen = () => {
 
   useEffect(() => {
     if (categories && categories.length > 0 && !activeTab) {
+      console.log("Setting default active tab to:", categories[0].name);
       setActiveTab({
         key: categories[0].id,
         label: categories[0].name,
-        endpoint: categories[0].id,
+        endpoint: categories[0].action_endpoint,
         hasImage: true,
       });
     }

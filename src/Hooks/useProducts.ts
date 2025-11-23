@@ -3,8 +3,8 @@ import { MainData, Product, Map } from "../models/ProductModel";
 
 const BASE_URL = "https://api.demo.ouredu.net/canteen/api/v1/ar/products/student/products";
 
-async function fetchProducts(CategoryId: string): Promise<Product[]> {
-  const url = `${BASE_URL}/${CategoryId}`; 
+async function fetchProducts(url: string): Promise<Product[]> {
+  console.log("Fetching products from:", url);
 
   const response = await fetch(url, {
     headers: {

@@ -21,6 +21,14 @@ export interface Category {
   image_url: string;
 }
 
+export interface Action {
+  endpoint_url: string;
+  method: string;
+  label: string;
+  bg_color: string;
+  key: string;
+}
+
 export class Map {
   static parseCategories(rawResponse: any): Category[] {
     const rawItems = rawResponse.included || [];

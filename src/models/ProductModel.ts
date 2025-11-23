@@ -10,13 +10,13 @@ export interface RawItem {
   relationships?: any;
 }
 
-  export interface Action {
-    endpoint: string;
-    method: string; 
-    label: string;
-    bg_color: string;
-    key: string;
-  }
+export interface Action {
+  endpoint: string;
+  method: string;
+  label: string;
+  bg_color: string;
+  key: string;
+}
 export interface Product {
   id: string;
   type: string;

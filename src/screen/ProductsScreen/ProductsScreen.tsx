@@ -8,7 +8,7 @@ import { colors } from "src/assets/colors/colors";
 import i18n from "src/locales/i18n";
 
 const ProductsScreen = () => {
-  const { data: categories, isLoading: categoriesLoading } = useCategories();
+  const { data: categories} = useCategories();
 
   const tabs =
     categories?.map((cat) => ({

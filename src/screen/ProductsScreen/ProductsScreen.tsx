@@ -1,88 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View, Text, FlatList, StyleSheet, Platform } from "react-native";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import ProductTab from "../../components/ProductTab/ProductTab";
+import { useProducts } from "../../Hooks/useProducts";
+import { useCategories } from "src/Hooks/useCategory";
 import { colors } from "src/assets/colors/colors";
 import i18n from "src/locales/i18n";
-import ProductTab from "../../components/ProductTab/ProductTab";
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  count: number;
-  image: any;
-}
 
 const ProductsScreen = () => {
-  const [activeTab, setActiveTab] = useState<"juices" | "fast">("juices");
+  const { data: categories, isLoading: categoriesLoading } = useCategories();
 
-  const tabs = [
-    {
-      key: "juices",
-      label: i18n.t("juices"),
-      icon: require("../../assets/images/Ellips.png"),
-      hasImage: true,
-    },
-    {
-      key: "fast",
-      label: i18n.t("fastfood"),
-      hasImage: false,
-    },
-  ] as const;
+  const tabs =
+    categories?.map((cat) => ({
+      key: cat.id,
+      label: cat.name,
+      endpoint: cat.id,
+      image_url: cat.image_url,
+    })) || [];
 
-  const juices = [
-    {
-      id: 1,
-      title: i18n.t("Strawberry juice"),
-      price: 16,
-      count: 0,
-      image: require("../../assets/images/222222.png"),
-    },
-    {
-      id: 2,
-      title: i18n.t("Orange juice"),
-      price: 18,
-      count: 0,
-      image: require("../../assets/images/orangejuice.png"),
-    },
-    {
-      id: 3,
-      title: i18n.t("Lemon juice"),
-      price: 10,
-      count: 0,
-      image: require("../../assets/images/rfsfs.png"),
-    },
-    {
-      id: 4,
-      title: i18n.t("Cantaloupe juice"),
-      price: 24,
-      count: 0,
-      image: require("../../assets/images/rrrrrr.png"),
-    },
-  ];
+  const [activeTab, setActiveTab] = useState<any>(null);
 
-  const fastMeals = [
-    {
-      id: 5,
-      title: i18n.t("Burger"),
-      price: 40,
-      count: 0,
-      image: require("../../assets/images/burger.jpg"),
-    },
-    {
-      id: 6,
-      title: i18n.t("Pizaa"),
-      price: 60,
-      count: 0,
-      image: require("../../assets/images/pizza.jpg"),
-    },
-  ];
+  useEffect(() => {
+    if (categories && categories.length > 0 && !activeTab) {
+      setActiveTab({
+        key: categories[0].id,
+        label: categories[0].name,
+        endpoint: categories[0].id,
+        hasImage: true,
+      });
+    }
+  }, [categories, activeTab]);
 
-  const [products, setProducts] = useState<Product[]>(juices);
+  const {
+    data: products,
+    isLoading: productsLoading,
+    error,
+  } = useProducts(
+    "https://api.demo.ouredu.net/canteen/api/v1/ar/products/student/products",
+    activeTab?.endpoint
+  );
 
-  const handleTabPress = (key: "juices" | "fast") => {
-    setActiveTab(key);
-    setProducts(key === "juices" ? juices : fastMeals);
+  const handleTabPress = (key: string) => {
+    const tab = tabs.find((t) => t.key === key);
+    if (tab) setActiveTab(tab);
   };
 
   return (
@@ -100,8 +60,14 @@ const ProductsScreen = () => {
         style={{ maxHeight: 80 }}
         renderItem={({ item }) => (
           <ProductTab
-            item={item}
-            activeTab={activeTab}
+            activeTab={activeTab?.key}
+            item={{
+              key: item.key,
+              label: item.label,
+              endpoint: item.endpoint,
+              hasImage: !!item.image_url,
+              icon: item.image_url,
+            }}
             onPress={handleTabPress}
           />
         )}
@@ -111,19 +77,24 @@ const ProductsScreen = () => {
       <Text style={styles.header}>{i18n.t("Products")}</Text>
 
       {/* Products */}
-      <FlatList
-        data={products}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={2}
-        columnWrapperStyle={{ justifyContent: "space-between" }}
-        contentContainerStyle={{ paddingTop: 10 }}
-        renderItem={({ item }) => (
-          <ProductCard
-            item={item}
-            onAddToCart={() => console.log("Add:", item.id)}
-          />
-        )}
-      />
+      {!productsLoading && !error && products && (
+        <FlatList
+          data={products}
+          keyExtractor={(item) => item.id}
+          numColumns={2}
+          columnWrapperStyle={{
+            justifyContent: "space-between",
+            flexDirection: "row-reverse",
+          }}
+          contentContainerStyle={{ paddingTop: 10 }}
+          renderItem={({ item }) => (
+            <ProductCard
+              item={item}
+              onAddToCart={() => console.log("Add to cart:", item.id)}
+            />
+          )}
+        />
+      )}
     </View>
   );
 };
@@ -137,7 +108,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     paddingTop: Platform.OS === "android" ? 50 : 80,
   },
-
   header: {
     textAlign: "right",
     fontSize: 18,

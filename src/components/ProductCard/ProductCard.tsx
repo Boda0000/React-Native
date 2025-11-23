@@ -4,9 +4,10 @@ import { Ionicons } from "@expo/vector-icons";
 import SAR from "../../assets/icons/SAR.svg";
 import CustomButton from "../btn/CustomButton";
 import { colors } from "src/assets/colors/colors";
+import { Product } from "src/models/ProductModel";
 
 interface ProductCardProps {
-  item: any;
+  item: Product;
 
   onAddToCart: () => void;
 }
@@ -16,7 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   onAddToCart,
 }) => {
-  const [count, setCount] = React.useState(item.count);
+  const [count, setCount] = React.useState(item.quantity);
 
   const onIncrease = () => {
     setCount(count + 1);
@@ -28,10 +29,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
   return (
     <View style={styles.card}>
-      <Image source={item.image} style={styles.image} />
+      <Image
+        source={
+          typeof item.image_url === "string"
+            ? { uri: item.image_url }
+            : item.image_url
+        }
+        style={styles.image}
+      />
 
       <View style={styles.contentRow}>
-        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.title}>{item.name}</Text>
 
         <View style={styles.row}>
           <SAR width={15} height={15} />

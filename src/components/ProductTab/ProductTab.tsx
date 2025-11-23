@@ -3,16 +3,17 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { colors } from "src/assets/colors/colors";
 
 interface TabItem {
-  key: "juices" | "fast";
+  key: string;
   label: string;
   icon?: any;
   hasImage: boolean;
+  endpoint?: string;
 }
 
 interface ProductTabProps {
   item: TabItem;
-  activeTab: "juices" | "fast";
-  onPress: (key: "juices" | "fast") => void;
+  activeTab: string | null;
+  onPress: (key: string) => void;
 }
 
 const ProductTab: React.FC<ProductTabProps> = ({
@@ -20,6 +21,7 @@ const ProductTab: React.FC<ProductTabProps> = ({
   activeTab,
   onPress,
 }) => {
+  item.label;
   return (
     <TouchableOpacity
       onPress={() => onPress(item.key)}
@@ -33,7 +35,7 @@ const ProductTab: React.FC<ProductTabProps> = ({
 
       {item.hasImage ? (
         <View style={styles.circleImage}>
-          <Image source={item.icon} style={styles.imageInsideCircle} />
+          <Image source={{ uri: item.icon }} style={styles.imageInsideCircle} />
         </View>
       ) : (
         <View style={styles.circle} />

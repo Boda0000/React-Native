@@ -17,16 +17,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   onAddToCart,
 }) => {
-  const [count, setCount] = React.useState(item.quantity);
+  const initialCount =
+    item.quantity != null ? parseInt(item.quantity as any) : 0;
+  const [count, setCount] = React.useState(initialCount);
 
   const onIncrease = () => {
-    setCount(count + 1);
+    setCount((prev) => prev + 1);
   };
   const onDecrease = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
+    setCount((prev) => (prev > 0 ? prev - 1 : 0));
   };
+
   return (
     <View style={styles.card}>
       <Image

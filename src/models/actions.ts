@@ -4,4 +4,5 @@ export interface Action {
   label: string;
   bg_color: string;
   key: string;
+  data:string;
 }

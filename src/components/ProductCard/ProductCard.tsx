@@ -31,9 +31,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
     <View style={styles.card}>
       <Image
         source={
-          typeof item.image_url === "string"
-            ? { uri: item.image_url }
-            : item.image_url
+          typeof item.image.url === "string"
+            ? { uri: item.image.url }
+            : item.image.url
         }
         style={styles.image}
       />

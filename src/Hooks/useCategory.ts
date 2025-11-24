@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { MainData, Map, Category } from "../models/categoryModel";
+import { Category } from "../models/categoryModel";
+import { deserializeData } from "./deseralization";
 
-async function fetchCategories(): Promise<Category[]> {
+async function fetchCategories(): Promise<any> {
   const url =
     "https://api.demo.ouredu.net/canteen/api/v1/ar/categories/student/list";
-
-  console.log("Fetching categories from:", url);
 
   const response = await fetch(url, {
     method: "GET",
@@ -19,15 +18,11 @@ async function fetchCategories(): Promise<Category[]> {
     },
   });
 
-  console.log("Categories Response Status:", response.status);
-
   if (!response.ok) {
     throw new Error("Failed to fetch categories");
   }
 
-  const jsonData: MainData = await response.json();
-
-  const categories = Map.parseCategories(jsonData);
+  const categories = await deserializeData(response);
 
   return categories;
 }

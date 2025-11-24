@@ -11,22 +11,24 @@ const ProductsScreen = () => {
   const { data: categories } = useCategories();
 
   const tabs =
-    categories?.map((cat) => ({
+    categories?.map((cat) => (
+      console.log("Mapping category to tab:", cat.actions[0].endpoint_url),
+      {
       key: cat.id,
       label: cat.name,
-      endpoint: cat.action_endpoint,
-      image_url: cat.image_url,
+      endpoint: cat.actions[0]?.endpoint_url,
+      image_url: cat.image.url,
     })) || [];
 
   const [activeTab, setActiveTab] = useState<any>(null);
 
   useEffect(() => {
     if (categories && categories.length > 0 && !activeTab) {
-      console.log("Setting default active tab to:", categories[0].name);
+      console.log("Setting default active tab to:", categories[0].actions[0].endpoint_url);
       setActiveTab({
         key: categories[0].id,
         label: categories[0].name,
-        endpoint: categories[0].action_endpoint,
+        endpoint: categories[0].actions[0]?.endpoint_url,
         hasImage: true,
       });
     }
@@ -40,6 +42,7 @@ const ProductsScreen = () => {
 
   const handleTabPress = (key: string) => {
     const tab = tabs.find((t) => t.key === key);
+    console.log("Tab pressed:", key, tab);
     if (tab) setActiveTab(tab);
   };
 

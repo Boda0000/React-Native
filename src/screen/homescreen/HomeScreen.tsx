@@ -14,30 +14,82 @@ import { colors } from "src/assets/colors/colors";
 import Quiz from "../../assets/icons/quiz.svg";
 import Leftarrow from "../../assets/icons/leftarrow.svg";
 import Rightarrow from "../../assets/icons/rightarrow.svg";
+import TrueFalseSelector from "../../components/TrueFalseSelector/TrueFalseSelector";
 
 export default function Counter() {
-  const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+  const numbers = [
+    {
+      id: 1,
+      status: "success",
+      value: true,
+      type: "complete",
+    },
+    {
+      id: 2,
+      status: "pending",
+      value: false,
+      type: "true_false",
+    },
+    {
+      id: 3,
+      status: "pending",
+      value: true,
+      type: "complete",
+    },
 
-  const [currentnumber, setcurrentnumber] = useState(0);
-  const [completed, setCompleted] = useState<number[]>([]);
-  const [wrong, setWrong] = useState<number[]>([]);
+    {
+      id: 4,
+      status: "pending",
+      value: false,
+      type: "true_false",
+    },
+
+    {
+      id: 5,
+      status: "pending",
+      value: true,
+      type: "complete",
+    },
+    {
+      id: 6,
+      status: "pending",
+      value: true,
+      type: "true_false",
+    },
+    {
+      id: 7,
+      status: "pending",
+      value: false,
+      type: "true_false",
+    },
+    {
+      id: 8,
+      status: "pending",
+      value: true,
+      type: "complete",
+    },
+  ];
+
+  const [numbersValue, setNumbersValue] = useState(numbers);
+  const [currentNumber, setCurrentNumber] = useState(0);
 
   function onPressNumber(index: number) {
-    if (!completed.includes(currentnumber)) {
-      setCompleted((prev) => [...prev, currentnumber]);
-    }
+    setNumbersValue((prev) =>
+      prev.map((item, i) =>
+        i === currentNumber
+          ? { ...item, status: item.value ? "success" : "wrong" }
+          : item
+      )
+    );
 
-    if (!completed && !wrong.includes(currentnumber)) {
-      setWrong((prev) => [...prev, currentnumber]);
-    }
-    setcurrentnumber(index);
+    setCurrentNumber(index);
   }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={{ marginVertical: 20 }}>
         <FlatList
-          data={numbers}
+          data={numbersValue}
           horizontal
           contentContainerStyle={styles.counterRow}
           renderItem={({ item, index }) => (
@@ -45,12 +97,12 @@ export default function Counter() {
               onPress={() => onPressNumber(index)}
               style={[
                 styles.numbers,
-                completed.includes(index) && styles.correct,
-                wrong.includes(index) && styles.wrong,
-                index === currentnumber && styles.current,
+                item.status === "success" && styles.correct,
+                item.status === "wrong" && styles.wrong,
+                index === currentNumber && styles.current,
               ]}
             >
-              <Text style={styles.circleText}>{item}</Text>
+              <Text style={styles.circleText}>{item.id}</Text>
             </TouchableOpacity>
           )}
         />
@@ -67,11 +119,24 @@ export default function Counter() {
         source={require("../../assets/images/quiz.png")}
       />
 
-      <TextInput
-        style={styles.input}
-        placeholder="اكتب اجابتك هنا..."
-        placeholderTextColor="#6C798D"
-      />
+      {numbersValue[currentNumber].type === "complete" ? (
+        <TextInput
+          style={styles.input}
+          placeholder="اكتب اجابتك هنا..."
+          placeholderTextColor="#6C798D"
+        />
+      ) : (
+        <TrueFalseSelector
+          value={numbersValue[currentNumber].value}
+          onChange={(val) => {
+            setNumbersValue((prev) =>
+              prev.map((item, i) =>
+                i === currentNumber ? { ...item, value: val } : item
+              )
+            );
+          }}
+        />
+      )}
 
       <View style={styles.buttonsRow}>
         <TouchableOpacity style={styles.button}>
@@ -187,7 +252,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#082375",
     fontWeight: 700,
-    fontSize:14,
-    fontFamily:"IBMPlexSansArabic-Bold",
+    fontSize: 14,
+    fontFamily: "IBMPlexSansArabic-Bold",
   },
 });

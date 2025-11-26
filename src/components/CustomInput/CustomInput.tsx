@@ -26,7 +26,7 @@ interface FormInputProps extends TextInputProps {
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
 
-  style?: object; // استايل الحاوية الخارجية
+  style?: object; 
 }
 
 export default function FormInput({

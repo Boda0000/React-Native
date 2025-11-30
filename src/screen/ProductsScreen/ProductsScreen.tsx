@@ -3,8 +3,7 @@ import { View, Text, FlatList, StyleSheet, Platform } from "react-native";
 import { observer } from "mobx-react-lite";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import ProductTab from "../../components/ProductTab/ProductTab";
-import { productStore } from "../../stores/ProductStore";
-import { categoryStore } from "../../stores/CategoryStore";
+import { categoryStore , productStore } from "../../stores/CategoryStore";
 import { colors } from "src/assets/colors/colors";
 import i18n from "src/locales/i18n";
 

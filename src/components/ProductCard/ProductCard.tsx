@@ -5,37 +5,22 @@ import SAR from "../../assets/icons/SAR.svg";
 import CustomButton from "../btn/CustomButton";
 import { colors } from "src/assets/colors/colors";
 import { Product } from "src/models/ProductModel";
+import { observer } from "mobx-react-lite";
+import { productStore } from "../../stores/ProductStore";
 
 interface ProductCardProps {
   item: Product;
-
   onAddToCart: () => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
-  item,
-
-  onAddToCart,
-}) => {
-  const initialCount =
-    item.quantity != null ? parseInt(item.quantity as any) : 0;
-  const [count, setCount] = React.useState(initialCount);
-
-  const onIncrease = () => {
-    setCount((prev) => prev + 1);
-  };
-  const onDecrease = () => {
-    setCount((prev) => (prev > 0 ? prev - 1 : 0));
-  };
+const ProductCard: React.FC<ProductCardProps> = observer(({ item, onAddToCart }) => {
+  const onIncrease = () => productStore.increaseCount(item.id);
+  const onDecrease = () => productStore.decreaseCount(item.id);
 
   return (
     <View style={styles.card}>
       <Image
-        source={
-          typeof item.image.url === "string"
-            ? { uri: item.image.url }
-            : item.image.url
-        }
+        source={typeof item.image.url === "string" ? { uri: item.image.url } : item.image.url}
         style={styles.image}
       />
 
@@ -65,7 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <Ionicons name="add" size={14} color={colors.neutral800} />
           </TouchableOpacity>
 
-          <Text style={styles.count}>{count}</Text>
+          <Text style={styles.count}>{item.count || 0}</Text>
 
           <TouchableOpacity onPress={onDecrease} style={styles.countBtn}>
             <Ionicons name="remove" size={14} color={colors.neutral800} />
@@ -74,9 +59,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
       </View>
     </View>
   );
-};
+});
 
 export default ProductCard;
+
+
+
 
 const styles = StyleSheet.create({
   card: {
@@ -86,47 +74,37 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     overflow: "hidden",
   },
-
   image: {
     width: "100%",
     height: 100,
-    borderTopLeftRadius: 14,
-    borderTopRightRadius: 14,
-    borderBottomEndRadius: 14,
-    borderBottomStartRadius: 14,
+    borderRadius: 14,
   },
-
   contentRow: {
     flexDirection: "row-reverse",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 10,
     paddingVertical: 8,
-
     borderWidth: 1,
     borderColor: colors.borderLight,
     borderTopWidth: 0,
   },
-
   title: {
     fontSize: 16,
     fontWeight: "500",
     color: colors.neutral800,
     fontFamily: "IBMPlexSansArabic-Medium",
   },
-
   row: {
     flexDirection: "row",
     alignItems: "center",
   },
-
   price: {
     color: colors.primary500,
     fontWeight: "700",
     fontFamily: "IBMPlexSansArabic-Bold",
     fontSize: 14,
   },
-
   controls: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -139,7 +117,6 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 14,
     borderBottomRightRadius: 14,
   },
-
   cartBtn: {
     backgroundColor: colors.secondry300,
     width: 32,
@@ -148,7 +125,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
   counter: {
     flexDirection: "row",
     alignItems: "center",
@@ -157,7 +133,6 @@ const styles = StyleSheet.create({
     padding: 4,
     borderRadius: 4,
   },
-
   countBtn: {
     backgroundColor: colors.neutral100,
     width: 24,
@@ -166,7 +141,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 2,
   },
-
   count: {
     marginHorizontal: 12,
     fontSize: 16,

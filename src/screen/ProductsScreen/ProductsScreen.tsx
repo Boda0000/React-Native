@@ -1,49 +1,30 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { View, Text, FlatList, StyleSheet, Platform } from "react-native";
+import { observer } from "mobx-react-lite";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import ProductTab from "../../components/ProductTab/ProductTab";
-import { useProducts } from "../../Hooks/useProducts";
-import { useCategories } from "src/Hooks/useCategory";
+import { productStore } from "../../stores/ProductStore";
+import { categoryStore } from "../../stores/CategoryStore";
 import { colors } from "src/assets/colors/colors";
 import i18n from "src/locales/i18n";
 
-const ProductsScreen = () => {
-  const { data: categories } = useCategories();
-
-  const tabs =
-    categories?.map((cat) => (
-      console.log("Mapping category to tab:", cat.actions[0].endpoint_url),
-      {
-      key: cat.id,
-      label: cat.name,
-      endpoint: cat.actions[0]?.endpoint_url,
-      image_url: cat.image.url,
-    })) || [];
-
-  const [activeTab, setActiveTab] = useState<any>(null);
+const ProductsScreen = observer(() => {
+  const tabs = categoryStore.tabs;
+  const activeCategory = categoryStore.activeCategory;
 
   useEffect(() => {
-    if (categories && categories.length > 0 && !activeTab) {
-      console.log("Setting default active tab to:", categories[0].actions[0].endpoint_url);
-      setActiveTab({
-        key: categories[0].id,
-        label: categories[0].name,
-        endpoint: categories[0].actions[0]?.endpoint_url,
-        hasImage: true,
-      });
-    }
-  }, [categories, activeTab]);
+    categoryStore.loadCategories();
+  }, []);
 
-  const {
-    data: products,
-    isLoading: productsLoading,
-    error,
-  } = useProducts(activeTab?.endpoint);
+  useEffect(() => {
+    if (activeCategory) {
+      productStore.loadProducts(activeCategory.actions[0]?.endpoint_url);
+    }
+  }, [activeCategory]);
 
   const handleTabPress = (key: string) => {
-    const tab = tabs.find((t) => t.key === key);
-    console.log("Tab pressed:", key, tab);
-    if (tab) setActiveTab(tab);
+    const cat = categoryStore.categories.find((c) => c.id === key);
+    if (cat) categoryStore.setActiveCategory(cat);
   };
 
   return (
@@ -61,12 +42,12 @@ const ProductsScreen = () => {
         style={{ maxHeight: 80 }}
         renderItem={({ item }) => (
           <ProductTab
-            activeTab={activeTab?.key}
+            activeTab={activeCategory?.id}
             item={{
               key: item.key,
               label: item.label,
               endpoint: item.endpoint,
-              hasImage: !!item.image_url,
+              hasImage: item.hasImage,
               icon: item.image_url,
             }}
             onPress={handleTabPress}
@@ -78,27 +59,25 @@ const ProductsScreen = () => {
       <Text style={styles.header}>{i18n.t("Products")}</Text>
 
       {/* Products */}
-      {!productsLoading && !error && products && (
-        <FlatList
-          data={products}
-          keyExtractor={(item) => item.id}
-          numColumns={2}
-          columnWrapperStyle={{
-            justifyContent: "space-between",
-            flexDirection: "row-reverse",
-          }}
-          contentContainerStyle={{ paddingTop: 10 }}
-          renderItem={({ item }) => (
-            <ProductCard
-              item={item}
-              onAddToCart={() => console.log("Add to cart:", item.id)}
-            />
-          )}
-        />
-      )}
+      <FlatList
+        data={productStore.products}
+        keyExtractor={(item) => item.id}
+        numColumns={2}
+        columnWrapperStyle={{
+          justifyContent: "space-between",
+          flexDirection: "row-reverse",
+        }}
+        contentContainerStyle={{ paddingTop: 10 }}
+        renderItem={({ item }) => (
+          <ProductCard
+            item={item}
+            onAddToCart={() => console.log("Add to cart:", item.id)}
+          />
+        )}
+      />
     </View>
   );
-};
+});
 
 export default ProductsScreen;
 

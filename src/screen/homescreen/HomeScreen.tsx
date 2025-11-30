@@ -15,61 +15,24 @@ import Quiz from "../../assets/icons/quiz.svg";
 import Leftarrow from "../../assets/icons/leftarrow.svg";
 import Rightarrow from "../../assets/icons/rightarrow.svg";
 import TrueFalseSelector from "../../components/TrueFalseSelector/TrueFalseSelector";
+import SidebarModal from "src/components/modal/SidebarModal";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Counter() {
   const numbers = [
-    {
-      id: 1,
-      status: "success",
-      value: true,
-      type: "complete",
-    },
-    {
-      id: 2,
-      status: "pending",
-      value: false,
-      type: "true_false",
-    },
-    {
-      id: 3,
-      status: "pending",
-      value: true,
-      type: "complete",
-    },
-
-    {
-      id: 4,
-      status: "pending",
-      value: false,
-      type: "true_false",
-    },
-
-    {
-      id: 5,
-      status: "pending",
-      value: true,
-      type: "complete",
-    },
-    {
-      id: 6,
-      status: "pending",
-      value: true,
-      type: "true_false",
-    },
-    {
-      id: 7,
-      status: "pending",
-      value: false,
-      type: "true_false",
-    },
-    {
-      id: 8,
-      status: "pending",
-      value: true,
-      type: "complete",
-    },
+    { id: 1, status: "success", value: true, type: "complete" },
+    { id: 2, status: "pending", value: false, type: "true_false" },
+    { id: 3, status: "pending", value: true, type: "complete" },
+    { id: 4, status: "pending", value: false, type: "true_false" },
+    { id: 5, status: "pending", value: true, type: "complete" },
+    { id: 6, status: "pending", value: true, type: "true_false" },
+    { id: 7, status: "pending", value: false, type: "true_false" },
+    { id: 8, status: "pending", value: true, type: "complete" },
   ];
 
+  const navigation = useNavigation<any>();
+  const [sidebarVisible, setSidebarVisible] = useState(false);
   const [numbersValue, setNumbersValue] = useState(numbers);
   const [currentNumber, setCurrentNumber] = useState(0);
 
@@ -86,70 +49,92 @@ export default function Counter() {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={{ marginVertical: 20 }}>
-        <FlatList
-          data={numbersValue}
-          horizontal
-          contentContainerStyle={styles.counterRow}
-          renderItem={({ item, index }) => (
-            <TouchableOpacity
-              onPress={() => onPressNumber(index)}
-              style={[
-                styles.numbers,
-                item.status === "success" && styles.correct,
-                item.status === "wrong" && styles.wrong,
-                index === currentNumber && styles.current,
-              ]}
-            >
-              <Text style={styles.circleText}>{item.id}</Text>
-            </TouchableOpacity>
-          )}
-        />
-      </View>
-
-      <Text style={styles.questionNumber}>السؤال 4 من 8 (مقالي)</Text>
-      <View style={{ flexDirection: "row", justifyContent: "center", gap: 11 }}>
-        <Text style={styles.questionText}>اكتب عن كيفية نمو الأسماك</Text>
-        <Quiz width={22} height={22} />
-      </View>
-
-      <Image
-        style={styles.image}
-        source={require("../../assets/images/quiz.png")}
+    <View style={{ flex: 1 }}>
+      {/* Sidebar Modal */}
+      <SidebarModal
+        visible={sidebarVisible}
+        onClose={() => setSidebarVisible(false)}
       />
 
-      {numbersValue[currentNumber].type === "complete" ? (
-        <TextInput
-          style={styles.input}
-          placeholder="اكتب اجابتك هنا..."
-          placeholderTextColor="#6C798D"
-        />
-      ) : (
-        <TrueFalseSelector
-          value={numbersValue[currentNumber].value}
-          onChange={(val) => {
-            setNumbersValue((prev) =>
-              prev.map((item, i) =>
-                i === currentNumber ? { ...item, value: val } : item
-              )
-            );
-          }}
-        />
-      )}
+      {/* زر فتح الـ Sidebar */}
+      <TouchableOpacity
+        onPress={() => setSidebarVisible(true)}
+        style={{
+          position: "absolute",
+          top: Platform.OS === "android" ? 55 : 90,
+          right: 20,
+          zIndex: 10,
+        }}
+      >
+        <Ionicons name="menu" size={28} color={colors.neutral800} />
+      </TouchableOpacity>
 
-      <View style={styles.buttonsRow}>
-        <TouchableOpacity style={styles.button}>
-          <Leftarrow width={15} height={15} />
-          <Text style={styles.buttonText}>السؤال التالي</Text>
-        </TouchableOpacity>
+      {/* محتوى الشاشة */}
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={{ marginVertical: 20 }}>
+          <FlatList
+            data={numbersValue}
+            horizontal
+            contentContainerStyle={styles.counterRow}
+            renderItem={({ item, index }) => (
+              <TouchableOpacity
+                onPress={() => onPressNumber(index)}
+                style={[
+                  styles.numbers,
+                  item.status === "success" && styles.correct,
+                  item.status === "wrong" && styles.wrong,
+                  index === currentNumber && styles.current,
+                ]}
+              >
+                <Text style={styles.circleText}>{item.id}</Text>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
 
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>السؤال السابق</Text>
-          <Rightarrow width={15} height={15} />
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+        <Text style={styles.questionNumber}>السؤال 4 من 8 (مقالي)</Text>
+        <View style={{ flexDirection: "row", justifyContent: "center", gap: 11 }}>
+          <Text style={styles.questionText}>اكتب عن كيفية نمو الأسماك</Text>
+          <Quiz width={22} height={22} />
+        </View>
+
+        <Image
+          style={styles.image}
+          source={require("../../assets/images/quiz.png")}
+        />
+
+        {numbersValue[currentNumber].type === "complete" ? (
+          <TextInput
+            style={styles.input}
+            placeholder="اكتب اجابتك هنا..."
+            placeholderTextColor="#6C798D"
+          />
+        ) : (
+          <TrueFalseSelector
+            value={numbersValue[currentNumber].value}
+            onChange={(val) => {
+              setNumbersValue((prev) =>
+                prev.map((item, i) =>
+                  i === currentNumber ? { ...item, value: val } : item
+                )
+              );
+            }}
+          />
+        )}
+
+        <View style={styles.buttonsRow}>
+          <TouchableOpacity style={styles.button}>
+            <Leftarrow width={15} height={15} />
+            <Text style={styles.buttonText}>السؤال التالي</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>السؤال السابق</Text>
+            <Rightarrow width={15} height={15} />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -201,14 +186,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#52383C",
     marginBottom: 20,
-    fontWeight: 400,
+    fontWeight: "400",
     fontSize: 16,
     fontFamily: "IBM Plex Sans Arabic",
   },
 
   questionText: {
     fontSize: 18,
-    fontWeight: 700,
+    fontWeight: "700",
     fontFamily: "IBMPlexSansArabic-Bold",
     textAlign: "center",
     marginBottom: 15,
@@ -251,7 +236,7 @@ const styles = StyleSheet.create({
 
   buttonText: {
     color: "#082375",
-    fontWeight: 700,
+    fontWeight: "700",
     fontSize: 14,
     fontFamily: "IBMPlexSansArabic-Bold",
   },

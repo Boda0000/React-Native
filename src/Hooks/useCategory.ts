@@ -1,8 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
-import { Category } from "../models/categoryModel";
 import { deserializeData } from "./deseralization";
 
-async function fetchCategories(): Promise<any> {
+export async function fetchCategories(): Promise<any> {
   const url =
     "https://api.demo.ouredu.net/canteen/api/v1/ar/categories/student/list";
 
@@ -27,9 +25,5 @@ async function fetchCategories(): Promise<any> {
   return categories;
 }
 
-export function useCategories() {
-  return useQuery<Category[], Error>({
-    queryKey: ["categories"],
-    queryFn: fetchCategories,
-  });
-}
+
+

@@ -12,6 +12,7 @@ export interface Product {
   quantity: number;
   image: ImageAttributes;
   actions: Action[];
+  count?: number;
 }
 
 

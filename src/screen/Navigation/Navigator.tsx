@@ -14,6 +14,7 @@ import HomeScreen from "../homescreen/HomeScreen";
 import { initLanguage } from "../../locales/i18n";
 import CartScreen from "../cart/cartScreen";
 import ProductsScreen from "../ProductsScreen/ProductsScreen";
+import OrderScreen from "../orderscreen/OrderScreen"
 
 const Stack = createStackNavigator();
 
@@ -65,6 +66,7 @@ export default function Navigator() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
         <Stack.Screen name="CartScreen" component={CartScreen} />
+        <Stack.Screen name="OrderScreen" component={OrderScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

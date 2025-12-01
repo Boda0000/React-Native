@@ -78,6 +78,7 @@
   "Invalid email address": "البريد الإلكتروني غير صالح",
   "Email required": "البريد الإلكتروني مطلوب",
   "Mobile number required": "رقم الجوال مطلوب",
+  "Orders":"الطلبات",
   "ordernumber": "رقم الطلب #",
   "Received": "تم الاستلام",
   "Cancelled": "ملغي",

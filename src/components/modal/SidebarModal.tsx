@@ -28,9 +28,9 @@ const SidebarModal: React.FC<SidebarProps> = ({ visible, onClose }) => {
   }) => (
     <CustomButton
       onPress={() => {
-        onClose(); 
-        if (screen) navigation.navigate(screen); 
-        if (action) action(); 
+        onClose();
+        if (screen) navigation.navigate(screen);
+        if (action) action();
       }}
       buttonStyle={styles.item}
       textStyle={styles.itemText}
@@ -100,6 +100,7 @@ const SidebarModal: React.FC<SidebarProps> = ({ visible, onClose }) => {
               text={i18n.t("Products")}
               screen="ProductsScreen"
             />
+            <MenuItem icon="cart" text={i18n.t("Orders")} screen="OrderScreen" />
           </View>
         </View>
 

@@ -78,6 +78,7 @@
   "Invalid email address": "Invalid email address",
   "Email required": "Email required",
   "Mobile number required": "Mobile number required",
+  "Orders": "Orders",
   "ordernumber": "Order Number #",
   "Received": "Received",
   "Cancelled": "Cancelled",
@@ -98,13 +99,13 @@
   "Burger": "Burger",
   "Pizaa": "Pizaa",
   "Products": "Products",
-  "Menu":"Menu",
-   "Notifications": "Notifications",
-   "Change language":"Change language",
-    "Log out": "Log out",
-     "Delete account": "Delete account",
-      "Cart":"Cart",
-      "Soft drinks":"Soft drinks",
+  "Menu": "Menu",
+  "Notifications": "Notifications",
+  "Change language": "Change language",
+  "Log out": "Log out",
+  "Delete account": "Delete account",
+  "Cart": "Cart",
+  "Soft drinks": "Soft drinks",
   "Onboarding": {
     "Slides": [
       {

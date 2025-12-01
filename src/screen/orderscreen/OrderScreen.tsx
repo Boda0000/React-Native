@@ -1,18 +1,10 @@
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  Platform,
-  TouchableOpacity,
-} from "react-native";
+import { useState } from "react";
+import { View, Text, FlatList, StyleSheet, Platform } from "react-native";
 import SAR from "../../assets/icons/SAR.svg";
 import Calender from "../../assets/icons/Calender.svg";
 import i18n from "src/locales/i18n";
 import { colors } from "../../assets/colors/colors";
-import ProductTab from "../../components/ProductTab/ProductTab";
-
-
+import OrderTab from "../../components/OrderTab/OrderTab";
 
 type Order = {
   id: string;
@@ -60,17 +52,33 @@ const orders: Order[] = [
   },
 ];
 
+const orderTabs = [
+  { key: "all", label: i18n.t("All") },
+  { key: "received", label: i18n.t("Received") },
+  { key: "cancelled", label: i18n.t("Cancelled") },
+];
+
 const OrdersScreen = () => {
+  const [activeTab, setActiveTab] = useState("all");
+
+  // FILTER ORDERS BASED ON TAB
+  const filteredOrders =
+    activeTab === "all"
+      ? orders
+      : orders.filter((o) =>
+          activeTab === "received"
+            ? o.status === i18n.t("Received")
+            : o.status === i18n.t("Cancelled")
+        );
+
   const OrderCard = ({ item }: { item: Order }) => {
     const isReceived = item.status === i18n.t("Received");
 
     return (
-        
       <View style={styles.card1}>
         <View style={styles.h1}>
           <Text style={styles.orderNumber}>
-            {i18n.t("ordernumber")}
-            {item.ordernumber}
+            {i18n.t("ordernumber")} {item.ordernumber}
           </Text>
 
           <View style={styles.priceContainer}>
@@ -84,9 +92,7 @@ const OrdersScreen = () => {
             style={[
               styles.statusText,
               { color: isReceived ? colors.primary500 : colors.error500 },
-              {
-                borderColor: isReceived ? colors.primary500 : colors.error500,
-              },
+              { borderColor: isReceived ? colors.primary500 : colors.error500 },
             ]}
           >
             {item.status}
@@ -103,17 +109,32 @@ const OrdersScreen = () => {
 
   return (
     <View style={styles.container1}>
+      {/* ✔ Tabs Section using FlatList */}
       <FlatList
-        data={orders}
+        data={orderTabs}
+        horizontal
+        keyExtractor={(item) => item.key}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingVertical: 10, paddingHorizontal: 10 }}
+        renderItem={({ item }) => (
+          <OrderTab
+            item={item}
+            activeTab={activeTab}
+            onPress={(key) => setActiveTab(key)}
+          />
+        )}
+      />
+
+      {/* Orders */}
+      <FlatList
+        data={filteredOrders}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <OrderCard item={item} />}
         contentContainerStyle={{
-          paddingTop: Platform.OS === "android" ? 100 : 60,
+          paddingTop: 10,
+          paddingBottom: 100,
         }}
       />
-
-   
-
     </View>
   );
 };
@@ -122,26 +143,19 @@ const styles = StyleSheet.create({
   container1: {
     flex: 1,
     backgroundColor: colors.white,
-    padding: 15,
+    paddingHorizontal: 15,
     paddingTop: Platform.OS === "android" ? 50 : 80,
   },
 
   card1: {
     backgroundColor: colors.cardLight,
     borderRadius: 14,
-    marginHorizontal: 9,
     marginBottom: 20,
     paddingHorizontal: 15,
     paddingVertical: 20,
-    height: 100,
     borderWidth: 1,
     borderColor: colors.borderLight,
-
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 1,
-    shadowRadius: 4,
-
+    height: 100,
     elevation: 3,
   },
 
@@ -162,29 +176,20 @@ const styles = StyleSheet.create({
     textAlign: "right",
     fontSize: 16,
     color: colors.text,
-    marginTop: 2,
     fontWeight: "500",
     fontFamily: "IBMPlexSansArabic-Medium",
   },
 
-  priceContainer: {
-    flexDirection: "row-reverse",
-    alignItems: "center",
-  },
+  priceContainer: { flexDirection: "row-reverse", alignItems: "center" },
 
   price: {
     color: colors.primary500,
     fontWeight: "700",
     fontSize: 14,
-    textAlign: "right",
     fontFamily: "IBM Plex Sans Arabic",
   },
 
-  dateContainer: {
-    flexDirection: "row-reverse",
-    alignItems: "center",
-    gap: 4,
-  },
+  dateContainer: { flexDirection: "row-reverse", alignItems: "center", gap: 4 },
 
   date: {
     fontSize: 12,
@@ -202,8 +207,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.neutral150,
     padding: 7,
   },
-
-
 });
 
 export default OrdersScreen;

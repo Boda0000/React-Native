@@ -1,25 +1,19 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { fetchProducts , fetchCategories} from "../Api/category.api";
+import { fetchCategories, fetchProducts } from "../Api/category.api";
 import { Category } from "../models/categoryModel";
 import { Product } from "../models/ProductModel";
 
-
-class CategoryStore {
+class CanteenStore {
   categories: Category[] = [];
   activeCategory: Category | null = null;
+
+  products: Product[] = [];
+
   loading = false;
   error: string | null = null;
 
   constructor() {
     makeAutoObservable(this);
-  }
-
-  setLoading(loading: boolean) {
-    this.loading = loading;
-  }
-
-  setError(error: string | null) {
-    this.error = error;
   }
 
   setActiveCategory(category: Category) {
@@ -28,24 +22,34 @@ class CategoryStore {
 
   setCategories(categories: Category[]) {
     this.categories = categories;
+
     if (categories.length && !this.activeCategory) {
       this.activeCategory = categories[0];
     }
   }
 
   async loadCategories() {
-    this.setLoading(true);
-    this.setError(null);
+    this.loading = true;
+    this.error = null;
 
     try {
       const data = await fetchCategories();
-      runInAction(() => this.setCategories(data));
+
+      runInAction(() => {
+        this.setCategories(data);
+      });
+
+      if (data.length) {
+        this.loadProducts(data[0].actions[0]?.endpoint_url);
+      }
     } catch (err: any) {
-      runInAction(() =>
-        this.setError(err.message || "Failed to load categories")
-      );
+      runInAction(() => {
+        this.error = err.message || "Failed to load categories";
+      });
     } finally {
-      runInAction(() => this.setLoading(false));
+      runInAction(() => {
+        this.loading = false;
+      });
     }
   }
 
@@ -58,24 +62,6 @@ class CategoryStore {
       hasImage: !!cat.image.url,
     }));
   }
-}
-
-class ProductStore {
-  products: Product[] = [];
-  loading = false;
-  error: string | null = null;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  setLoading(val: boolean) {
-    this.loading = val;
-  }
-
-  setError(err: string | null) {
-    this.error = err;
-  }
 
   setProducts(products: Product[]) {
     this.products = products.map((p) => ({
@@ -85,18 +71,25 @@ class ProductStore {
   }
 
   async loadProducts(endpoint: string) {
-    this.setLoading(true);
-    this.setError(null);
+    if (!endpoint) return;
+
+    this.loading = true;
+    this.error = null;
 
     try {
       const products = await fetchProducts(endpoint);
-      runInAction(() => this.setProducts(products));
+
+      runInAction(() => {
+        this.setProducts(products);
+      });
     } catch (err: any) {
-      runInAction(() =>
-        this.setError(err.message || "Failed to load products")
-      );
+      runInAction(() => {
+        this.error = err.message || "Failed to load products";
+      });
     } finally {
-      runInAction(() => this.setLoading(false));
+      runInAction(() => {
+        this.loading = false;
+      });
     }
   }
 
@@ -111,6 +104,4 @@ class ProductStore {
   }
 }
 
-
-export const categoryStore = new CategoryStore();
-export const productStore = new ProductStore();
+export const canteenStore = new CanteenStore();

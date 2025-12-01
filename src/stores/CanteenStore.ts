@@ -6,9 +6,7 @@ import { Product } from "../models/ProductModel";
 class CanteenStore {
   categories: Category[] = [];
   activeCategory: Category | null = null;
-
   products: Product[] = [];
-
   loading = false;
   error: string | null = null;
 
@@ -16,41 +14,41 @@ class CanteenStore {
     makeAutoObservable(this);
   }
 
-  setActiveCategory(category: Category) {
-    this.activeCategory = category;
-  }
-
-  setCategories(categories: Category[]) {
-    this.categories = categories;
-
-    if (categories.length && !this.activeCategory) {
-      this.activeCategory = categories[0];
-    }
+  setProp<Key extends keyof this>(key: Key, value: this[Key]) {
+    this[key] = value;
   }
 
   async loadCategories() {
-    this.loading = true;
-    this.error = null;
+    this.setProp("loading", true);
+    this.setProp("error", null);
 
     try {
       const data = await fetchCategories();
 
       runInAction(() => {
-        this.setCategories(data);
+        this.setProp("categories", data);
+        if (data.length && !this.activeCategory) {
+          this.setProp("activeCategory", data[0]);
+        }
       });
 
-      if (data.length) {
-        this.loadProducts(data[0].actions[0]?.endpoint_url);
+      const endpoint = data[0]?.actions[0]?.endpoint_url;
+      if (endpoint) {
+        this.loadProducts(endpoint);
       }
     } catch (err: any) {
       runInAction(() => {
-        this.error = err.message || "Failed to load categories";
+        this.setProp("error", err.message || "Failed to load categories");
       });
     } finally {
       runInAction(() => {
-        this.loading = false;
+        this.setProp("loading", false);
       });
     }
+  }
+
+  setActiveCategory(category: Category) {
+    this.setProp("activeCategory", category);
   }
 
   get tabs() {
@@ -63,32 +61,29 @@ class CanteenStore {
     }));
   }
 
-  setProducts(products: Product[]) {
-    this.products = products.map((p) => ({
-      ...p,
-      count: p.quantity || 0,
-    }));
-  }
-
   async loadProducts(endpoint: string) {
     if (!endpoint) return;
 
-    this.loading = true;
-    this.error = null;
+    this.setProp("loading", true);
+    this.setProp("error", null);
 
     try {
       const products = await fetchProducts(endpoint);
 
       runInAction(() => {
-        this.setProducts(products);
+        const normalized = products.map((p) => ({
+          ...p,
+          count: p.quantity || 0,
+        }));
+        this.setProp("products", normalized);
       });
     } catch (err: any) {
       runInAction(() => {
-        this.error = err.message || "Failed to load products";
+        this.setProp("error", err.message || "Failed to load products");
       });
     } finally {
       runInAction(() => {
-        this.loading = false;
+        this.setProp("loading", false);
       });
     }
   }

@@ -6,7 +6,7 @@ import CustomButton from "../btn/CustomButton";
 import { colors } from "src/assets/colors/colors";
 import { Product } from "src/models/ProductModel";
 import { observer } from "mobx-react-lite";
-import { productStore } from "../../stores/ProductStore";
+import { productStore } from "../../stores/OrderStore";
 
 interface ProductCardProps {
   item: Product;

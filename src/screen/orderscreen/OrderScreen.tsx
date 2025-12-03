@@ -1,88 +1,99 @@
-import { useState } from "react";
-import { View, Text, FlatList, StyleSheet, Platform } from "react-native";
+import { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+} from "react-native";
 import SAR from "../../assets/icons/SAR.svg";
 import Calender from "../../assets/icons/Calender.svg";
+import { Ionicons } from "@expo/vector-icons";
 import i18n from "src/locales/i18n";
 import { colors } from "../../assets/colors/colors";
 import OrderTab from "../../components/OrderTab/OrderTab";
-
-type Order = {
-  id: string;
-  ordernumber: string;
-  price: number;
-  date: string;
-  status: string;
-};
-
-const orders: Order[] = [
-  {
-    id: "1",
-    ordernumber: "6526851",
-    price: 29,
-    date: "24/12/2024",
-    status: i18n.t("Received"),
-  },
-  {
-    id: "2",
-    ordernumber: "6526851",
-    price: 29,
-    date: "24/12/2024",
-    status: i18n.t("Received"),
-  },
-  {
-    id: "3",
-    ordernumber: "6526851",
-    price: 29,
-    date: "24/12/2024",
-    status: i18n.t("Received"),
-  },
-  {
-    id: "4",
-    ordernumber: "6526851",
-    price: 18,
-    date: "23/12/2024",
-    status: i18n.t("Cancelled"),
-  },
-  {
-    id: "5",
-    ordernumber: "6526851",
-    price: 18,
-    date: "23/12/2024",
-    status: i18n.t("Cancelled"),
-  },
-];
+import { observer } from "mobx-react-lite";
+import { orderStore } from "../../stores/OrderStore";
 
 const orderTabs = [
-  { key: "all", label: i18n.t("All") },
-  { key: "received", label: i18n.t("Received") },
-  { key: "cancelled", label: i18n.t("Cancelled") },
+  { key: "all", label: "الطلبات السابقة" },
+  { key: "received", label: "الطلبات الحالية" },
 ];
+
+const formatDate = (timestamp: number) => {
+  const d = new Date(timestamp * 1000);
+  return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+};
 
 const OrdersScreen = () => {
   const [activeTab, setActiveTab] = useState("all");
 
-  // FILTER ORDERS BASED ON TAB
-  const filteredOrders =
-    activeTab === "all"
-      ? orders
-      : orders.filter((o) =>
-          activeTab === "received"
-            ? o.status === i18n.t("Received")
-            : o.status === i18n.t("Cancelled")
-        );
+  useEffect(() => {
+    orderStore.loadOrders();
+  }, []);
 
-  const OrderCard = ({ item }: { item: Order }) => {
-    const isReceived = item.status === i18n.t("Received");
+  const filteredOrders = orderStore.orders.filter((o) => {
+    if (activeTab === "all") {
+      return o.status_name === "مستلم";
+    } else if (activeTab === "received") {
+      return o.status_name === "جارى التحضير" || o.status_name === "يحضر";
+    }
+    return false;
+  });
+
+  const OrderCard = ({ item }) => {
+    const isCurrent =
+      item.status_name === "جارى التحضير" || item.status_name === "يحضر";
+
+    if (isCurrent) {
+      return (
+        <View style={currentStyles.container}>
+          <View style={currentStyles.headerRow}>
+            <Text style={currentStyles.orderNumber}>
+              رقم الطلب{item.order_number}
+            </Text>
+            <View style={currentStyles.priceRow}>
+              <Text style={currentStyles.price}>{item.total_price}</Text>
+              <SAR width={20} height={17} />
+            </View>
+          </View>
+
+          <View style={currentStyles.subRow}>
+            <View style={currentStyles.statusTag}>
+              <Text style={currentStyles.statusText}>{item.status_name}</Text>
+            </View>
+
+            <View style={currentStyles.timeRow}>
+              <Calender width={13} height={13} />
+              <Text style={currentStyles.timeText}>
+                {formatDate(item.order_date)}
+              </Text>
+            </View>
+          </View>
+
+          <View style={currentStyles.actionsRow}>
+            <TouchableOpacity style={currentStyles.deleteBtn}>
+              <Ionicons name="trash" size={22} color="#fff" />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={currentStyles.editBtn}>
+              <Text style={currentStyles.editText}>تعديل</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    }
 
     return (
       <View style={styles.card1}>
         <View style={styles.h1}>
           <Text style={styles.orderNumber}>
-            {i18n.t("ordernumber")} {item.ordernumber}
+            {i18n.t("ordernumber")} {item.order_number}
           </Text>
 
           <View style={styles.priceContainer}>
-            <Text style={styles.price}>{item.price}</Text>
+            <Text style={styles.price}>{item.total_price}</Text>
             <SAR width={20} height={17} />
           </View>
         </View>
@@ -91,16 +102,18 @@ const OrdersScreen = () => {
           <Text
             style={[
               styles.statusText,
-              { color: isReceived ? colors.primary500 : colors.error500 },
-              { borderColor: isReceived ? colors.primary500 : colors.error500 },
+              {
+                color: colors.primary500,
+                borderColor: colors.primary500,
+              },
             ]}
           >
-            {item.status}
+            {item.status_name}
           </Text>
 
           <View style={styles.dateContainer}>
             <Calender width={13} height={13} />
-            <Text style={styles.date}>{item.date}</Text>
+            <Text style={styles.date}>{formatDate(item.order_date)}</Text>
           </View>
         </View>
       </View>
@@ -109,7 +122,6 @@ const OrdersScreen = () => {
 
   return (
     <View style={styles.container1}>
-      {/* ✔ Tabs Section using FlatList */}
       <FlatList
         data={orderTabs}
         horizontal
@@ -125,7 +137,6 @@ const OrdersScreen = () => {
         )}
       />
 
-      {/* Orders */}
       <FlatList
         data={filteredOrders}
         keyExtractor={(item) => item.id}
@@ -138,6 +149,8 @@ const OrdersScreen = () => {
     </View>
   );
 };
+
+export default observer(OrdersScreen);
 
 const styles = StyleSheet.create({
   container1: {
@@ -209,4 +222,103 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OrdersScreen;
+const currentStyles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.cardLight,
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+    borderWidth: 1,
+    borderColor: "#BEDBDE",
+    borderRadius: 14,
+    width: "95%",
+    alignSelf: "center",
+    marginVertical: 10,
+  },
+
+  headerRow: {
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  orderNumber: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#385052",
+    fontFamily: "IBMPlexSansArabic-Medium",
+  },
+
+  priceRow: {
+    flexDirection: "row-reverse",
+    alignItems: "center",
+  },
+
+  price: {
+    color: colors.primary500,
+    fontWeight: "700",
+    fontSize: 14,
+    fontFamily: "IBMPlexSansArabic-Bold",
+  },
+
+  subRow: {
+    marginTop: 6,
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  statusTag: {
+    backgroundColor: "#FFFFFF66",
+    padding: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#FFBD67",
+  },
+
+  statusText: {
+    color: "#E8A300",
+    fontWeight: "700",
+    fontSize: 14,
+    fontFamily: "IBMPlexSansArabic-Bold",
+  },
+
+  timeRow: {
+    flexDirection: "row-reverse",
+    alignItems: "center",
+    gap: 4,
+  },
+
+  timeText: {
+    fontSize: 12,
+    color: "#385052",
+    fontFamily: "IBM Plex Sans Arabic",
+  },
+
+  actionsRow: {
+    marginTop: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+
+  deleteBtn: {
+    backgroundColor: "#CE0043",
+    padding: 14,
+    borderRadius: 14,
+  },
+
+  editBtn: {
+    backgroundColor: "#3A5254",
+    flex: 1,
+    paddingVertical: 14,
+    borderRadius: 14,
+    alignItems: "center",
+  },
+
+  editText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "700",
+    fontFamily: "IBMPlexSansArabic-Bold",
+  },
+});
